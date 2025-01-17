@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UnevennesX - Hub</title>
+    <style>
+         body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #1a1a1a;
+    color: #ddd;
+    overflow: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.background-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+     background: radial-gradient(ellipse at center, #000 0%, #1a1a1a 100%);
+    z-index: 0;
+    opacity: 1;
+}
+
+.container {
+     background: rgba(25, 25, 25, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
+    width: 550px;
+    max-width: 95%;
+    text-align: center;
+    z-index: 1;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+h1 {
+    margin-bottom: 10px;
+    color: #ddd;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    display: inline-block;
+}
+
+h1:hover {
+    color: #ff4081;
+}
+
+p {
+    margin-bottom: 25px;
+    color: #aaa;
+}
+
+.link-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+     margin:0px auto;
+}
+
+.link-button {
+    display: block;
+    background-color: #333;
+    color: #ddd;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+     width: auto;
+    max-width: 100%;
+      box-sizing: border-box;
+}
+
+.link-button:hover {
+     background-color: #444;
+    transform: scale(1.05);
+}
+    </style>
+</head>
+<body>
+    <div class="background-gradient"></div>
+    <div class="container">
+        <h1>UnevennesX - Hub</h1>
+        <p>Acceso directo a mis herramientas y páginas.</p>
+        <div class="link-container">
+             <a href="https://unevennesx.github.io/-CheckLinks-/" class="link-button">Check Links</a>
+            <a href="https://extension-de-pg.vercel.app/" class="link-button">Extension de PG</a>
+            <a href="https://mi-pg.vercel.app/login/" class="link-button">Mi PG Login</a>
+            <a href="https://unevennesx.github.io/UID-ONLY/" class="link-button">UID Only</a>
+           <a href="https://unevennesx.github.io/UID-MAID/" class="link-button">UID Maid</a>
+           <a href="https://unevennesx.github.io/UnevennesX/" class="link-button">UnevennesX</a>
+            <a href="https://unevennesx.github.io/UserAgent/" class="link-button">User Agent</a>
+        </div>
+    </div>
+<script>
+     document.addEventListener('DOMContentLoaded', () => {
+        const linkTitle = document.getElementById('linkTitle');
+         
+        linkTitle.addEventListener('click', () => {
+             window.open('https://mi-pg.vercel.app/login/', '_blank');
+        });
+
+     });
+</script>
+</body>
+</html>
