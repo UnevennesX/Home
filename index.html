@@ -3,160 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UnevennesX - Home</title>
-    <link rel="icon" type="image/png" href="https://cdn.dribbble.com/users/7549673/screenshots/17206704/media/1210a9d0ec8af427967e735935861eeb.png?resize=400x300&vertical=center" />
-
+    <title>UnevennesX - Portfolio</title>
+    <link rel="icon" type="image/png" href="https://cdn.dribbble.com/users/7549673/screenshots/17206704/media/1210a9d0ec8af427967e735935861eeb.png?resize=400x300&vertical=center">
     <style>
-         body {
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: #1a1a1a;
-    color: #ddd;
-    overflow: auto;
-    padding: 20px;
-    box-sizing: border-box;
-}
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background: #151515;
+            color: #ddd;
+            padding: 20px;
+            box-sizing: border-box;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.background-gradient {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-     background: radial-gradient(ellipse at center, #000 0%, #1a1a1a 100%);
-    z-index: 0;
-    opacity: 1;
-}
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(25, 25, 25, 0.97);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            padding: 20px;
+            margin: auto;
+            animation: fadeInUp 0.5s ease-out;
+        }
 
-.container {
-     background: rgba(25, 25, 25, 0.9);
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
-    width: 550px;
-    max-width: 95%;
-    text-align: center;
-    z-index: 1;
-    backdrop-filter: blur(10px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-.container:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
-}
+        h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 1.8em;
+            margin: 15px 0 25px 0;
+            padding: 0 10px;
+            animation: textGlow 2s infinite alternate;
+        }
 
-h1 {
-    margin-bottom: 10px;
-    color: #ddd;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 600;
-    transition: color 0.3s ease;
-    display: inline-block;
-}
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0 0 5px rgba(255, 107, 107, 0.3);
+            }
+            100% {
+                text-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
+            }
+        }
 
-h1:hover {
-    color: #ff4081;
-}
+        .section {
+            margin-bottom: 12px;
+            border-radius: 8px;
+            background: rgba(40,40,40,0.6);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
 
-p {
-    margin-bottom: 25px;
-    color: #aaa;
-}
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
 
-.link-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px;
-     margin:0px auto;
-}
+        .section-header {
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
 
-.link-button {
-    display: block;
-    background-color: #333;
-    color: #ddd;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-weight: 600;
-    text-decoration: none;
-    text-align: center;
-     width: auto;
-    max-width: 100%;
-      box-sizing: border-box;
-}
+        .section-header:hover {
+            background: rgba(255,255,255,0.05);
+        }
 
-.link-button:hover {
-     background-color: #444;
-    transform: scale(1.05);
-}
+        .section-title {
+            font-size: 1em;
+            color: #ff6b6b;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .arrow {
+            transition: transform 0.3s ease;
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        .section.active .arrow {
+            transform: rotate(180deg);
+        }
+
+        .grid-links {
+            display: none;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            padding: 15px 20px;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section.active .grid-links {
+            display: grid;
+        }
+
+        .link-button {
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            color: #ddd;
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .link-button:hover {
+            background: rgba(255,64,129,0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(255,64,129,0.1);
+        }
+
+        .new-badge {
+            background: #ff4081;
+            color: white;
+            font-size: 0.65em;
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @media (min-width: 600px) {
+            .grid-links {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
+            
+            .link-button {
+                padding: 18px 25px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="background-gradient"></div>
     <div class="container">
-        <h1> UnevennesX </h1>
+        <h1>UnevennesX Projects</h1>
         
-        <div class="link-container">
+        <!-- Sección Principal -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">🌟 Principales</div>
+                <div class="arrow">▼</div>
+            </div>
+            <div class="grid-links">
+                <a href="https://extension-de-pg.vercel.app/" class="link-button">
+                    Extensión PG
+                    <span class="new-badge">NEW</span>
+                </a>
+                <a href="https://mi-pg.vercel.app/login/" class="link-button">UnevennesX</a>
+                <a href="https://unevennesx.github.io/UserAgent/" class="link-button">User Agent 2.0</a>
+            </div>
+        </div>
 
-            
-            <a href="https://unevennesx.github.io/UID-ONLY/" class="link-button">UID ONLY</a>
-            <a href="https://unevennesx.github.io/cpx-tap-bit/" class="link-button">CPX NEWW</a>
+        <!-- Proyectos Destacados -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">🚀 Destacados</div>
+                <div class="arrow">▼</div>
+            </div>
+            <div class="grid-links">
+                <a href="https://unevennesx.github.io/-CheckLinks-/" class="link-button">
+                    ALL SAMPLICIOUS
+                </a>
+                <a href="https://unevennesx.github.io/app/" class="link-button">
+                    glimpsehere.com
+                </a>
+                <a href="https://unevennesx.github.io/zamplia/" class="link-button">
+                    Zamplia
+                </a>
+                <a href="https://unevennesx.github.io/UnevennesX/" class="link-button">Armador V1</a>
 
+                <a href="https://unevennesx.github.io/cube/" class="link-button">
+                    Sample-Cube
+                    <span class="new-badge">NEW</span>
+                </a>
+            </div>
+        </div>
 
+        <!-- Herramientas Técnicas -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">⚙️ Técnicas</div>
+                <div class="arrow">▼</div>
+            </div>
+            <div class="grid-links">
+                <a href="https://unevennesx.github.io/UID-ONLY/" class="link-button">UID System</a>
+                <a href="https://unevennesx.github.io/cpx-tap-bit/" class="link-button">CPX NEWW</a>
 
+            </div>
+        </div>
 
-            <a style="" href="https://extension-de-pg.vercel.app/" class="link-button">Extension de PG</a>
-
-           
-
-            
-            
-
-<br>
-            
- 
-
-
-            <a style="color:#ff4081;" href="https://unevennesx.github.io/-CheckLinks-/" class="link-button">ALL SAMPLICIOUS</a>
-            <a href="https://unevennesx.github.io/UnevennesX/" class="link-button">Armador V1</a>
-            <a style="color:#ff4081;" href="https://unevennesx.github.io/app/" class="link-button">app.glimpsehere.com</a>
-            <a style="color:#ff4081;" href="https://unevennesx.github.io/zamplia/" class="link-button">Zamplia</a>
-
-<br>
-            
-            <a style="color:grend;" href="https://unevennesx.github.io/calculadora/" class="link-button">Calculadora</a>
-
-            <a style="" href="https://unevennesx.github.io/UserAgent/" class="link-button">User Agent NEW</a>
-
-
-            
-
-            
-            <a href="https://mi-pg.vercel.app/login/" class="link-button">UnevennesX</a>
-            
+        <!-- Utilidades -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">🔧 Utilidades</div>
+                <div class="arrow">▼</div>
+            </div>
+            <div class="grid-links">
+                <a href="https://unevennesx.github.io/calculadora/" class="link-button">
+                    Calculadora
+                </a>
+                <a href="https://unevennesx.github.io/userv1/" class="link-button">
+                    User Agent 1.0
+                </a>
+            </div>
         </div>
     </div>
-<script>
-     document.addEventListener('DOMContentLoaded', () => {
-        const linkTitle = document.getElementById('linkTitle');
-         
-        linkTitle.addEventListener('click', () => {
-             window.open('https://mi-pg.vercel.app/login/', '_blank');
-        });
 
-     });
-</script>
+    <script>
+        document.querySelectorAll('.section-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const section = header.parentElement;
+                section.classList.toggle('active');
+                
+                // Cerrar otras secciones
+                document.querySelectorAll('.section').forEach(otherSection => {
+                    if(otherSection !== section && otherSection.classList.contains('active')) {
+                        otherSection.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+
+
 </body>
 </html>
