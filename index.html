@@ -385,6 +385,7 @@
     <h1>UnevennesX Projects</h1>
 
     <input type="text" id="search-input" placeholder="Buscar proyectos...">
+    <div id="no-results-message" style="display:none; color: white; text-align: center; margin-top: 10px;">No se encontraron resultados.</div>
 
     <!-- Sección Principal -->
     <div class="section">
@@ -523,9 +524,13 @@
     });
 
     const searchInput = document.getElementById('search-input');
+    const noResultsMessage = document.getElementById('no-results-message');
 
     searchInput.addEventListener('input', function () {
         let searchTerm = searchInput.value;
+        searchTerm = normalizeString(searchTerm);
+
+        let hasResults = false;
 
         // Verificar la longitud del término de búsqueda
         if (searchTerm.length < 2) {
@@ -537,10 +542,9 @@
             document.querySelectorAll('.link-button').forEach(link => {
                 link.style.display = 'block';
             });
+            noResultsMessage.style.display = 'none';
             return; // Salir de la función
         }
-
-        searchTerm = normalizeString(searchTerm); // Normalizar el término de búsqueda
 
         // Obtener todos los elementos link-button
         const allLinks = document.querySelectorAll('.link-button');
@@ -550,6 +554,7 @@
             const linkText = normalizeString(link.textContent); // Normalizar el texto del enlace
             if (linkText.includes(searchTerm)) {
                 link.style.display = 'block';  // Mostrar el enlace si coincide con la búsqueda
+                hasResults = true;
             } else {
                 link.style.display = 'none';   // Ocultar el enlace si no coincide
             }
@@ -561,15 +566,23 @@
             const visibleLinks = section.querySelectorAll('.link-button[style="display: block;"]');
             // Si la sección tiene al menos un enlace visible, mostrar la sección; de lo contrario, ocultarla
             section.style.display = visibleLinks.length > 0 ? 'block' : 'none';
+        });
 
-            // Abrir la sección SÓLO si contiene el término de búsqueda
-            if (normalizeString(section.textContent).includes(searchTerm)) {
-                section.classList.add('active');
-            } else {
-                // Cerrar la sección si NO contiene el término de búsqueda
+        // Mostrar/Ocultar el mensaje de "No se encontraron resultados"
+        noResultsMessage.style.display = hasResults ? 'none' : 'block';
+
+        // Cerrar secciones que no coinciden con la búsqueda
+        document.querySelectorAll('.section').forEach(section => {
+            let sectionHasVisibleLinks = false;
+            section.querySelectorAll('.link-button').forEach(link => {
+                if (link.style.display === 'block') {
+                    sectionHasVisibleLinks = true;
+                }
+            });
+
+            if (!sectionHasVisibleLinks) {
                 section.classList.remove('active');
             }
-
         });
     });
 
