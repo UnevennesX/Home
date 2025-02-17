@@ -43,7 +43,7 @@
             margin: 0;
             background: #151515;
             color: #ddd;
-            padding: 20px;
+            padding: 10px; /* Reducido el padding general */
             box-sizing: border-box;
             min-height: 100vh;
             display: flex;
@@ -57,7 +57,7 @@
             background: rgba(25, 25, 25, 0.97);
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
+            padding: 15px; /* Reducido el padding del contenedor */
             margin: auto;
             animation: fadeInUp 0.5s ease-out;
         }
@@ -77,9 +77,9 @@
         h1 {
             text-align: center;
             color: #fff;
-            font-size: 1.8em;
-            margin: 15px 0 25px 0;
-            padding: 0 10px;
+            font-size: 1.6em; /* Ajustado el tamaño del título */
+            margin: 10px 0 20px 0; /* Ajustado el margen del título */
+            padding: 0 5px; /* Reducido el padding horizontal */
             animation: textGlow 2s infinite alternate;
         }
 
@@ -94,7 +94,7 @@
         }
 
         .section {
-            margin-bottom: 12px;
+            margin-bottom: 8px; /* Reducido el margen inferior de las secciones */
             border-radius: 8px;
             background: rgba(40, 40, 40, 0.6);
             overflow: hidden;
@@ -107,7 +107,7 @@
         }
 
         .section-header {
-            padding: 15px 20px;
+            padding: 12px 15px; /* Ajustado el padding del header */
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -120,17 +120,17 @@
         }
 
         .section-title {
-            font-size: 1em;
+            font-size: 0.9em; /* Ajustado el tamaño del título de la sección */
             color: #ff6b6b;
             margin: 0;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px; /* Reducido el gap */
         }
 
         .arrow {
             transition: transform 0.3s ease;
-            font-size: 0.9em;
+            font-size: 0.8em; /* Ajustado el tamaño de la flecha */
             color: #888;
         }
 
@@ -141,8 +141,8 @@
         .grid-links {
             display: none;
             grid-template-columns: 1fr;
-            gap: 12px;
-            padding: 15px 20px;
+            gap: 10px; /* Reducido el gap */
+            padding: 12px 15px; /* Ajustado el padding */
             animation: slideDown 0.4s ease-out;
         }
 
@@ -163,13 +163,13 @@
         }
 
         .link-button {
-            padding: 15px 20px;
+            padding: 12px 15px; /* Ajustado el padding */
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 8px;
             color: #ddd;
             text-decoration: none;
-            font-size: 0.95em;
+            font-size: 0.9em; /* Ajustado el tamaño de la fuente */
             transition: all 0.3s ease;
             animation: fadeIn 0.5s ease-out;
         }
@@ -183,10 +183,10 @@
         .new-badge {
             background: #ff4081;
             color: white;
-            font-size: 0.65em;
-            padding: 3px 8px;
+            font-size: 0.6em; /* Ajustado el tamaño de la fuente */
+            padding: 2px 6px; /* Ajustado el padding */
             border-radius: 10px;
-            margin-left: 8px;
+            margin-left: 6px; /* Reducido el margen */
             animation: pulse 1.5s infinite;
         }
 
@@ -204,6 +204,7 @@
             }
         }
 
+        /* Estilos para pantallas más grandes */
         @media (min-width: 600px) {
             .grid-links {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -213,16 +214,32 @@
             .link-button {
                 padding: 18px 25px;
             }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .section-title {
+                font-size: 1em;
+            }
         }
 
         #search-input {
-            width: 97%;
-            padding: 10px;
-            margin-bottom: 10px;
+            width: 100%; /* Ancho para pantallas pequeñas */
+            padding: 8px; /* Reducido el padding */
+            margin-bottom: 8px; /* Reducido el margen inferior */
             border: 1px solid #444;
             background-color: #222;
             color: #ddd;
             border-radius: 5px;
+            box-sizing: border-box; /* Importante para que el padding no aumente el ancho total */
+        }
+
+        /* En pantallas más grandes, puedes ajustar el ancho si lo deseas */
+        @media (min-width: 600px) {
+            #search-input {
+                width: 97%; /* Puedes ajustar el ancho para pantallas más grandes si es necesario */
+            }
         }
 
         /* Estilos básicos para el modal */
@@ -312,23 +329,23 @@
             bottom: 10px;
             left: 10px;
             background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
+            padding: 8px; /* Reducido el padding */
             border-radius: 5px;
             z-index: 100;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px; /* Reducido el gap */
         }
 
         #track-name {
             color: #fff;
-            font-size: 0.9em;
+            font-size: 0.8em; /* Ajustado el tamaño de la fuente */
         }
 
         #controls-container {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px; /* Reducido el gap */
         }
 
         #play-pause-button,
@@ -337,8 +354,8 @@
             background-color: transparent;
             color: #fff;
             border: none;
-            padding: 5px;
-            font-size: 1.2em;
+            padding: 4px; /* Reducido el padding */
+            font-size: 1em; /* Ajustado el tamaño de la fuente */
             cursor: pointer;
             transition: color 0.3s ease;
         }
@@ -350,8 +367,8 @@
         }
 
         #volume-slider {
-            width: 80px;
-            height: 5px;
+            width: 60px; /* Reducido el ancho */
+            height: 4px; /* Reducido la altura */
             background: #555;
             outline: none;
             opacity: 0.7;
@@ -363,8 +380,8 @@
         #volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 10px;
-            height: 10px;
+            width: 8px; /* Reducido el ancho */
+            height: 8px; /* Reducido la altura */
             background: #fff;
             cursor: pointer;
             border-radius: 50%;
@@ -388,7 +405,7 @@
     <div id="no-results-message" style="display:none; color: white; text-align: center; margin-top: 10px;">No se encontraron resultados.</div>
 
     <!-- Sección Principal -->
-    <div class="section">
+    <div class="section" data-section-name="Principales">
         <div class="section-header">
             <div class="section-title">🌟 Principales</div>
             <div class="arrow">▼</div>
@@ -404,7 +421,7 @@
     </div>
 
     <!-- Proyectos Destacados -->
-    <div class="section">
+    <div class="section" data-section-name="Destacados">
         <div class="section-header">
             <div class="section-title">🚀 Destacados</div>
             <div class="arrow">▼</div>
@@ -450,7 +467,7 @@
     </div>
 
     <!-- Herramientas Técnicas -->
-    <div class="section">
+    <div class="section" data-section-name="Técnicas">
         <div class="section-header">
             <div class="section-title">⚙️ Técnicas</div>
             <div class="arrow">▼</div>
@@ -463,7 +480,7 @@
     </div>
 
     <!-- Utilidades -->
-    <div class="section">
+    <div class="section" data-section-name="Utilidades">
         <div class="section-header">
             <div class="section-title">🔧 Utilidades</div>
             <div class="arrow">▼</div>
@@ -498,7 +515,7 @@
             <source src="miami.mp3" type="audio/mpeg">
             <source src="rd.mp3" type="audio/mpeg">
             <!-- Asegúrate de que la ruta y el tipo MIME sean correctos -->
-             <source src="rd2.mp3" type="audio/mpeg">
+            <source src="rd2.mp3" type="audio/mpeg">
         </audio>
     </div>
 </div>
@@ -549,41 +566,34 @@
         // Obtener todos los elementos link-button
         const allLinks = document.querySelectorAll('.link-button');
 
+        // Ocultar todas las secciones y enlaces al inicio
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.display = 'none';
+            section.classList.remove('active'); // Cerrar todas las secciones
+        });
+        document.querySelectorAll('.link-button').forEach(link => {
+            link.style.display = 'none';
+        });
+
         // Iterar a través de cada enlace y determinar si debe mostrarse u ocultarse
         allLinks.forEach(link => {
             const linkText = normalizeString(link.textContent); // Normalizar el texto del enlace
+            const section = link.closest('.section'); // Obtener la sección contenedora
+
             if (linkText.includes(searchTerm)) {
                 link.style.display = 'block';  // Mostrar el enlace si coincide con la búsqueda
                 hasResults = true;
+
+                // Mostrar la sección si no está ya visible
+                section.style.display = 'block';
+                section.classList.add('active'); // Abrir la sección
             } else {
                 link.style.display = 'none';   // Ocultar el enlace si no coincide
             }
         });
 
-        // Iterar a través de cada sección
-        document.querySelectorAll('.section').forEach(section => {
-            // Verificar si la sección contiene enlaces visibles
-            const visibleLinks = section.querySelectorAll('.link-button[style="display: block;"]');
-            // Si la sección tiene al menos un enlace visible, mostrar la sección; de lo contrario, ocultarla
-            section.style.display = visibleLinks.length > 0 ? 'block' : 'none';
-        });
-
         // Mostrar/Ocultar el mensaje de "No se encontraron resultados"
         noResultsMessage.style.display = hasResults ? 'none' : 'block';
-
-        // Cerrar secciones que no coinciden con la búsqueda
-        document.querySelectorAll('.section').forEach(section => {
-            let sectionHasVisibleLinks = false;
-            section.querySelectorAll('.link-button').forEach(link => {
-                if (link.style.display === 'block') {
-                    sectionHasVisibleLinks = true;
-                }
-            });
-
-            if (!sectionHasVisibleLinks) {
-                section.classList.remove('active');
-            }
-        });
     });
 
     // -----------  REPRODUCTOR MEJORADO  ------------
@@ -694,20 +704,20 @@
 
     document.addEventListener('click', function initialInteraction() { //Usando función tradicional
 
-            if (!hasInteracted) {
-                loadSavedState();
+        if (!hasInteracted) {
+            loadSavedState();
 
-                if (localStorage.getItem('musicState') === 'playing') {
-                    audio.play();
-                    isPlaying = true
-                    playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
-                }
-
-                hasInteracted = true; //Se establece como verdadero
-
-                document.removeEventListener('click', initialInteraction); //Ahora si removemos.
+            if (localStorage.getItem('musicState') === 'playing') {
+                audio.play();
+                isPlaying = true
+                playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
             }
-        });
+
+            hasInteracted = true; //Se establece como verdadero
+
+            document.removeEventListener('click', initialInteraction); //Ahora si removemos.
+        }
+    });
     // --- FIN DEL REPRODUCTOR MEJORADO ----
 
     window.addEventListener('load', function () {
