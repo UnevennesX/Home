@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="https://cdn.dribbble.com/users/7549673/screenshots/17206704/media/1210a9d0ec8af427967e735935861eeb.png?resize=400x300&vertical=center">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-       /* Estilos para la pantalla de carga */
+        /* Estilos para la pantalla de carga */
         #loading-screen {
             position: fixed;
             top: 0;
@@ -37,7 +37,8 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-       body {
+
+        body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             background: #151515;
@@ -55,7 +56,7 @@
             max-width: 800px;
             background: rgba(25, 25, 25, 0.97);
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
             padding: 20px;
             margin: auto;
             animation: fadeInUp 0.5s ease-out;
@@ -66,6 +67,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -85,6 +87,7 @@
             0% {
                 text-shadow: 0 0 5px rgba(255, 107, 107, 0.3);
             }
+
             100% {
                 text-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
             }
@@ -93,14 +96,14 @@
         .section {
             margin-bottom: 12px;
             border-radius: 8px;
-            background: rgba(40,40,40,0.6);
+            background: rgba(40, 40, 40, 0.6);
             overflow: hidden;
             transition: all 0.3s ease;
         }
 
         .section:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .section-header {
@@ -113,7 +116,7 @@
         }
 
         .section-header:hover {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .section-title {
@@ -148,6 +151,7 @@
                 opacity: 0;
                 transform: translateY(-10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -160,8 +164,8 @@
 
         .link-button {
             padding: 15px 20px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 8px;
             color: #ddd;
             text-decoration: none;
@@ -171,9 +175,9 @@
         }
 
         .link-button:hover {
-            background: rgba(255,64,129,0.15);
+            background: rgba(255, 64, 129, 0.15);
             transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(255,64,129,0.1);
+            box-shadow: 0 4px 10px rgba(255, 64, 129, 0.1);
         }
 
         .new-badge {
@@ -187,9 +191,17 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         @media (min-width: 600px) {
@@ -197,7 +209,7 @@
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
                 gap: 15px;
             }
-            
+
             .link-button {
                 padding: 18px 25px;
             }
@@ -213,463 +225,488 @@
             border-radius: 5px;
         }
 
-         /* Estilos básicos para el modal */
+        /* Estilos básicos para el modal */
         .modal {
-          display: none; /* Oculto por defecto */
-          position: fixed; /* Estar en un lugar */
-          z-index: 1; /* Estar por encima de otros elementos */
-          left: 0;
-          top: 0;
-          width: 100%; /* Ancho completo */
-          height: 100%; /* Altura completa */
-          overflow: auto; /* Habilitar el desplazamiento si el contenido es demasiado largo */
-          background-color: rgba(0,0,0,0.4); /* Fondo oscuro con transparencia */
+            display: none;
+            /* Oculto por defecto */
+            position: fixed;
+            /* Estar en un lugar */
+            z-index: 1;
+            /* Estar por encima de otros elementos */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Ancho completo */
+            height: 100%;
+            /* Altura completa */
+            overflow: auto;
+            /* Habilitar el desplazamiento si el contenido es demasiado largo */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Fondo oscuro con transparencia */
         }
 
         /* Contenido del modal */
         .modal-content {
-          background-color: #333; /* Fondo más oscuro para el modal */
-          color: #ddd;
-          margin: 15% auto; /* 15% desde la parte superior y centrado */
-          padding: 20px;
-          border: 1px solid #888;
-          /*width: 80%;  Reducir el tamaño del modal */
-           max-width: 500px; /* Establecer un ancho máximo para el modal */
-           width: 90%; /* Hacer que el modal ocupe el 90% del ancho de su contenedor */
-          border-radius: 10px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #333;
+            /* Fondo más oscuro para el modal */
+            color: #ddd;
+            margin: 15% auto;
+            /* 15% desde la parte superior y centrado */
+            padding: 20px;
+            border: 1px solid #888;
+            /*width: 80%;  Reducir el tamaño del modal */
+            max-width: 500px;
+            /* Establecer un ancho máximo para el modal */
+            width: 90%;
+            /* Hacer que el modal ocupe el 90% del ancho de su contenedor */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         /* Botón de cierre */
         .close-button {
-          color: #aaa;
-          float: right;
-          font-size: 28px;
-          font-weight: bold;
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
         }
 
         .close-button:hover,
         .close-button:focus {
-          color: #fff; /* Cambiar el color al pasar el ratón */
-          text-decoration: none;
-          cursor: pointer;
+            color: #fff;
+            /* Cambiar el color al pasar el ratón */
+            text-decoration: none;
+            cursor: pointer;
         }
 
         /* Estilos adicionales (opcional) */
         .modal-content h2 {
-          margin-top: 0;
-          color: #ff6b6b; /* Color para el título del modal */
-            font-size: 1.5em; /* Reducir el tamaño del título */
+            margin-top: 0;
+            color: #ff6b6b;
+            /* Color para el título del modal */
+            font-size: 1.5em;
+            /* Reducir el tamaño del título */
         }
 
         .modal-content ul {
-          list-style-type: none;
-          padding: 0;
+            list-style-type: none;
+            padding: 0;
         }
 
         .modal-content li {
-          margin-bottom: 5px;
+            margin-bottom: 5px;
         }
 
         .modal-content a {
-          color: #007bff;
-          text-decoration: none;
+            color: #007bff;
+            text-decoration: none;
         }
 
         .modal-content a:hover {
-          text-decoration: underline;
+            text-decoration: underline;
         }
-        /* Estilos para la música de fondo */
-         #music-container {
-        position: fixed;
-        bottom: 10px;
-        left: 10px;
-        background-color: rgba(0, 0, 0, 0.5);
-        padding: 10px;
-        border-radius: 5px;
-        z-index: 100; /* Asegura que esté por encima de otros elementos */
-        display: flex;
-        align-items: center;
-        gap: 10px; /* Espacio entre elementos */
-    }
 
-    #toggle-music {
-        background-color: transparent;
-        color: #fff;
-        border: none;
-        padding: 5px;
-        font-size: 1.2em;
-        cursor: pointer;
-        transition: color 0.3s ease;
-    }
+        /* Estilos para el reproductor de música */
+        #music-player-container {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    #toggle-music:hover {
-        color: #ff4081;
-    }
+        #track-name {
+            color: #fff;
+            font-size: 0.9em;
+        }
 
-    #volume {
-        width: 100px;
-    }
+        #controls-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-    #track-select {
-        background-color: #333;
-        color: #ddd;
-        border: 1px solid #444;
-        border-radius: 3px;
-        padding: 5px;
-        cursor: pointer;
-    }
+        #play-pause-button,
+        #prev-button,
+        #next-button {
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            padding: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
 
-    #track-select:hover {
-        background-color: #444;
-    }
+        #play-pause-button:hover,
+        #prev-button:hover,
+        #next-button:hover {
+            color: #ff4081;
+        }
+
+        #volume-slider {
+            width: 80px;
+            height: 5px;
+            background: #555;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity .2s;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        #volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        #volume-slider:hover {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
-     <!-- Pantalla de carga -->
-    <div id="loading-screen">
-        <div class="loading-spinner"></div>
-        <p>Cargando... UnevennesX Projects</p>
+<!-- Pantalla de carga -->
+<div id="loading-screen">
+    <div class="loading-spinner"></div>
+    <p>Cargando... UnevennesX Projects</p>
+</div>
+<div class="container">
+    <h1>UnevennesX Projects</h1>
+
+    <input type="text" id="search-input" placeholder="Buscar proyectos...">
+
+    <!-- Sección Principal -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-title">🌟 Principales</div>
+            <div class="arrow">▼</div>
+        </div>
+        <div class="grid-links">
+            <a href="https://extension-de-pg.vercel.app/" class="link-button">
+                Extensión PG
+                <span class="new-badge">NEW</span>
+            </a>
+            <a href="https://mi-pg.vercel.app/login/" class="link-button">UnevennesX</a>
+            <a href="https://unevennesx.github.io/UserAgent/" class="link-button">User Agent 2.0</a>
+        </div>
     </div>
-    <div class="container">
-        <h1>UnevennesX Projects</h1>
 
-        <input type="text" id="search-input" placeholder="Buscar proyectos...">
-        
-        <!-- Sección Principal -->
-        <div class="section">
-            <div class="section-header">
-                <div class="section-title">🌟 Principales</div>
-                <div class="arrow">▼</div>
-            </div>
-            <div class="grid-links">
-                <a href="https://extension-de-pg.vercel.app/" class="link-button">
-                    Extensión PG
-                    <span class="new-badge">NEW</span>
-                </a>
-                <a href="https://mi-pg.vercel.app/login/" class="link-button">UnevennesX</a>
-                <a href="https://unevennesx.github.io/UserAgent/" class="link-button">User Agent 2.0</a>
-            </div>
+    <!-- Proyectos Destacados -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-title">🚀 Destacados</div>
+            <div class="arrow">▼</div>
         </div>
+        <div class="grid-links">
+            <a href="https://unevennesx.github.io/-CheckLinks-/" class="link-button">
+                ALL SAMPLICIOUS
+            </a>
+            <a href="https://unevennesx.github.io/app/" class="link-button">
+                glimpsehere.com
+            </a>
+            <a href="https://unevennesx.github.io/zamplia/" class="link-button">
+                Zamplia
+            </a>
+            <a href="https://unevennesx.github.io/UnevennesX/" class="link-button">Armador V1</a>
 
-        <!-- Proyectos Destacados -->
-        <div class="section">
-            <div class="section-header">
-                <div class="section-title">🚀 Destacados</div>
-                <div class="arrow">▼</div>
-            </div>
-            <div class="grid-links">
-                <a href="https://unevennesx.github.io/-CheckLinks-/" class="link-button">
-                    ALL SAMPLICIOUS
-                </a>
-                <a href="https://unevennesx.github.io/app/" class="link-button">
-                    glimpsehere.com
-                </a>
-                <a href="https://unevennesx.github.io/zamplia/" class="link-button">
-                    Zamplia
-                </a>
-                <a href="https://unevennesx.github.io/UnevennesX/" class="link-button">Armador V1</a>
+            <a href="https://unevennesx.github.io/cube/" class="link-button">
+                Sample-Cube
+                <span class="new-badge">NEW</span>
+            </a>
 
-                <a href="https://unevennesx.github.io/cube/" class="link-button">
-                    Sample-Cube
-                    <span class="new-badge">NEW</span>
-                </a>
-
-                <a href="https://unevennesx.github.io/savanta/" class="link-button">
-                    Savanta
-                    <span class="new-badge">NEW</span>
-                </a>
+            <a href="https://unevennesx.github.io/savanta/" class="link-button">
+                Savanta
+                <span class="new-badge">NEW</span>
+            </a>
 
 
-                <a href="https://unevennesx.github.io/ISA/" class="link-button">
-                    ISA -
-                    <span class="new-badge">NEW</span>
-                </a>
+            <a href="https://unevennesx.github.io/ISA/" class="link-button">
+                ISA -
+                <span class="new-badge">NEW</span>
+            </a>
 
-                                <a href="https://unevennesx.github.io/consultas/" class="link-button">
-                    Consultas
-                    <span class="new-badge">NEW</span>
-                </a>
+            <a href="https://unevennesx.github.io/consultas/" class="link-button">
+                Consultas
+                <span class="new-badge">NEW</span>
+            </a>
 
-
-
-                                <a href="https://unevennesx.github.io/zipcodes/" class="link-button">
-                    Zipcode
-                    <span class="new-badge">NEW</span>
-                </a>
-                
-
-            </div>
+            <a href="https://unevennesx.github.io/zipcodes/" class="link-button">
+                Zipcode
+                <span class="new-badge">NEW</span>
+            </a>
         </div>
+    </div>
 
-          <!-- Proyecto EvannescencE - Links Izi -->
-        <div class="section">
-            <div class="section-header">
-                <div class="section-title">🎵 Música</div>
-                <div class="arrow">▼</div>
-            </div>
-            <div class="grid-links">
-                <a href="#" class="link-button music-link">
-                    Según IP
-                    <span class="new-badge">NEW</span>
-                </a>
-            </div>
+    <!-- Herramientas Técnicas -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-title">⚙️ Técnicas</div>
+            <div class="arrow">▼</div>
         </div>
+        <div class="grid-links">
+            <a href="https://unevennesx.github.io/UID-ONLY/" class="link-button">UID System</a>
+            <a href="https://unevennesx.github.io/cpx-tap-bit/" class="link-button">CPX NEWW</a>
 
-        <!-- Herramientas Técnicas -->
-        <div class="section">
-            <div class="section-header">
-                <div class="section-title">⚙️ Técnicas</div>
-                <div class="arrow">▼</div>
-            </div>
-            <div class="grid-links">
-                <a href="https://unevennesx.github.io/UID-ONLY/" class="link-button">UID System</a>
-                <a href="https://unevennesx.github.io/cpx-tap-bit/" class="link-button">CPX NEWW</a>
-
-            </div>
         </div>
+    </div>
 
-        <!-- Utilidades -->
-        <div class="section">
-            <div class="section-header">
-                <div class="section-title">🔧 Utilidades</div>
-                <div class="arrow">▼</div>
-            </div>
-            <div class="grid-links">
-                <a href="https://unevennesx.github.io/calculadora/" class="link-button">
-                    Calculadora
-                </a>
-                <a href="https://unevennesx.github.io/userv1/" class="link-button">
-                    User Agent 1.0
-                </a>
-
-                                <a href="https://unevennesx.github.io/agg-consultas/" class="link-button">
-                    Admin de consultas
-                    <span class="new-badge">NEW</span>
-                </a>
-                
-                
-            </div>
+    <!-- Utilidades -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-title">🔧 Utilidades</div>
+            <div class="arrow">▼</div>
         </div>
+        <div class="grid-links">
+            <a href="https://unevennesx.github.io/calculadora/" class="link-button">
+                Calculadora
+            </a>
+            <a href="https://unevennesx.github.io/userv1/" class="link-button">
+                User Agent 1.0
+            </a>
 
-         <!-- Modal para el Proyecto EvannescencE - Links Izi -->
-        <div id="music-links-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-button">×</span>
-                <h2>Música según IP</h2>
-                <p>¡Disfruta de la música!</p>
-
-                 
-                 <ul id="music-list">
-                    <li><a href="https://www.youtube.com/watch?v=zAfrPjTvSNs&pp=ygUIbmV3IHlvcms%3D" target="_blank">New York</a></li>
-                    <li><a href="https://www.youtube.com/watch?v=hoQmSA6MRAk&pp=ygUFbWlhbWk%3D" target="_blank">Miami</a></li>
-                    </ul>
-            </div>
+            <a href="https://unevennesx.github.io/agg-consultas/" class="link-button">
+                Admin de consultas
+                <span class="new-badge">NEW</span>
+            </a>
         </div>
-         <!-- Contenedor para la música de fondo -->
-             <div id="music-container">
-        <audio id="background-music" loop autoplay volume="0.1">
-            <source src="URL_DE_TU_ARCHIVO_MP3_1.mp3" type="audio/mpeg" data-track-name="Track 1">
-            <source src="URL_DE_TU_ARCHIVO_MP3_2.mp3" type="audio/mpeg" data-track-name="Track 2">
-            <source src="URL_DE_TU_ARCHIVO_MP3_3.mp3" type="audio/mpeg" data-track-name="Track 3">
-            Tu navegador no soporta la reproducción de audio.
+    </div>
+
+    <!-- Reproductor de Música -->
+    <div id="music-player-container">
+        <span id="track-name">New York</span>
+        <!-- Nombre de la pista actual -->
+        <div id="controls-container">
+            <button id="prev-button"><i class="fas fa-backward"></i></button>
+            <button id="play-pause-button"><i class="fas fa-play"></i></button>
+            <button id="next-button"><i class="fas fa-forward"></i></button>
+            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.1">
+        </div>
+        <audio id="background-music" loop>
+            <source src="newyork.mp3" type="audio/mpeg">
+            <source src="miami.mp3" type="audio/mpeg">
+            <source src="rd.mp3" type="audio/mpeg">
+            <!-- Asegúrate de que la ruta y el tipo MIME sean correctos -->
+             <source src="rd2.mp3" type="audio/mpeg">
         </audio>
-
-        <button id="toggle-music"><i class="fas fa-pause"></i></button>
-        <label for="volume"><i class="fas fa-volume-up"></i></label>
-        <input type="range" id="volume" min="0" max="1" step="0.01" value="0.1">
-
-        <select id="track-select">
-            <option value="0">Track 1</option>
-            <option value="1">Track 2</option>
-            <option value="2">Track 3</option>
-        </select>
     </div>
-    </div>
+</div>
 
-    <script>
-       // Función para eliminar acentos y convertir a minúsculas
-        function normalizeString(str) {
-            return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-        }
+<script>
+    // Función para eliminar acentos y convertir a minúsculas
+    function normalizeString(str) {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
 
-        document.querySelectorAll('.section-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const section = header.parentElement;
-                section.classList.toggle('active');
-                
-                // Cerrar otras secciones
-                document.querySelectorAll('.section').forEach(otherSection => {
-                    if(otherSection !== section && otherSection.classList.contains('active')) {
-                        otherSection.classList.remove('active');
-                    }
-                });
-            });
-        });
+    document.querySelectorAll('.section-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const section = header.parentElement;
+            section.classList.toggle('active');
 
-        const searchInput = document.getElementById('search-input');
-
-        searchInput.addEventListener('input', function() {
-            let searchTerm = searchInput.value;
-
-            // Verificar la longitud del término de búsqueda
-            if (searchTerm.length < 2) {
-                // Si el término tiene menos de 2 caracteres, mostrar todas las secciones y enlaces
-                document.querySelectorAll('.section').forEach(section => {
-                    section.style.display = 'block';
-                    section.classList.remove('active'); // Cerrar todas las secciones
-                });
-                document.querySelectorAll('.link-button').forEach(link => {
-                    link.style.display = 'block';
-                });
-                return; // Salir de la función
-            }
-
-            searchTerm = normalizeString(searchTerm); // Normalizar el término de búsqueda
-
-           // Obtener todos los elementos link-button
-            const allLinks = document.querySelectorAll('.link-button');
-
-            // Iterar a través de cada enlace y determinar si debe mostrarse u ocultarse
-            allLinks.forEach(link => {
-                const linkText = normalizeString(link.textContent); // Normalizar el texto del enlace
-                if (linkText.includes(searchTerm)) {
-                    link.style.display = 'block';  // Mostrar el enlace si coincide con la búsqueda
-                } else {
-                    link.style.display = 'none';   // Ocultar el enlace si no coincide
+            // Cerrar otras secciones
+            document.querySelectorAll('.section').forEach(otherSection => {
+                if (otherSection !== section && otherSection.classList.contains('active')) {
+                    otherSection.classList.remove('active');
                 }
             });
+        });
+    });
 
-             // Iterar a través de cada sección
+    const searchInput = document.getElementById('search-input');
+
+    searchInput.addEventListener('input', function () {
+        let searchTerm = searchInput.value;
+
+        // Verificar la longitud del término de búsqueda
+        if (searchTerm.length < 2) {
+            // Si el término tiene menos de 2 caracteres, mostrar todas las secciones y enlaces
             document.querySelectorAll('.section').forEach(section => {
-                // Verificar si la sección contiene enlaces visibles
-                const visibleLinks = section.querySelectorAll('.link-button[style="display: block;"]');
-                // Si la sección tiene al menos un enlace visible, mostrar la sección; de lo contrario, ocultarla
-                section.style.display = visibleLinks.length > 0 ? 'block' : 'none';
-                
-                // Abrir la sección SÓLO si contiene el término de búsqueda
-                if (normalizeString(section.textContent).includes(searchTerm)) {
-                    section.classList.add('active');
-                } else {
-                  // Cerrar la sección si NO contiene el término de búsqueda
-                  section.classList.remove('active');
-                }
-
+                section.style.display = 'block';
+                section.classList.remove('active'); // Cerrar todas las secciones
             });
+            document.querySelectorAll('.link-button').forEach(link => {
+                link.style.display = 'block';
+            });
+            return; // Salir de la función
+        }
 
+        searchTerm = normalizeString(searchTerm); // Normalizar el término de búsqueda
 
+        // Obtener todos los elementos link-button
+        const allLinks = document.querySelectorAll('.link-button');
+
+        // Iterar a través de cada enlace y determinar si debe mostrarse u ocultarse
+        allLinks.forEach(link => {
+            const linkText = normalizeString(link.textContent); // Normalizar el texto del enlace
+            if (linkText.includes(searchTerm)) {
+                link.style.display = 'block';  // Mostrar el enlace si coincide con la búsqueda
+            } else {
+                link.style.display = 'none';   // Ocultar el enlace si no coincide
+            }
         });
 
-          // Obtener el modal
-        var modal = document.getElementById("music-links-modal");
+        // Iterar a través de cada sección
+        document.querySelectorAll('.section').forEach(section => {
+            // Verificar si la sección contiene enlaces visibles
+            const visibleLinks = section.querySelectorAll('.link-button[style="display: block;"]');
+            // Si la sección tiene al menos un enlace visible, mostrar la sección; de lo contrario, ocultarla
+            section.style.display = visibleLinks.length > 0 ? 'block' : 'none';
 
-        // Obtener el botón "EvannescencE - Links Izi"
-        var btn = document.querySelector('.music-link'); // Selector específico
-
-        // Obtener el elemento <span> que cierra el modal
-        var span = document.getElementsByClassName("close-button")[0];
-
-        // Cuando el usuario haga clic en el botón, abrir el modal
-        btn.onclick = function() {
-          modal.style.display = "block";
-
-
-        }
-
-        // Cuando el usuario haga clic en <span> (x), cerrar el modal
-        span.onclick = function() {
-          modal.style.display = "none";
-        }
-
-        // Cuando el usuario haga clic en cualquier lugar fuera del modal, cerrarlo
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        }
-        const backgroundMusic = document.getElementById('background-music');
-        const toggleMusicButton = document.getElementById('toggle-music');
-        const volumeControl = document.getElementById('volume');
-        const trackSelect = document.getElementById('track-select');
-        let isPlaying = true; // Variable para rastrear el estado de reproducción
-
-        // Al cargar la página
-        document.addEventListener('DOMContentLoaded', function() {
-           window.addEventListener('load', function() {
-            const loadingScreen = document.getElementById('loading-screen');
-            loadingScreen.style.transition = "opacity 0.5s";
-            loadingScreen.style.opacity = "0";
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 500); // Espera 500ms para que la transición termine
-        });
-            const musicState = localStorage.getItem('musicState');
-            if (musicState === 'paused') {
-                backgroundMusic.pause();
-                toggleMusicButton.innerHTML = '<i class="fas fa-play"></i>'; // Mostrar el icono de "play"
-                isPlaying = false;
+            // Abrir la sección SÓLO si contiene el término de búsqueda
+            if (normalizeString(section.textContent).includes(searchTerm)) {
+                section.classList.add('active');
+            } else {
+                // Cerrar la sección si NO contiene el término de búsqueda
+                section.classList.remove('active');
             }
 
-                // Cargar la pista de música seleccionada previamente (si existe)
-                const selectedTrack = localStorage.getItem('selectedTrack') || 0;
-                trackSelect.value = selectedTrack;
-                loadTrack(selectedTrack);
-
         });
+    });
 
-          function loadTrack(trackIndex) {
-                // Pausar la pista actual
-                backgroundMusic.pause();
+    // -----------  REPRODUCTOR MEJORADO  ------------
 
-                // Establecer la nueva pista
-                for (let i = 0; i < backgroundMusic.children.length; i++) {
-                    if (i == trackIndex) {
-                        backgroundMusic.children[i].selected = true;
-                    } else {
-                        backgroundMusic.children[i].selected = false;
-                    }
+    const audio = document.getElementById('background-music');
+    const playPauseButton = document.getElementById('play-pause-button');
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+    const volumeSlider = document.getElementById('volume-slider');
+    const trackNameDisplay = document.getElementById('track-name');
+
+    let isPlaying = false;
+    let currentTrackIndex = 0;
+
+    // Lista de pistas
+    const tracks = [
+        {src: "newyork.mp3", name: "New York"},
+        {src: "miami.mp3", name: "Miami"},
+        {src: "rd.mp3", name: "RD"},
+        {src: "rd2.mp3", name: "RD 2"}
+    ];
+
+    function loadTrack(trackIndex) {
+        if (trackIndex < 0) {
+            trackIndex = tracks.length - 1;
+        } else if (trackIndex >= tracks.length) {
+            trackIndex = 0;
+        }
+        currentTrackIndex = trackIndex;
+        audio.src = tracks[trackIndex].src;
+        trackNameDisplay.textContent = tracks[trackIndex].name;
+        audio.load();
+        localStorage.setItem('currentTrackIndex', currentTrackIndex);
+    }
+
+    playPauseButton.addEventListener('click', () => {
+        if (isPlaying) {
+            audio.pause();
+            playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+            localStorage.setItem('musicState', 'paused');
+        } else {
+            audio.play();
+            playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
+            localStorage.setItem('musicState', 'playing');
+        }
+        isPlaying = !isPlaying;
+    });
+
+    prevButton.addEventListener('click', () => {
+        loadTrack(currentTrackIndex - 1);
+
+        if (isPlaying) {
+            audio.play();
+        }
+    });
+
+    nextButton.addEventListener('click', () => {
+        loadTrack(currentTrackIndex + 1);
+
+        if (isPlaying) {
+            audio.play();
+        }
+    });
+
+    volumeSlider.addEventListener('input', () => {
+        audio.volume = volumeSlider.value;
+        localStorage.setItem('volume', volumeSlider.value);
+    });
+
+    audio.addEventListener('ended', () => {
+        loadTrack(currentTrackIndex + 1);
+
+        if (isPlaying) {
+            audio.play();
+        }
+    });
+
+    function loadSavedState() {
+        const savedMusicState = localStorage.getItem('musicState');
+        isPlaying = savedMusicState === 'playing';
+
+        const savedTrackIndex = localStorage.getItem('currentTrackIndex');
+        if (savedTrackIndex) {
+            currentTrackIndex = parseInt(savedTrackIndex);
+        }
+
+        const savedVolume = localStorage.getItem('volume');
+        if (savedVolume) {
+            volumeSlider.value = savedVolume;
+            audio.volume = savedVolume;
+        } else {
+            volumeSlider.value = 0.1;
+            audio.volume = 0.1;
+        }
+
+        if (isPlaying) {
+            playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
+        } else {
+            playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+        }
+
+        loadTrack(currentTrackIndex);
+
+    }
+
+    //Reproducir solo después de la interacción del usuario
+    let hasInteracted = false;
+
+    document.addEventListener('click', function initialInteraction() { //Usando función tradicional
+
+            if (!hasInteracted) {
+                loadSavedState();
+
+                if (localStorage.getItem('musicState') === 'playing') {
+                    audio.play();
+                    isPlaying = true
+                    playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
                 }
 
-                // Cargar la nueva pista
-                backgroundMusic.load();
+                hasInteracted = true; //Se establece como verdadero
 
-                // Reproducir la nueva pista
-                backgroundMusic.play();
-
-                // Actualizar el icono del botón de reproducción/pausa
-                toggleMusicButton.innerHTML = '<i class="fas fa-pause"></i>';
-                isPlaying = true;
+                document.removeEventListener('click', initialInteraction); //Ahora si removemos.
             }
-
-        // Al hacer clic en el botón
-         toggleMusicButton.addEventListener('click', function() {
-            if (isPlaying) {
-                backgroundMusic.pause();
-                toggleMusicButton.innerHTML = '<i class="fas fa-play"></i>'; // Mostrar el icono de "play"
-                localStorage.setItem('musicState', 'paused');
-            } else {
-                backgroundMusic.play();
-                toggleMusicButton.innerHTML = '<i class="fas fa-pause"></i>'; // Mostrar el icono de "pause"
-                localStorage.setItem('musicState', 'playing');
-            }
-            isPlaying = !isPlaying; // Invertir el estado de reproducción
         });
+    // --- FIN DEL REPRODUCTOR MEJORADO ----
 
-    // Cambiar la pista de música seleccionada
-        trackSelect.addEventListener('change', function() {
-            const selectedTrack = trackSelect.value;
-            loadTrack(selectedTrack);
+    window.addEventListener('load', function () {
+        const loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.style.transition = "opacity 0.5s";
+        loadingScreen.style.opacity = "0";
 
-             // Guardar la pista seleccionada en localStorage
-            localStorage.setItem('selectedTrack', selectedTrack);
+        loadingScreen.addEventListener('transitionend', () => {
+            loadingScreen.style.display = 'none';
         });
-
-
-        volumeControl.addEventListener('input', function() {
-            backgroundMusic.volume = volumeControl.value;
-        });
-    </script>
-
+    });
+</script>
 
 </body>
 </html>
