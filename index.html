@@ -171,11 +171,23 @@
                 padding: 18px 25px;
             }
         }
+
+        #search-input {
+            width: 97%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #444;
+            background-color: #222;
+            color: #ddd;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>UnevennesX Projects</h1>
+
+        <input type="text" id="search-input" placeholder="Buscar proyectos...">
         
         <!-- Sección Principal -->
         <div class="section">
@@ -292,6 +304,31 @@
                         otherSection.classList.remove('active');
                     }
                 });
+            });
+        });
+
+        const searchInput = document.getElementById('search-input');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            document.querySelectorAll('.section').forEach(section => {
+                let sectionVisible = false; // Inicialmente, ocultar la sección
+                section.querySelectorAll('.link-button').forEach(link => {
+                    const linkText = link.textContent.toLowerCase();
+                    if (linkText.includes(searchTerm)) {
+                        link.style.display = 'block'; // Mostrar el enlace
+                        sectionVisible = true; // Mostrar la sección si al menos un enlace coincide
+                    } else {
+                        link.style.display = 'none'; // Ocultar el enlace
+                    }
+                });
+
+                if (sectionVisible) {
+                    section.style.display = 'block'; // Mostrar la sección
+                } else {
+                    section.style.display = 'none'; // Ocultar la sección
+                }
             });
         });
     </script>
