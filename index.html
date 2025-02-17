@@ -46,9 +46,9 @@
             padding: 20px;
             box-sizing: border-box;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: flex;                /* Enable flexbox on body */
+            flex-direction: column;       /* Stack content vertically */
+            align-items: center;         /* Center horizontally */
         }
 
         .container {
@@ -58,7 +58,7 @@
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
             padding: 20px;
-            margin: auto;
+            margin: auto;               /* Distribute extra space evenly */
             animation: fadeInUp 0.5s ease-out;
         }
 
