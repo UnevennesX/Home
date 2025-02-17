@@ -43,12 +43,13 @@
             margin: 0;
             background: #151515;
             color: #ddd;
-            padding: 10px; /* Reducido el padding general */
+            padding: 20px;
             box-sizing: border-box;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow-x: hidden; /* Oculta el scroll horizontal en el body */
         }
 
         .container {
@@ -57,7 +58,7 @@
             background: rgba(25, 25, 25, 0.97);
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            padding: 15px; /* Reducido el padding del contenedor */
+            padding: 20px;
             margin: auto;
             animation: fadeInUp 0.5s ease-out;
         }
@@ -77,9 +78,9 @@
         h1 {
             text-align: center;
             color: #fff;
-            font-size: 1.6em; /* Ajustado el tamaño del título */
-            margin: 10px 0 20px 0; /* Ajustado el margen del título */
-            padding: 0 5px; /* Reducido el padding horizontal */
+            font-size: 1.8em;
+            margin: 15px 0 25px 0;
+            padding: 0 10px;
             animation: textGlow 2s infinite alternate;
         }
 
@@ -94,7 +95,7 @@
         }
 
         .section {
-            margin-bottom: 8px; /* Reducido el margen inferior de las secciones */
+            margin-bottom: 12px;
             border-radius: 8px;
             background: rgba(40, 40, 40, 0.6);
             overflow: hidden;
@@ -107,7 +108,7 @@
         }
 
         .section-header {
-            padding: 12px 15px; /* Ajustado el padding del header */
+            padding: 15px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -120,17 +121,17 @@
         }
 
         .section-title {
-            font-size: 0.9em; /* Ajustado el tamaño del título de la sección */
+            font-size: 1em;
             color: #ff6b6b;
             margin: 0;
             display: flex;
             align-items: center;
-            gap: 6px; /* Reducido el gap */
+            gap: 8px;
         }
 
         .arrow {
             transition: transform 0.3s ease;
-            font-size: 0.8em; /* Ajustado el tamaño de la flecha */
+            font-size: 0.9em;
             color: #888;
         }
 
@@ -141,8 +142,8 @@
         .grid-links {
             display: none;
             grid-template-columns: 1fr;
-            gap: 10px; /* Reducido el gap */
-            padding: 12px 15px; /* Ajustado el padding */
+            gap: 12px;
+            padding: 15px 20px;
             animation: slideDown 0.4s ease-out;
         }
 
@@ -163,13 +164,13 @@
         }
 
         .link-button {
-            padding: 12px 15px; /* Ajustado el padding */
+            padding: 15px 20px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 8px;
             color: #ddd;
             text-decoration: none;
-            font-size: 0.9em; /* Ajustado el tamaño de la fuente */
+            font-size: 0.95em;
             transition: all 0.3s ease;
             animation: fadeIn 0.5s ease-out;
         }
@@ -183,10 +184,10 @@
         .new-badge {
             background: #ff4081;
             color: white;
-            font-size: 0.6em; /* Ajustado el tamaño de la fuente */
-            padding: 2px 6px; /* Ajustado el padding */
+            font-size: 0.65em;
+            padding: 3px 8px;
             border-radius: 10px;
-            margin-left: 6px; /* Reducido el margen */
+            margin-left: 8px;
             animation: pulse 1.5s infinite;
         }
 
@@ -214,63 +215,41 @@
             .link-button {
                 padding: 18px 25px;
             }
-
-            h1 {
-                font-size: 1.8em;
-            }
-
-            .section-title {
-                font-size: 1em;
-            }
         }
 
         #search-input {
-            width: 100%; /* Ancho para pantallas pequeñas */
-            padding: 8px; /* Reducido el padding */
-            margin-bottom: 8px; /* Reducido el margen inferior */
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
             border: 1px solid #444;
             background-color: #222;
             color: #ddd;
             border-radius: 5px;
-            box-sizing: border-box; /* Importante para que el padding no aumente el ancho total */
+            box-sizing: border-box;
         }
-
-        /* En pantallas más grandes, puedes ajustar el ancho si lo deseas */
 
         /* Estilos básicos para el modal */
         .modal {
             display: none;
-            /* Oculto por defecto */
             position: fixed;
-            /* Estar en un lugar */
             z-index: 1;
-            /* Estar por encima de otros elementos */
             left: 0;
             top: 0;
             width: 100%;
-            /* Ancho completo */
             height: 100%;
-            /* Altura completa */
             overflow: auto;
-            /* Habilitar el desplazamiento si el contenido es demasiado largo */
             background-color: rgba(0, 0, 0, 0.4);
-            /* Fondo oscuro con transparencia */
         }
 
         /* Contenido del modal */
         .modal-content {
             background-color: #333;
-            /* Fondo más oscuro para el modal */
             color: #ddd;
             margin: 15% auto;
-            /* 15% desde la parte superior y centrado */
             padding: 20px;
             border: 1px solid #888;
-            /*width: 80%;  Reducir el tamaño del modal */
             max-width: 500px;
-            /* Establecer un ancho máximo para el modal */
             width: 90%;
-            /* Hacer que el modal ocupe el 90% del ancho de su contenedor */
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
@@ -286,7 +265,6 @@
         .close-button:hover,
         .close-button:focus {
             color: #fff;
-            /* Cambiar el color al pasar el ratón */
             text-decoration: none;
             cursor: pointer;
         }
@@ -295,9 +273,7 @@
         .modal-content h2 {
             margin-top: 0;
             color: #ff6b6b;
-            /* Color para el título del modal */
             font-size: 1.5em;
-            /* Reducir el tamaño del título */
         }
 
         .modal-content ul {
@@ -324,23 +300,23 @@
             bottom: 10px;
             left: 10px;
             background-color: rgba(0, 0, 0, 0.5);
-            padding: 8px; /* Reducido el padding */
+            padding: 10px;
             border-radius: 5px;
             z-index: 100;
             display: flex;
             align-items: center;
-            gap: 8px; /* Reducido el gap */
+            gap: 10px;
         }
 
         #track-name {
             color: #fff;
-            font-size: 0.8em; /* Ajustado el tamaño de la fuente */
+            font-size: 0.8em;
         }
 
         #controls-container {
             display: flex;
             align-items: center;
-            gap: 4px; /* Reducido el gap */
+            gap: 4px;
         }
 
         #play-pause-button,
@@ -349,8 +325,8 @@
             background-color: transparent;
             color: #fff;
             border: none;
-            padding: 4px; /* Reducido el padding */
-            font-size: 1em; /* Ajustado el tamaño de la fuente */
+            padding: 4px;
+            font-size: 1em;
             cursor: pointer;
             transition: color 0.3s ease;
         }
@@ -362,8 +338,8 @@
         }
 
         #volume-slider {
-            width: 60px; /* Reducido el ancho */
-            height: 4px; /* Reducido la altura */
+            width: 60px;
+            height: 4px;
             background: #555;
             outline: none;
             opacity: 0.7;
@@ -375,8 +351,8 @@
         #volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 8px; /* Reducido el ancho */
-            height: 8px; /* Reducido la altura */
+            width: 8px;
+            height: 8px;
             background: #fff;
             cursor: pointer;
             border-radius: 50%;
@@ -384,6 +360,85 @@
 
         #volume-slider:hover {
             opacity: 1;
+        }
+
+        /* Estilos específicos para pantallas más pequeñas (móviles) */
+        @media (max-width: 599px) {
+
+          body {
+                padding: 10px;
+                overflow-x: hidden; /* Important: Hide horizontal scroll */
+            }
+
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+                margin: 10px 0 15px 0;
+            }
+
+            .section {
+                margin-bottom: 10px;
+            }
+
+            .section-header {
+                padding: 12px 15px;
+            }
+
+            .section-title {
+                font-size: 0.9em;
+            }
+
+            .grid-links {
+                padding: 10px;
+                gap: 8px;
+            }
+
+            .link-button {
+                padding: 10px 12px;
+                font-size: 0.85em;
+            }
+
+             #search-input {
+                width: 100%; /* Expand search input to container width */
+                max-width: none; /* Override any inherited max-width */
+            }
+
+            #music-player-container {
+                bottom: 5px;
+                left: 5px;
+                padding: 5px;
+                gap: 5px;
+            }
+
+            #track-name {
+                font-size: 0.7em;
+            }
+
+            #controls-container {
+                gap: 3px;
+            }
+
+            #play-pause-button,
+            #prev-button,
+            #next-button {
+                padding: 3px;
+                font-size: 0.9em;
+            }
+
+            #volume-slider {
+                width: 40px;
+                height: 3px;
+            }
+
+            #volume-slider::-webkit-slider-thumb {
+                width: 6px;
+                height: 6px;
+            }
+
         }
     </style>
 </head>
