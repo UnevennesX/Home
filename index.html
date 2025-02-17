@@ -7,8 +7,6 @@
     <link rel="icon" type="image/png" href="https://cdn.dribbble.com/users/7549673/screenshots/17206704/media/1210a9d0ec8af427967e735935861eeb.png?resize=400x300&vertical=center">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        
-                
         /* Estilos para la pantalla de carga */
         #loading-screen {
             position: fixed;
@@ -62,6 +60,7 @@
             padding: 20px;
             margin: auto;
             animation: fadeInUp 0.5s ease-out;
+            position: relative; /* Para posicionamiento absoluto del reproductor */
         }
 
         @keyframes fadeInUp {
@@ -215,10 +214,7 @@
             .link-button {
                 padding: 18px 25px;
             }
-            .search-input {
-                width: 95%; /* Un ajuste sutil en móviles si es necesario */
         }
-    
 
         #search-input {
             width: 97%;
@@ -228,6 +224,18 @@
             background-color: #222;
             color: #ddd;
             border-radius: 5px;
+            box-sizing: border-box; /* Asegura que padding no afecte el ancho total */
+            font-size: 1em; /* Tamaño base para el texto del input */
+        }
+
+        @media (max-width: 600px) {
+            #search-input {
+                width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+                font-size: 1.2em; /* Aumenta el tamaño del texto en móviles */
+            }
+             .container {
+                padding: 10px; /* Ajusta el padding del contenedor si es necesario */
+            }
         }
 
         /* Estilos básicos para el modal */
@@ -313,7 +321,8 @@
 
         /* Estilos para el reproductor de música */
         #music-player-container {
-            position: fixed;
+            /* position: fixed;   Posición fija, puede causar superposición */
+            position: absolute; /* Posición absoluta dentro del contenedor */
             bottom: 10px;
             left: 10px;
             background-color: rgba(0, 0, 0, 0.5);
@@ -342,8 +351,8 @@
             background-color: transparent;
             color: #fff;
             border: none;
-            padding: 5px;
-            font-size: 1.2em;
+            padding: 10px; /* Aumenta el padding para facilitar el toque */
+            font-size: 1.5em; /* Aumenta el tamaño de los iconos */
             cursor: pointer;
             transition: color 0.3s ease;
         }
@@ -355,8 +364,8 @@
         }
 
         #volume-slider {
-            width: 80px;
-            height: 5px;
+            width: 100px;  /* Aumenta el ancho del slider */
+            height: 12px;   /* Aumenta la altura del slider */
             background: #555;
             outline: none;
             opacity: 0.7;
@@ -368,16 +377,42 @@
         #volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 10px;
-            height: 10px;
+            width: 16px;  /* Aumenta el ancho del "pulgar" */
+            height: 16px; /* Aumenta la altura del "pulgar" */
             background: #fff;
             cursor: pointer;
             border-radius: 50%;
         }
 
+        #volume-slider::-moz-range-thumb { /* Para Firefox */
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            cursor: pointer;
+            border-radius: 50%;
+            border: none;
+        }
+
         #volume-slider:hover {
             opacity: 1;
         }
+
+        @media (max-width: 480px) {
+          #play-pause-button,
+          #prev-button,
+          #next-button {
+            font-size: 1.3em; /* Ajusta aún más si es necesario */
+          }
+          #volume-slider {
+            width: 70px;  /* Ajusta el ancho */
+          }
+           #music-player-container {
+            bottom: 5px; /* Reduce el margen inferior */
+            left: 5px;   /* Reduce el margen izquierdo */
+            padding: 5px; /* Reduce el padding */
+          }
+        }
+
     </style>
 </head>
 <body>
