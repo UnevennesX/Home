@@ -204,25 +204,16 @@
             }
         }
 
-        @media (min-width: 600px) {
-            .grid-links {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 15px;
-            }
-
-            .link-button {
-                padding: 18px 25px;
-            }
-        }
-
         #search-input {
-            width: 97%;
+            width: 97%; /* Changed to 97% */
             padding: 10px;
             margin-bottom: 10px;
             border: 1px solid #444;
             background-color: #222;
             color: #ddd;
             border-radius: 5px;
+            box-sizing: border-box; /*  Para que el padding y el border no aumenten el ancho total  */
+
         }
 
         /* Estilos básicos para el modal */
@@ -372,6 +363,12 @@
 
         #volume-slider:hover {
             opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            #search-input {
+                width: calc(97% - 20px); /*  Resta el padding para un ancho real del 97%  */
+            }
         }
     </style>
 </head>
