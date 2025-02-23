@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UnevennesX</title>
-    <link rel="icon" type="image/png" href="https://cdn.dribbble.com/users/7549673/screenshots/17206704/media/1210a9d0ec8af427967e735935861eeb.png?resize=400x300&vertical=center">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/png"
+        href="https://cdn.dribbble.com/users/7549673/screenshots/17206704/media/1210a9d0ec8af427967e735935861eeb.png?resize=400x300&vertical=center">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         /* Estilos para la pantalla de carga */
         #loading-screen {
@@ -20,7 +24,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 1000; /* Asegura que esté por encima de todo */
+            z-index: 1000;
+            /* Asegura que esté por encima de todo */
         }
 
         .loading-spinner {
@@ -34,8 +39,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         body {
@@ -49,7 +59,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden; /* Oculta el scroll horizontal en el body */
+            overflow-x: hidden;
+            /* Oculta el scroll horizontal en el body */
         }
 
         .container {
@@ -228,7 +239,7 @@
             box-sizing: border-box;
         }
 
-        /* Estilos básicos para el modal */
+        /* Estilos para el modal de login */
         .modal {
             display: none;
             position: fixed;
@@ -241,7 +252,7 @@
             background-color: rgba(0, 0, 0, 0.4);
         }
 
-        /* Contenido del modal */
+        /* Estilos para el contenido del modal */
         .modal-content {
             background-color: #333;
             color: #ddd;
@@ -252,9 +263,62 @@
             width: 90%;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
         }
 
-        /* Botón de cierre */
+        /* Estilos para el título del modal */
+        .modal-content h2 {
+            margin-top: 0;
+            color: #ff6b6b;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos para las etiquetas de los campos de entrada */
+        .modal-content label {
+            display: block;
+            margin-bottom: 5px;
+            color: #fff;
+            text-align: left;
+        }
+
+        /* Estilos para los campos de entrada */
+        .modal-content input[type="text"],
+        .modal-content input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #444;
+            background-color: #222;
+            color: #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Estilos para el botón de envío */
+        .modal-content button {
+            background-color: #ff4081;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-content button:hover {
+            background-color: #d43268;
+        }
+
+        /* Estilos para el mensaje de error */
+        .modal-content p#passwordError {
+            color: red;
+            display: none;
+            margin-top: 10px;
+        }
+
+        /* Estilos para el botón de cierre */
         .close-button {
             color: #aaa;
             float: right;
@@ -267,31 +331,6 @@
             color: #fff;
             text-decoration: none;
             cursor: pointer;
-        }
-
-        /* Estilos adicionales (opcional) */
-        .modal-content h2 {
-            margin-top: 0;
-            color: #ff6b6b;
-            font-size: 1.5em;
-        }
-
-        .modal-content ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .modal-content li {
-            margin-bottom: 5px;
-        }
-
-        .modal-content a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .modal-content a:hover {
-            text-decoration: underline;
         }
 
         /* Estilos para el reproductor de música */
@@ -365,9 +404,10 @@
         /* Estilos específicos para pantallas más pequeñas (móviles) */
         @media (max-width: 599px) {
 
-          body {
+            body {
                 padding: 10px;
-                overflow-x: hidden; /* Important: Hide horizontal scroll */
+                overflow-x: hidden;
+                /* Important: Hide horizontal scroll */
             }
 
             .container {
@@ -402,9 +442,11 @@
                 font-size: 0.85em;
             }
 
-             #search-input {
-                width: 100%; /* Expand search input to container width */
-                max-width: none; /* Override any inherited max-width */
+            #search-input {
+                width: 100%;
+                /* Expand search input to container width */
+                max-width: none;
+                /* Override any inherited max-width */
             }
 
             #music-player-container {
@@ -442,373 +484,480 @@
         }
     </style>
 </head>
+
 <body>
-<!-- Pantalla de carga -->
-<div id="loading-screen">
-    <div class="loading-spinner"></div>
-    <p>Cargando... UnevennesX Projects</p>
-</div>
-<div class="container">
-    <h1>UnevennesX Projects</h1>
+    <!-- Pantalla de carga -->
+    <div id="loading-screen">
+        <div class="loading-spinner"></div>
+        <p>Cargando... UnevennesX Projects</p>
+    </div>
+    <div class="container">
+        <h1>UnevennesX Projects</h1>
 
-    <input type="text" id="search-input" placeholder="Buscar proyectos...">
-    <div id="no-results-message" style="display:none; color: white; text-align: center; margin-top: 10px;">No se encontraron resultados.</div>
+        <input type="text" id="search-input" placeholder="Buscar proyectos...">
+        <div id="no-results-message" style="display:none; color: white; text-align: center; margin-top: 10px;">No se
+            encontraron resultados.</div>
 
-    <!-- Sección Principal -->
-    <div class="section" data-section-name="Principales">
-        <div class="section-header">
-            <div class="section-title">🌟 Principales</div>
-            <div class="arrow">▼</div>
+        <!-- Sección Principal -->
+        <div class="section" data-section-name="Principales">
+            <div class="section-header">
+                <div class="section-title">🌟 Principales</div>
+                <div class="arrow">▼</div>
+            </div>
+            <div class="grid-links">
+                <a href="https://extension-de-pg.vercel.app/" class="link-button">
+                    Precio del $$$$
+                    <span class="new-badge">NEW</span>
+                </a>
+                <a href="https://mi-pg.vercel.app/login/" class="link-button">UnevennesX</a>
+                <a href="https://unevennesx.github.io/UserAgent/" class="link-button">User Agent 2.0</a>
+            </div>
         </div>
-        <div class="grid-links">
-            <a href="https://extension-de-pg.vercel.app/" class="link-button">
-                Precio del $$$$
-                <span class="new-badge">NEW</span>
-            </a>
-            <a href="https://mi-pg.vercel.app/login/" class="link-button">UnevennesX</a>
-            <a href="https://unevennesx.github.io/UserAgent/" class="link-button">User Agent 2.0</a>
+
+        <!-- Proyectos Destacados -->
+        <div class="section" data-section-name="Destacados">
+            <div class="section-header">
+                <div class="section-title">🚀 Destacados</div>
+                <div class="arrow">▼</div>
+            </div>
+            <div class="grid-links">
+                <a href="https://unevennesx.github.io/-CheckLinks-/" class="link-button">
+                    ALL SAMPLICIOUS
+                </a>
+                <a href="https://unevennesx.github.io/app/" class="link-button">
+                    glimpsehere.com
+                </a>
+                <a href="https://unevennesx.github.io/zamplia/" class="link-button">
+                    Zamplia
+                </a>
+                <a href="https://unevennesx.github.io/UnevennesX/" class="link-button">Armador V1</a>
+
+                <a href="https://unevennesx.github.io/cube/" class="link-button">
+                    Sample-Cube
+                    <span class="new-badge">NEW</span>
+                </a>
+
+                <a href="https://unevennesx.github.io/savanta/" class="link-button">
+                    Savanta
+                </a>
+
+
+                <a href="https://unevennesx.github.io/ISA/" class="link-button">
+                    ISA -
+
+                </a>
+
+
+                <a href="https://unevennesx.github.io/Survey.Dashmr/" class="link-button">
+                    Survey.Dashmr
+                    <span class="new-badge">NEW</span>
+                </a>
+
+
+
+                <a href="https://unevennesx.github.io/Survey-Cint/" class="link-button">
+                    Sw.Cint
+                    <span class="new-badge">NEW</span>
+                </a>
+
+
+
+                <a href="https://unevennesx.github.io/consultas/" class="link-button">
+                    Consultas
+                    <span class="new-badge">NEW</span>
+                </a>
+
+                <a href="https://unevennesx.github.io/zipcodes/" class="link-button">
+                    Zipcode
+
+                </a>
+            </div>
+        </div>
+
+        <!-- Herramientas Técnicas -->
+        <div class="section" data-section-name="Técnicas">
+            <div class="section-header">
+                <div class="section-title">⚙️ Técnicas</div>
+                <div class="arrow">▼</div>
+            </div>
+            <div class="grid-links">
+                <a href="https://unevennesx.github.io/UID-ONLY/" class="link-button">UID System</a>
+                <a href="https://unevennesx.github.io/cpx-tap-bit/" class="link-button">CPX NEWW</a>
+
+
+                <a href="https://unevennesx.github.io/fakename/" class="link-button">
+                    Fake-Name
+                    <span class="new-badge">NEW</span>
+                </a>
+
+
+
+
+            </div>
+        </div>
+
+        <!-- Utilidades -->
+        <div class="section" data-section-name="Utilidades">
+            <div class="section-header">
+                <div class="section-title">🔧 Utilidades</div>
+                <div class="arrow">▼</div>
+            </div>
+            <div class="grid-links">
+                <a href="https://unevennesx.github.io/calculadora/" class="link-button">
+                    Calculadora
+                </a>
+                <a href="https://unevennesx.github.io/userv1/" class="link-button">
+                    User Agent 1.0
+                </a>
+
+                <a href="https://unevennesx.github.io/agg-consultas/" class="link-button">
+                    Admin de consultas
+                    <span class="new-badge">NEW</span>
+                </a>
+            </div>
+        </div>
+
+
+        <!-- 👑 Owner -->
+        <div class="section" data-section-name="👑 Owner" id="owner-section">
+            <div class="section-header" id="owner-header">
+                <div class="section-title">👑 Owner</div>
+                <div class="arrow">▼</div>
+            </div>
+            <div class="grid-links" id="owner-links">
+                <a href="https://mi-pg.vercel.app/extraer-links/" class="link-button">
+                    Extraer Link UnevennesX
+                    <span class="new-badge">NEW</span>
+                </a>
+            </div>
+        </div>
+
+
+
+
+        <!-- Reproductor de Música -->
+        <div id="music-player-container">
+            <span id="track-name">New York</span>
+            <!-- Nombre de la pista actual -->
+            <div id="controls-container">
+                <button id="prev-button"><i class="fas fa-backward"></i></button>
+                <button id="play-pause-button"><i class="fas fa-play"></i></button>
+                <button id="next-button"><i class="fas fa-forward"></i></button>
+                <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.1">
+            </div>
+            <audio id="background-music" loop>
+                <source src="newyork.mp3" type="audio/mpeg">
+                <source src="miami.mp3" type="audio/mpeg">
+                <source src="rd.mp3" type="audio/mpeg">
+                <!-- Asegúrate de que la ruta y el tipo MIME sean correctos -->
+                <source src="rd2.mp3" type="audio/mpeg">
+            </audio>
         </div>
     </div>
 
-    <!-- Proyectos Destacados -->
-    <div class="section" data-section-name="Destacados">
-        <div class="section-header">
-            <div class="section-title">🚀 Destacados</div>
-            <div class="arrow">▼</div>
-        </div>
-        <div class="grid-links">
-            <a href="https://unevennesx.github.io/-CheckLinks-/" class="link-button">
-                ALL SAMPLICIOUS
-            </a>
-            <a href="https://unevennesx.github.io/app/" class="link-button">
-                glimpsehere.com
-            </a>
-            <a href="https://unevennesx.github.io/zamplia/" class="link-button">
-                Zamplia
-            </a>
-            <a href="https://unevennesx.github.io/UnevennesX/" class="link-button">Armador V1</a>
+    <!-- Modal para la contraseña del Owner -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeModal">×</span>
+            <h2>Acceso Owner</h2>
 
-            <a href="https://unevennesx.github.io/cube/" class="link-button">
-                Sample-Cube
-                <span class="new-badge">NEW</span>
-            </a>
+            <label for="usernameInput">Usuario:</label>
+            <input type="text" id="usernameInput" placeholder="Usuario" value="UnevennesX" readonly>
 
-            <a href="https://unevennesx.github.io/savanta/" class="link-button">
-                Savanta
-            </a>
+            <label for="passwordInput">Contraseña:</label>
+            <input type="password" id="passwordInput" placeholder="Contraseña">
 
-
-            <a href="https://unevennesx.github.io/ISA/" class="link-button">
-                ISA -
-
-            </a>
-
-
-                        <a href="https://unevennesx.github.io/Survey.Dashmr/" class="link-button">
-                Survey.Dashmr
-                <span class="new-badge">NEW</span>
-            </a>
-
-
-
-                                    <a href="https://unevennesx.github.io/Survey-Cint/" class="link-button">
-                Sw.Cint
-                <span class="new-badge">NEW</span>
-            </a>
-            
-            
-
-            <a href="https://unevennesx.github.io/consultas/" class="link-button">
-                Consultas
-                <span class="new-badge">NEW</span>
-            </a>
-
-            <a href="https://unevennesx.github.io/zipcodes/" class="link-button">
-                Zipcode
-
-            </a>
+            <button id="submitPassword">Entrar</button>
+            <p id="passwordError" style="color: red; display: none;">Usuario o contraseña incorrectos.</p>
         </div>
     </div>
 
-    <!-- Herramientas Técnicas -->
-    <div class="section" data-section-name="Técnicas">
-        <div class="section-header">
-            <div class="section-title">⚙️ Técnicas</div>
-            <div class="arrow">▼</div>
-        </div>
-        <div class="grid-links">
-            <a href="https://unevennesx.github.io/UID-ONLY/" class="link-button">UID System</a>
-            <a href="https://unevennesx.github.io/cpx-tap-bit/" class="link-button">CPX NEWW</a>
-            
 
-            <a href="https://unevennesx.github.io/fakename/" class="link-button">
-                Fake-Name
-                <span class="new-badge">NEW</span>
-            </a>
+    <script>
+        // Función para eliminar acentos y convertir a minúsculas
+        function normalizeString(str) {
+            return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        }
 
+        document.querySelectorAll('.section-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const section = header.parentElement;
+                section.classList.toggle('active');
 
-            
-
-        </div>
-    </div>
-
-    <!-- Utilidades -->
-    <div class="section" data-section-name="Utilidades">
-        <div class="section-header">
-            <div class="section-title">🔧 Utilidades</div>
-            <div class="arrow">▼</div>
-        </div>
-        <div class="grid-links">
-            <a href="https://unevennesx.github.io/calculadora/" class="link-button">
-                Calculadora
-            </a>
-            <a href="https://unevennesx.github.io/userv1/" class="link-button">
-                User Agent 1.0
-            </a>
-
-            <a href="https://unevennesx.github.io/agg-consultas/" class="link-button">
-                Admin de consultas
-                <span class="new-badge">NEW</span>
-            </a>
-
-
-
-
-            
-            
-        </div>
-    </div>
-
-    <!-- Reproductor de Música -->
-    <div id="music-player-container">
-        <span id="track-name">New York</span>
-        <!-- Nombre de la pista actual -->
-        <div id="controls-container">
-            <button id="prev-button"><i class="fas fa-backward"></i></button>
-            <button id="play-pause-button"><i class="fas fa-play"></i></button>
-            <button id="next-button"><i class="fas fa-forward"></i></button>
-            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.1">
-        </div>
-        <audio id="background-music" loop>
-            <source src="newyork.mp3" type="audio/mpeg">
-            <source src="miami.mp3" type="audio/mpeg">
-            <source src="rd.mp3" type="audio/mpeg">
-            <!-- Asegúrate de que la ruta y el tipo MIME sean correctos -->
-            <source src="rd2.mp3" type="audio/mpeg">
-        </audio>
-    </div>
-</div>
-
-<script>
-    // Función para eliminar acentos y convertir a minúsculas
-    function normalizeString(str) {
-        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-    }
-
-    document.querySelectorAll('.section-header').forEach(header => {
-        header.addEventListener('click', () => {
-            const section = header.parentElement;
-            section.classList.toggle('active');
-
-            // Cerrar otras secciones
-            document.querySelectorAll('.section').forEach(otherSection => {
-                if (otherSection !== section && otherSection.classList.contains('active')) {
-                    otherSection.classList.remove('active');
-                }
+                // Cerrar otras secciones
+                document.querySelectorAll('.section').forEach(otherSection => {
+                    if (otherSection !== section && otherSection.classList.contains('active')) {
+                        otherSection.classList.remove('active');
+                    }
+                });
             });
         });
-    });
 
-    const searchInput = document.getElementById('search-input');
-    const noResultsMessage = document.getElementById('no-results-message');
+        const searchInput = document.getElementById('search-input');
+        const noResultsMessage = document.getElementById('no-results-message');
 
-    searchInput.addEventListener('input', function () {
-        let searchTerm = searchInput.value;
-        searchTerm = normalizeString(searchTerm);
+        searchInput.addEventListener('input', function () {
+            let searchTerm = searchInput.value;
+            searchTerm = normalizeString(searchTerm);
 
-        let hasResults = false;
+            let hasResults = false;
 
-        // Verificar la longitud del término de búsqueda
-        if (searchTerm.length < 2) {
-            // Si el término tiene menos de 2 caracteres, mostrar todas las secciones y enlaces
+            // Verificar la longitud del término de búsqueda
+            if (searchTerm.length < 2) {
+                // Si el término tiene menos de 2 caracteres, mostrar todas las secciones y enlaces
+                document.querySelectorAll('.section').forEach(section => {
+                    section.style.display = 'block';
+                    section.classList.remove('active'); // Cerrar todas las secciones
+                });
+                document.querySelectorAll('.link-button').forEach(link => {
+                    link.style.display = 'block';
+                });
+                noResultsMessage.style.display = 'none';
+                return; // Salir de la función
+            }
+
+            // Obtener todos los elementos link-button
+            const allLinks = document.querySelectorAll('.link-button');
+
+            // Ocultar todas las secciones y enlaces al inicio
             document.querySelectorAll('.section').forEach(section => {
-                section.style.display = 'block';
+                section.style.display = 'none';
                 section.classList.remove('active'); // Cerrar todas las secciones
             });
             document.querySelectorAll('.link-button').forEach(link => {
-                link.style.display = 'block';
+                link.style.display = 'none';
             });
-            noResultsMessage.style.display = 'none';
-            return; // Salir de la función
+
+            // Iterar a través de cada enlace y determinar si debe mostrarse u ocultarse
+            allLinks.forEach(link => {
+                const linkText = normalizeString(link.textContent); // Normalizar el texto del enlace
+                const section = link.closest('.section'); // Obtener la sección contenedora
+
+                if (linkText.includes(searchTerm)) {
+                    link.style.display = 'block'; // Mostrar el enlace si coincide con la búsqueda
+                    hasResults = true;
+
+                    // Mostrar la sección si no está ya visible
+                    section.style.display = 'block';
+                    section.classList.add('active'); // Abrir la sección
+                } else {
+                    link.style.display = 'none'; // Ocultar el enlace si no coincide
+                }
+            });
+
+            // Mostrar/Ocultar el mensaje de "No se encontraron resultados"
+            noResultsMessage.style.display = hasResults ? 'none' : 'block';
+        });
+
+        // -----------  REPRODUCTOR MEJORADO  ------------
+
+        const audio = document.getElementById('background-music');
+        const playPauseButton = document.getElementById('play-pause-button');
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        const volumeSlider = document.getElementById('volume-slider');
+        const trackNameDisplay = document.getElementById('track-name');
+
+        let isPlaying = false;
+        let currentTrackIndex = 0;
+
+        // Lista de pistas
+        const tracks = [
+            { src: "newyork.mp3", name: "New York" },
+            { src: "miami.mp3", name: "Miami" },
+            { src: "rd.mp3", name: "RD" },
+            { src: "rd2.mp3", name: "RD 2" }
+        ];
+
+        function loadTrack(trackIndex) {
+            if (trackIndex < 0) {
+                trackIndex = tracks.length - 1;
+            } else if (trackIndex >= tracks.length) {
+                trackIndex = 0;
+            }
+            currentTrackIndex = trackIndex;
+            audio.src = tracks[trackIndex].src;
+            trackNameDisplay.textContent = tracks[trackIndex].name;
+            audio.load();
+            localStorage.setItem('currentTrackIndex', currentTrackIndex);
         }
 
-        // Obtener todos los elementos link-button
-        const allLinks = document.querySelectorAll('.link-button');
-
-        // Ocultar todas las secciones y enlaces al inicio
-        document.querySelectorAll('.section').forEach(section => {
-            section.style.display = 'none';
-            section.classList.remove('active'); // Cerrar todas las secciones
-        });
-        document.querySelectorAll('.link-button').forEach(link => {
-            link.style.display = 'none';
-        });
-
-        // Iterar a través de cada enlace y determinar si debe mostrarse u ocultarse
-        allLinks.forEach(link => {
-            const linkText = normalizeString(link.textContent); // Normalizar el texto del enlace
-            const section = link.closest('.section'); // Obtener la sección contenedora
-
-            if (linkText.includes(searchTerm)) {
-                link.style.display = 'block';  // Mostrar el enlace si coincide con la búsqueda
-                hasResults = true;
-
-                // Mostrar la sección si no está ya visible
-                section.style.display = 'block';
-                section.classList.add('active'); // Abrir la sección
+        playPauseButton.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+                localStorage.setItem('musicState', 'paused');
             } else {
-                link.style.display = 'none';   // Ocultar el enlace si no coincide
-            }
-        });
-
-        // Mostrar/Ocultar el mensaje de "No se encontraron resultados"
-        noResultsMessage.style.display = hasResults ? 'none' : 'block';
-    });
-
-    // -----------  REPRODUCTOR MEJORADO  ------------
-
-    const audio = document.getElementById('background-music');
-    const playPauseButton = document.getElementById('play-pause-button');
-    const prevButton = document.getElementById('prev-button');
-    const nextButton = document.getElementById('next-button');
-    const volumeSlider = document.getElementById('volume-slider');
-    const trackNameDisplay = document.getElementById('track-name');
-
-    let isPlaying = false;
-    let currentTrackIndex = 0;
-
-    // Lista de pistas
-    const tracks = [
-        {src: "newyork.mp3", name: "New York"},
-        {src: "miami.mp3", name: "Miami"},
-        {src: "rd.mp3", name: "RD"},
-        {src: "rd2.mp3", name: "RD 2"}
-    ];
-
-    function loadTrack(trackIndex) {
-        if (trackIndex < 0) {
-            trackIndex = tracks.length - 1;
-        } else if (trackIndex >= tracks.length) {
-            trackIndex = 0;
-        }
-        currentTrackIndex = trackIndex;
-        audio.src = tracks[trackIndex].src;
-        trackNameDisplay.textContent = tracks[trackIndex].name;
-        audio.load();
-        localStorage.setItem('currentTrackIndex', currentTrackIndex);
-    }
-
-    playPauseButton.addEventListener('click', () => {
-        if (isPlaying) {
-            audio.pause();
-            playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
-            localStorage.setItem('musicState', 'paused');
-        } else {
-            audio.play();
-            playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
-            localStorage.setItem('musicState', 'playing');
-        }
-        isPlaying = !isPlaying;
-    });
-
-    prevButton.addEventListener('click', () => {
-        loadTrack(currentTrackIndex - 1);
-
-        if (isPlaying) {
-            audio.play();
-        }
-    });
-
-    nextButton.addEventListener('click', () => {
-        loadTrack(currentTrackIndex + 1);
-
-        if (isPlaying) {
-            audio.play();
-        }
-    });
-
-    volumeSlider.addEventListener('input', () => {
-        audio.volume = volumeSlider.value;
-        localStorage.setItem('volume', volumeSlider.value);
-    });
-
-    audio.addEventListener('ended', () => {
-        loadTrack(currentTrackIndex + 1);
-
-        if (isPlaying) {
-            audio.play();
-        }
-    });
-
-    function loadSavedState() {
-        const savedMusicState = localStorage.getItem('musicState');
-        isPlaying = savedMusicState === 'playing';
-
-        const savedTrackIndex = localStorage.getItem('currentTrackIndex');
-        if (savedTrackIndex) {
-            currentTrackIndex = parseInt(savedTrackIndex);
-        }
-
-        const savedVolume = localStorage.getItem('volume');
-        if (savedVolume) {
-            volumeSlider.value = savedVolume;
-            audio.volume = savedVolume;
-        } else {
-            volumeSlider.value = 0.1;
-            audio.volume = 0.1;
-        }
-
-        if (isPlaying) {
-            playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
-        } else {
-            playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
-        }
-
-        loadTrack(currentTrackIndex);
-
-    }
-
-    //Reproducir solo después de la interacción del usuario
-    let hasInteracted = false;
-
-    document.addEventListener('click', function initialInteraction() { //Usando función tradicional
-
-        if (!hasInteracted) {
-            loadSavedState();
-
-            if (localStorage.getItem('musicState') === 'playing') {
                 audio.play();
-                isPlaying = true
                 playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
+                localStorage.setItem('musicState', 'playing');
+            }
+            isPlaying = !isPlaying;
+        });
+
+        prevButton.addEventListener('click', () => {
+            loadTrack(currentTrackIndex - 1);
+
+            if (isPlaying) {
+                audio.play();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            loadTrack(currentTrackIndex + 1);
+
+            if (isPlaying) {
+                audio.play();
+            }
+        });
+
+        volumeSlider.addEventListener('input', () => {
+            audio.volume = volumeSlider.value;
+            localStorage.setItem('volume', volumeSlider.value);
+        });
+
+        audio.addEventListener('ended', () => {
+            loadTrack(currentTrackIndex + 1);
+
+            if (isPlaying) {
+                audio.play();
+            }
+        });
+
+        function loadSavedState() {
+            const savedMusicState = localStorage.getItem('musicState');
+            isPlaying = savedMusicState === 'playing';
+
+            const savedTrackIndex = localStorage.getItem('currentTrackIndex');
+            if (savedTrackIndex) {
+                currentTrackIndex = parseInt(savedTrackIndex);
             }
 
-            hasInteracted = true; //Se establece como verdadero
+            const savedVolume = localStorage.getItem('volume');
+            if (savedVolume) {
+                volumeSlider.value = savedVolume;
+                audio.volume = savedVolume;
+            } else {
+                volumeSlider.value = 0.1;
+                audio.volume = 0.1;
+            }
 
-            document.removeEventListener('click', initialInteraction); //Ahora si removemos.
+            if (isPlaying) {
+                playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+            }
+
+            loadTrack(currentTrackIndex);
+
         }
-    });
-    // --- FIN DEL REPRODUCTOR MEJORADO ----
 
-    window.addEventListener('load', function () {
-        const loadingScreen = document.getElementById('loading-screen');
-        loadingScreen.style.transition = "opacity 0.5s";
-        loadingScreen.style.opacity = "0";
+        //Reproducir solo después de la interacción del usuario
+        let hasInteracted = false;
 
-        loadingScreen.addEventListener('transitionend', () => {
-            loadingScreen.style.display = 'none';
+        document.addEventListener('click', function initialInteraction() { //Usando función tradicional
+
+            if (!hasInteracted) {
+                loadSavedState();
+
+                if (localStorage.getItem('musicState') === 'playing') {
+                    audio.play();
+                    isPlaying = true
+                    playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
+                }
+
+                hasInteracted = true; //Se establece como verdadero
+
+                document.removeEventListener('click', initialInteraction); //Ahora si removemos.
+            }
         });
-    });
-</script>
+        // --- FIN DEL REPRODUCTOR MEJORADO ----
+
+        window.addEventListener('load', function () {
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.style.transition = "opacity 0.5s";
+            loadingScreen.style.opacity = "0";
+
+            loadingScreen.addEventListener('transitionend', () => {
+                loadingScreen.style.display = 'none';
+            });
+        });
+
+        // ---------------------  PROTECCIÓN DE CONTRASEÑA  ------------------------
+        const passwordModal = document.getElementById('passwordModal');
+        const closeModalButton = document.getElementById('closeModal');
+        const submitPasswordButton = document.getElementById('submitPassword');
+        const passwordInput = document.getElementById('passwordInput');
+        const usernameInput = document.getElementById('usernameInput');
+        const ownerSection = document.getElementById('owner-section');
+        const ownerHeader = document.getElementById('owner-header');
+        const ownerLinks = document.getElementById('owner-links');
+
+        // Credenciales correctas
+        const correctUsername = "UnevennesX";
+        const correctPassword = "EvannescencE";
+        let isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+
+        ownerLinks.style.display = 'none'; // Oculta los links inicialmente
+
+        // Función para verificar la contraseña
+        function checkPassword() {
+            const enteredUsername = usernameInput.value;
+            const enteredPassword = passwordInput.value;
+
+            //Verifica si la contraseña y el nombre de usuario son correctos
+            if (enteredUsername === correctUsername && enteredPassword === correctPassword) {
+                isAuthenticated = true;
+                localStorage.setItem('isAuthenticated', 'true'); // Guarda el estado de autenticación
+                passwordModal.style.display = 'none';
+                ownerLinks.style.display = 'grid';
+                ownerSection.classList.add('active'); // Mantener la sección Owner abierta
+                passwordError.style.display = 'none';
+            } else {
+                passwordError.style.display = 'block';
+            }
+        }
+
+        // Mostrar el modal cuando se hace clic en el encabezado de la sección Owner
+        ownerHeader.addEventListener('click', function (event) {
+            event.preventDefault(); // Evitar que la sección se abra automáticamente
+            if (!isAuthenticated) {
+                passwordModal.style.display = 'block';
+            } else {
+                ownerLinks.style.display = ownerLinks.style.display === 'grid' ? 'none' : 'grid'; // Alternar la visibilidad si ya está autenticado
+                ownerSection.classList.toggle('active');
+            }
+        });
+
+        // Cerrar el modal con el botón de cerrar
+        closeModalButton.addEventListener('click', function () {
+            passwordModal.style.display = 'none';
+        });
+
+        // Enviar la contraseña al presionar el botón
+        submitPasswordButton.addEventListener('click', checkPassword);
+
+        // Enviar la contraseña al presionar Enter en el campo de contraseña
+        passwordInput.addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // Cerrar el modal si se hace clic fuera del contenido del modal
+        window.addEventListener('click', function (event) {
+            if (event.target === passwordModal) {
+                passwordModal.style.display = 'none';
+            }
+        });
+
+        // Al cargar la página, verificar si ya está autenticado
+        if (isAuthenticated) {
+            ownerLinks.style.display = 'grid';
+            ownerSection.classList.add('active');
+        }
+    </script>
 
 </body>
+
 </html>
