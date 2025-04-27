@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -105,6 +104,76 @@
                 text-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
             }
         }
+
+        /* --- ESTILOS PARA HORARIO DE PROCESAMIENTO --- */
+        #processing-times-container {
+            background: rgba(40, 40, 40, 0.6);
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 20px; /* Aumentado espacio inferior */
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #ddd;
+        }
+
+        #processing-times-container h3 {
+            color: #ff6b6b; /* Color temático */
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        #processing-times-container p { /* Estilo para el texto introductorio */
+            margin-bottom: 10px;
+            font-size: 0.95em;
+            text-align: center;
+        }
+
+        #processing-times-container ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+         #processing-times-container li {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+         }
+
+         #processing-times-container strong {
+             color: #eee;
+             display: inline-block; /* Para que el width funcione */
+             min-width: 160px; /* Ajusta según necesites para alinear (un poco más ancho para AM/PM) */
+             text-align: left;
+             padding-right: 5px; /* Espacio extra */
+         }
+
+        #current-times {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+         #current-times p {
+             margin: 5px 0;
+         }
+
+        #current-times span { /* El reloj */
+            font-weight: bold;
+            color: #fff;
+            background-color: rgba(0,0,0,0.3); /* Fondo sutil */
+            padding: 3px 8px; /* Un poco más de padding horizontal */
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada */
+            display: inline-block;
+            min-width: 95px; /* Ancho mínimo para evitar saltos con AM/PM */
+            text-align: center;
+        }
+        /* --- FIN ESTILOS HORARIO --- */
+
 
         .section {
             margin-bottom: 12px;
@@ -217,27 +286,16 @@
             }
         }
 
-        /* Estilos para pantallas más grandes */
-        @media (min-width: 600px) {
-            .grid-links {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 15px;
-            }
-
-            .link-button {
-                padding: 18px 25px;
-            }
-        }
-
         #search-input {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
+            padding: 12px; /* Aumentado padding */
+            margin-bottom: 20px; /* Aumentado espacio inferior */
             border: 1px solid #444;
             background-color: #222;
             color: #ddd;
             border-radius: 5px;
             box-sizing: border-box;
+            font-size: 1em; /* Mejorado tamaño de fuente */
         }
 
         /* Estilos para el modal de login */
@@ -402,6 +460,31 @@
             opacity: 1;
         }
 
+        /* Estilos para pantallas más grandes */
+        @media (min-width: 600px) {
+            .grid-links {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .link-button {
+                padding: 18px 25px;
+            }
+             #processing-times-container li {
+                display: flex; /* Usar flex para alinear */
+                justify-content: center; /* Centrar elementos en la línea */
+                align-items: center; /* Alinear verticalmente */
+                gap: 10px; /* Espacio entre strong y el texto */
+             }
+             #processing-times-container strong {
+                 min-width: auto; /* Quitar ancho fijo en pantallas grandes */
+                 width: auto;
+                 text-align: right; /* Alinear a la derecha para que quede pegado al texto */
+             }
+
+        }
+
+
         /* Estilos específicos para pantallas más pequeñas (móviles) */
         @media (max-width: 599px) {
 
@@ -420,6 +503,26 @@
                 font-size: 1.5em;
                 margin: 10px 0 15px 0;
             }
+
+            /* Ajustes para sección de horario en móvil */
+            #processing-times-container {
+                padding: 12px 15px;
+            }
+            #processing-times-container h3 {
+                font-size: 1em;
+            }
+            #processing-times-container p,
+            #processing-times-container li,
+            #current-times {
+                 font-size: 0.9em;
+             }
+             #processing-times-container strong {
+                 min-width: 140px; /* Ajustar ancho si es necesario en móvil para AM/PM */
+             }
+            #current-times span {
+                min-width: 90px; /* Ajustar ancho reloj en móvil */
+            }
+
 
             .section {
                 margin-bottom: 10px;
@@ -445,9 +548,9 @@
 
             #search-input {
                 width: 100%;
-                /* Expand search input to container width */
                 max-width: none;
-                /* Override any inherited max-width */
+                padding: 10px;
+                margin-bottom: 15px;
             }
 
             #music-player-container {
@@ -492,12 +595,28 @@
         <div class="loading-spinner"></div>
         <p>Cargando... UnevennesX Projects</p>
     </div>
+
     <div class="container">
         <h1>
-            <a href="https://unevennesx.github.io/consultas/" class="link-button">
+            <a href="https://unevennesx.github.io/consultas/" class="link-button" style="display: inline-block; margin-bottom: 10px;"> <!-- Ajuste para que el h1 no ocupe todo el ancho -->
                UnevennesX 👻 EvannescencE
             </a>
         </h1>
+
+        <!-- === SECCIÓN DE HORARIO DE PROCESAMIENTO === -->
+        <div id="processing-times-container">
+            <h3><i class="fas fa-clock"></i> Horario de Procesamiento de Pagos</h3>
+            <p>Nuestro equipo procesa los pagos dos veces al día en los siguientes horarios fijos:</p>
+            <ul>
+                <li><strong><i class="fas fa-gbp-sign"></i> Hora de Londres:</strong> 3:00 AM y 3:00 PM</li> <!-- Cambiado a AM/PM -->
+                <li><strong><i class="fas fa-dollar-sign"></i> Hora de Los Ángeles:</strong> 9:00 AM y 9:00 PM</li> <!-- Cambiado a AM/PM -->
+            </ul>
+            <div id="current-times">
+                <p>Hora actual Londres: <span id="current-london-time">--:--:-- --</span></p>
+                <p>Hora actual Los Ángeles: <span id="current-la-time">--:--:-- --</span></p>
+            </div>
+        </div>
+        <!-- === FIN SECCIÓN HORARIO === -->
 
         <input type="text" id="search-input" placeholder="Buscar proyectos...">
         <div id="no-results-message" style="display:none; color: white; text-align: center; margin-top: 10px;">No se
@@ -516,31 +635,21 @@
                 </a>
                 <a href="https://mi-pg.vercel.app/login/" class="link-button">UnevennesX</a>
                 <a href="https://unevennesx.github.io/UserAgent/" class="link-button">User Agent 2.0</a>
-
                 <a href="https://unevennesx.github.io/Avanced-UnevennesX/" class="link-button">Avanced-EvanneS 🔥</a>
-
-                                <a href="https://unevennesx.github.io/zipcodes/" class="link-button">
+                <a href="https://unevennesx.github.io/zipcodes/" class="link-button">
                     Zipcode
-
                 </a>
-                
             </div>
         </div>
 
         <!-- Proyectos Destacados -->
-
-
-        
         <div class="section" data-section-name="Destacados">
             <div class="section-header">
-
-
-
                 <div class="section-title">🚀 Destacados</div>
                 <div class="arrow">▼</div>
             </div>
             <div class="grid-links">
-                <a href="https://unevennesx.github.io/-CheckLinks-/" class="link-button">
+                 <a href="https://unevennesx.github.io/-CheckLinks-/" class="link-button">
                     ALL SAMPLICIOUS
                 </a>
                 <a href="https://unevennesx.github.io/app/" class="link-button">
@@ -550,73 +659,42 @@
                     Zamplia
                 </a>
                 <a href="https://unevennesx.github.io/UnevennesX/" class="link-button">Armador V1</a>
-
                 <a href="https://unevennesx.github.io/cube/" class="link-button">
                     Sample-Cube
-
                 </a>
-
                 <a href="https://unevennesx.github.io/savanta/" class="link-button">
                     Savanta
                 </a>
-
-
                 <a href="https://unevennesx.github.io/ISA/" class="link-button">
                     ISA -
-
                 </a>
-
-
                 <a href="https://unevennesx.github.io/Survey.Dashmr/" class="link-button">
                     Survey.Dashmr
-
                 </a>
-
-
-
                 <a href="https://unevennesx.github.io/Survey-Cint/" class="link-button">
                     Sw.Cint
-
                 </a>
-
-
-
-                                <a href="https://unevennesx.github.io/tsid/" class="link-button">
+                <a href="https://unevennesx.github.io/tsid/" class="link-button">
                     TSID
                 </a>
-
-
-                                <a href="https://unevennesx.github.io/rd-secured/" class="link-button">
+                <a href="https://unevennesx.github.io/rd-secured/" class="link-button">
                     Rd.Secured👻
                 </a>
-
-                                                <a href="https://unevennesx.github.io/RD-SIN-rd_proj_ud-/" class="link-button">
+                <a href="https://unevennesx.github.io/RD-SIN-rd_proj_ud-/" class="link-button">
                     Rd.🚫"rd_proj_ud"🚫
                 </a>
-
-
-
-                                <a href="https://unevennesx.github.io/All-Spectrum/" class="link-button">
+                <a href="https://unevennesx.github.io/All-Spectrum/" class="link-button">
                     ALL Spectrum👾
                     <span class="new-badge">Mejorado</span>
                 </a>
-
-
-                                                <a href="https://unevennesx.github.io/spectrum-corto/" class="link-button">
+                <a href="https://unevennesx.github.io/spectrum-corto/" class="link-button">
                     ⚠️Spectrum Corto⚠️
                     <span class="new-badge">Corto</span>
                 </a>
-
-
-                                                                <a href="https://unevennesx.github.io/Survey.Emi/" class="link-button">
+                <a href="https://unevennesx.github.io/Survey.Emi/" class="link-button">
                     Survey.Emi🤫
                     <span class="new-badge">New</span>
                 </a>
-                
-
-
-
-
             </div>
         </div>
 
@@ -627,30 +705,13 @@
                 <div class="arrow">▼</div>
             </div>
             <div class="grid-links">
-
-
-                
-                
-
-
                 <a href="https://unevennesx.github.io/fakename/" class="link-button">
                     Fake-Name
-                    
                 </a>
-
-
-                                
-                </a>
-
                 <a href="https://unevennesx.github.io/cpx-tap-bit/" class="link-button">CPX</a>
-
-                
-
                 <a href="https://unevennesx.github.io/calculadora/" class="link-button">
                     Calculadora
                 </a>
-
-
             </div>
         </div>
 
@@ -660,21 +721,13 @@
                 <div class="section-title">🔧 Utilidades</div>
                 <div class="arrow">▼</div>
             </div>
-
-            
             <div class="grid-links">
-
-
-                <a href="https://unevennesx.github.io/UID-ONLY/" class="link-button">Bitlabs
-                    
-                
+                <a href="https://unevennesx.github.io/UID-ONLY/" class="link-button">Bitlabs</a>
                 <a href="https://unevennesx.github.io/userv1/" class="link-button">
                     User Agent 1.0
                 </a>
-
                 <a href="https://unevennesx.github.io/agg-consultas/" class="link-button">
                     Admin de consultas
-                   
                 </a>
             </div>
         </div>
@@ -687,40 +740,24 @@
                 <div class="arrow">▼</div>
             </div>
             <div class="grid-links" id="owner-links">
-
-
-
-                <a href="https://unevennesx.github.io/user-owner/" class="link-button">
+                 <a href="https://unevennesx.github.io/user-owner/" class="link-button">
                     UserAgent V3
                     👑
                 </a>
-
-                
-                
                 <a href="https://mi-pg.vercel.app/extraer-links/" class="link-button">
                     Links UnevennesX
                     👑
                 </a>
-
-
                 <a href="https://mi-pg.vercel.app/offline_backup/manage/" class="link-button">
                     Backup UnevennesX
                     👑
                 </a>
-
-
-
-                
             </div>
         </div>
-
-
-
 
         <!-- Reproductor de Música -->
         <div id="music-player-container">
             <span id="track-name">New York</span>
-            <!-- Nombre de la pista actual -->
             <div id="controls-container">
                 <button id="prev-button"><i class="fas fa-backward"></i></button>
                 <button id="play-pause-button"><i class="fas fa-play"></i></button>
@@ -731,8 +768,6 @@
                 <source src="newyork.mp3" type="audio/mpeg">
                 <source src="miami.mp3" type="audio/mpeg">
                 <source src="rd.mp3" type="audio/mpeg">
-                <!-- Asegúrate de que la ruta y el tipo MIME sean correctos -->
-
             </audio>
         </div>
     </div>
@@ -742,13 +777,10 @@
         <div class="modal-content">
             <span class="close-button" id="closeModal">×</span>
             <h2>Acceso Owner</h2>
-
             <label for="usernameInput">Usuario:</label>
             <input type="text" id="usernameInput" placeholder="Usuario" value="UnevennesX" readonly>
-
             <label for="passwordInput">Contraseña:</label>
             <input type="password" id="passwordInput" placeholder="Contraseña">
-
             <button id="submitPassword">Entrar</button>
             <p id="passwordError" style="color: red; display: none;">Usuario o contraseña incorrectos.</p>
         </div>
@@ -762,18 +794,22 @@
         }
 
         document.querySelectorAll('.section-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const section = header.parentElement;
-                section.classList.toggle('active');
+            // Excluir el header de Owner del comportamiento general de toggle
+            if (header.id !== 'owner-header') {
+                header.addEventListener('click', () => {
+                    const section = header.parentElement;
+                    section.classList.toggle('active');
 
-                // Cerrar otras secciones
-                document.querySelectorAll('.section').forEach(otherSection => {
-                    if (otherSection !== section && otherSection.classList.contains('active')) {
-                        otherSection.classList.remove('active');
-                    }
+                    // Cerrar otras secciones (excepto Owner si está abierta)
+                    document.querySelectorAll('.section').forEach(otherSection => {
+                        if (otherSection !== section && otherSection.id !== 'owner-section' && otherSection.classList.contains('active')) {
+                            otherSection.classList.remove('active');
+                        }
+                    });
                 });
-            });
+            }
         });
+
 
         const searchInput = document.getElementById('search-input');
         const noResultsMessage = document.getElementById('no-results-message');
@@ -789,10 +825,11 @@
                 // Si el término tiene menos de 2 caracteres, mostrar todas las secciones y enlaces
                 document.querySelectorAll('.section').forEach(section => {
                     section.style.display = 'block';
-                    section.classList.remove('active'); // Cerrar todas las secciones
+                     // No cerrar secciones automáticamente al borrar búsqueda
+                    // section.classList.remove('active');
                 });
                 document.querySelectorAll('.link-button').forEach(link => {
-                    link.style.display = 'block';
+                    link.style.display = 'block'; // O 'grid' si es necesario según tu CSS
                 });
                 noResultsMessage.style.display = 'none';
                 return; // Salir de la función
@@ -801,29 +838,45 @@
             // Obtener todos los elementos link-button
             const allLinks = document.querySelectorAll('.link-button');
 
-            // Ocultar todas las secciones y enlaces al inicio
+            // Ocultar todas las secciones y enlaces al inicio (excepto Owner si está autenticado)
             document.querySelectorAll('.section').forEach(section => {
-                section.style.display = 'none';
-                section.classList.remove('active'); // Cerrar todas las secciones
+                 if (section.id !== 'owner-section' || !isAuthenticated) { // No ocultar Owner si está autenticado
+                      section.style.display = 'none';
+                      section.classList.remove('active');
+                 } else if (section.id === 'owner-section' && isAuthenticated){
+                     section.style.display = 'block'; // Asegurarse que Owner sigue visible
+                 }
             });
-            document.querySelectorAll('.link-button').forEach(link => {
-                link.style.display = 'none';
-            });
+             document.querySelectorAll('.link-button').forEach(link => {
+                 // Ocultar solo los enlaces que no estén dentro de la sección Owner autenticada
+                 const ownerSection = document.getElementById('owner-section');
+                 if (!ownerSection.contains(link) || !isAuthenticated) {
+                     link.style.display = 'none';
+                 } else {
+                     link.style.display = 'block'; // O 'grid'
+                 }
+             });
+
 
             // Iterar a través de cada enlace y determinar si debe mostrarse u ocultarse
             allLinks.forEach(link => {
                 const linkText = normalizeString(link.textContent); // Normalizar el texto del enlace
                 const section = link.closest('.section'); // Obtener la sección contenedora
 
-                if (linkText.includes(searchTerm)) {
-                    link.style.display = 'block'; // Mostrar el enlace si coincide con la búsqueda
+                // Asegurarse que section existe antes de acceder a sus propiedades
+                if (section && linkText.includes(searchTerm)) {
+                    link.style.display = 'block'; // Mostrar el enlace si coincide con la búsqueda (o 'grid')
                     hasResults = true;
 
                     // Mostrar la sección si no está ya visible
                     section.style.display = 'block';
                     section.classList.add('active'); // Abrir la sección
-                } else {
-                    link.style.display = 'none'; // Ocultar el enlace si no coincide
+                } else if (!linkText.includes(searchTerm)) {
+                     // Ocultar solo si no coincide Y no está en la sección Owner autenticada (ya manejado arriba)
+                     const ownerSection = document.getElementById('owner-section');
+                     if (section && (!ownerSection.contains(link) || !isAuthenticated)) {
+                        link.style.display = 'none';
+                     }
                 }
             });
 
@@ -831,8 +884,8 @@
             noResultsMessage.style.display = hasResults ? 'none' : 'block';
         });
 
-        // -----------  REPRODUCTOR MEJORADO  ------------
 
+        // -----------  REPRODUCTOR MEJORADO  ------------
         const audio = document.getElementById('background-music');
         const playPauseButton = document.getElementById('play-pause-button');
         const prevButton = document.getElementById('prev-button');
@@ -843,12 +896,10 @@
         let isPlaying = false;
         let currentTrackIndex = 0;
 
-        // Lista de pistas
         const tracks = [
             { src: "newyork.mp3", name: "New York" },
             { src: "miami.mp3", name: "Miami" },
             { src: "rd.mp3", name: "RD" },
-
         ];
 
         function loadTrack(trackIndex) {
@@ -858,11 +909,15 @@
                 trackIndex = 0;
             }
             currentTrackIndex = trackIndex;
-            audio.src = tracks[trackIndex].src;
+            // Solo cambia el src si es diferente para evitar recargas innecesarias
+            if (audio.currentSrc !== tracks[trackIndex].src) {
+                 audio.src = tracks[trackIndex].src;
+                 audio.load(); // Carga la nueva fuente
+            }
             trackNameDisplay.textContent = tracks[trackIndex].name;
-            audio.load();
             localStorage.setItem('currentTrackIndex', currentTrackIndex);
         }
+
 
         playPauseButton.addEventListener('click', () => {
             if (isPlaying) {
@@ -870,7 +925,9 @@
                 playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
                 localStorage.setItem('musicState', 'paused');
             } else {
-                audio.play();
+                // Asegurarse de que la pista correcta está cargada antes de reproducir
+                loadTrack(currentTrackIndex);
+                audio.play().catch(error => console.error("Error playing audio:", error)); // Manejar posible error de reproducción
                 playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
                 localStorage.setItem('musicState', 'playing');
             }
@@ -879,17 +936,15 @@
 
         prevButton.addEventListener('click', () => {
             loadTrack(currentTrackIndex - 1);
-
             if (isPlaying) {
-                audio.play();
+                audio.play().catch(error => console.error("Error playing audio:", error));
             }
         });
 
         nextButton.addEventListener('click', () => {
             loadTrack(currentTrackIndex + 1);
-
             if (isPlaying) {
-                audio.play();
+                audio.play().catch(error => console.error("Error playing audio:", error));
             }
         });
 
@@ -899,24 +954,29 @@
         });
 
         audio.addEventListener('ended', () => {
-            loadTrack(currentTrackIndex + 1);
-
-            if (isPlaying) {
-                audio.play();
-            }
+             // Solo avanza si está reproduciendo activamente
+             if (isPlaying) {
+                 loadTrack(currentTrackIndex + 1);
+                 audio.play().catch(error => console.error("Error playing audio on ended:", error));
+             } else {
+                 // Si no estaba reproduciendo, solo carga la siguiente pista pero no la reproduce
+                 loadTrack(currentTrackIndex + 1);
+             }
         });
 
         function loadSavedState() {
             const savedMusicState = localStorage.getItem('musicState');
-            isPlaying = savedMusicState === 'playing';
+            // isPlaying = savedMusicState === 'playing'; // No establecer isPlaying aquí, se hace con la interacción
 
             const savedTrackIndex = localStorage.getItem('currentTrackIndex');
-            if (savedTrackIndex) {
-                currentTrackIndex = parseInt(savedTrackIndex);
+            if (savedTrackIndex !== null) { // Verificar que no sea null
+                currentTrackIndex = parseInt(savedTrackIndex, 10); // Usar base 10
+            } else {
+                currentTrackIndex = 0; // Valor por defecto
             }
 
             const savedVolume = localStorage.getItem('volume');
-            if (savedVolume) {
+            if (savedVolume !== null) {
                 volumeSlider.value = savedVolume;
                 audio.volume = savedVolume;
             } else {
@@ -924,35 +984,37 @@
                 audio.volume = 0.1;
             }
 
-            if (isPlaying) {
-                playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
-            } else {
-                playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
-            }
+            // No cambiar el icono de play/pause aquí, se hará al interactuar
+            playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
 
-            loadTrack(currentTrackIndex);
-
+            loadTrack(currentTrackIndex); // Carga la pista guardada
         }
 
-        //Reproducir solo después de la interacción del usuario
+        // Cargar estado inicial sin intentar reproducir
+        loadSavedState();
+
+        // Iniciar reproducción solo después de la interacción del usuario
         let hasInteracted = false;
-
-        document.addEventListener('click', function initialInteraction() { //Usando función tradicional
-
+        function initialUserInteraction() {
             if (!hasInteracted) {
-                loadSavedState();
+                hasInteracted = true; // Marcar interacción
 
-                if (localStorage.getItem('musicState') === 'playing') {
-                    audio.play();
-                    isPlaying = true
-                    playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
+                // Intentar reproducir si el estado guardado era 'playing'
+                const savedMusicState = localStorage.getItem('musicState');
+                if (savedMusicState === 'playing') {
+                    // Llama al evento click del botón para manejar la lógica de play/pause
+                    playPauseButton.click();
                 }
 
-                hasInteracted = true; //Se establece como verdadero
-
-                document.removeEventListener('click', initialInteraction); //Ahora si removemos.
+                // Remover los listeners para que no se ejecuten múltiples veces
+                document.removeEventListener('click', initialUserInteraction);
+                document.removeEventListener('touchstart', initialUserInteraction);
             }
-        });
+        }
+        // Añadir listeners para la primera interacción (click o toque)
+        document.addEventListener('click', initialUserInteraction);
+        document.addEventListener('touchstart', initialUserInteraction);
+
         // --- FIN DEL REPRODUCTOR MEJORADO ----
 
         window.addEventListener('load', function () {
@@ -963,6 +1025,9 @@
             loadingScreen.addEventListener('transitionend', () => {
                 loadingScreen.style.display = 'none';
             });
+
+            // Llama a la actualización inicial de la hora aquí también, después de que cargue la página
+            updateTimes();
         });
 
         // ---------------------  PROTECCIÓN DE CONTRASEÑA  ------------------------
@@ -974,42 +1039,59 @@
         const ownerSection = document.getElementById('owner-section');
         const ownerHeader = document.getElementById('owner-header');
         const ownerLinks = document.getElementById('owner-links');
+        const passwordError = document.getElementById('passwordError'); // Referencia al mensaje de error
 
-        // Credenciales correctas
         const correctUsername = "UnevennesX";
         const correctPassword = "EvannescencE";
         let isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
 
-        ownerLinks.style.display = 'none'; // Oculta los links inicialmente
+        // Función para manejar el estado visual de la sección Owner
+        function updateOwnerSectionVisibility() {
+            if (isAuthenticated) {
+                ownerLinks.style.display = 'grid'; // Mostrar links
+                ownerSection.classList.add('active'); // Asegurarse que la sección está marcada como activa
+            } else {
+                ownerLinks.style.display = 'none'; // Ocultar links
+                ownerSection.classList.remove('active'); // Quitar estado activo si no está autenticado
+            }
+             // Siempre mostrar la sección Owner en sí (el contenedor)
+            ownerSection.style.display = 'block';
+        }
+
 
         // Función para verificar la contraseña
         function checkPassword() {
             const enteredUsername = usernameInput.value;
             const enteredPassword = passwordInput.value;
 
-            //Verifica si la contraseña y el nombre de usuario son correctos
             if (enteredUsername === correctUsername && enteredPassword === correctPassword) {
                 isAuthenticated = true;
-                localStorage.setItem('isAuthenticated', 'true'); // Guarda el estado de autenticación
+                localStorage.setItem('isAuthenticated', 'true');
                 passwordModal.style.display = 'none';
-                ownerLinks.style.display = 'grid';
-                ownerSection.classList.add('active'); // Mantener la sección Owner abierta
-                passwordError.style.display = 'none';
+                passwordError.style.display = 'none'; // Ocultar error
+                passwordInput.value = ''; // Limpiar campo contraseña
+                updateOwnerSectionVisibility(); // Actualizar visibilidad
             } else {
-                passwordError.style.display = 'block';
+                passwordError.style.display = 'block'; // Mostrar error
+                isAuthenticated = false; // Asegurar que no esté autenticado
+                localStorage.setItem('isAuthenticated', 'false'); // Guardar estado no autenticado
+                updateOwnerSectionVisibility(); // Actualizar (ocultará los links)
             }
         }
 
-        // Mostrar el modal cuando se hace clic en el encabezado de la sección Owner
-        ownerHeader.addEventListener('click', function (event) {
-            event.preventDefault(); // Evitar que la sección se abra automáticamente
+        // Comportamiento al hacer clic en el encabezado de Owner
+        ownerHeader.addEventListener('click', function () {
             if (!isAuthenticated) {
-                passwordModal.style.display = 'block';
+                passwordError.style.display = 'none'; // Ocultar error previo al mostrar modal
+                passwordModal.style.display = 'block'; // Mostrar modal si no está autenticado
+                passwordInput.focus(); // Poner foco en el input de contraseña
             } else {
-                ownerLinks.style.display = ownerLinks.style.display === 'grid' ? 'none' : 'grid'; // Alternar la visibilidad si ya está autenticado
+                // Si está autenticado, simplemente alterna la visibilidad de los links
                 ownerSection.classList.toggle('active');
+                ownerLinks.style.display = ownerSection.classList.contains('active') ? 'grid' : 'none';
             }
         });
+
 
         // Cerrar el modal con el botón de cerrar
         closeModalButton.addEventListener('click', function () {
@@ -1033,11 +1115,45 @@
             }
         });
 
-        // Al cargar la página, verificar si ya está autenticado
-        if (isAuthenticated) {
-            ownerLinks.style.display = 'grid';
-            ownerSection.classList.add('active');
+        // Al cargar la página, verificar y establecer el estado inicial de la sección Owner
+        updateOwnerSectionVisibility();
+
+        // ---------- FUNCIONALIDAD RELOJ EN TIEMPO REAL ----------
+        const londonTimeSpan = document.getElementById('current-london-time');
+        const laTimeSpan = document.getElementById('current-la-time');
+
+        function updateTimes() {
+            const now = new Date();
+
+            const timeOptions = {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true, // <<---- CAMBIO AQUÍ: true para formato AM/PM
+                // timeZoneName: 'short' // Puedes quitar o mantener esto según preferencia
+            };
+
+            try {
+                // Hora Londres (Europe/London) - Usando 'en-US' para asegurar AM/PM consistentemente
+                const londonTimeStr = now.toLocaleTimeString('en-US', { ...timeOptions, timeZone: 'Europe/London' });
+                londonTimeSpan.textContent = londonTimeStr; //.replace(/ (GMT|BST).*/,''); // El replace de zona horaria es menos necesario con AM/PM
+
+                // Hora Los Angeles (America/Los_Angeles)
+                const laTimeStr = now.toLocaleTimeString('en-US', { ...timeOptions, timeZone: 'America/Los_Angeles' });
+                laTimeSpan.textContent = laTimeStr; // .replace(/ (PST|PDT).*/, ''); // El replace de zona horaria es menos necesario con AM/PM
+
+            } catch (error) {
+                 console.error("Error updating time:", error);
+                 londonTimeSpan.textContent = "Error";
+                 laTimeSpan.textContent = "Error";
+            }
         }
+
+        // Actualiza la hora cada segundo
+        setInterval(updateTimes, 1000);
+        // Llama una vez al inicio (ya se llama en window.onload)
+        // updateTimes();
+
     </script>
 
 </body>
