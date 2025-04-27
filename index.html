@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UnevennesX - Completo + Monitor + Nieve</title> <!-- Título actualizado -->
+    <title>UnevennesX - Completo + Monitor</title> <!-- Título Limpio -->
     <link rel="icon" type="image/png"
         href="https://cdn.dribbble.com/users/7549673/screenshots/17206704/media/1210a9d0ec8af427967e735935861eeb.png?resize=400x300&vertical=center">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -12,15 +12,16 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         /* --- Estilos Originales + Ajustes Monitor --- */
-        #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #151515; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; }
+        #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #151515; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; transition: opacity 0.5s ease-out; }
+        #loading-screen.hidden { opacity: 0; pointer-events: none; }
         .loading-spinner { border: 8px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top: 8px solid #ff4081; width: 60px; height: 60px; animation: spin 2s linear infinite; margin-bottom: 20px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        body { font-family: 'Roboto', sans-serif; margin: 0; background: #151515; color: #ddd; padding: 20px; box-sizing: border-box; min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow-x: hidden; }
-        .container { width: 100%; max-width: 800px; background: rgba(25, 25, 25, 0.97); border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); padding: 20px; margin: auto; animation: fadeInUp 0.5s ease-out; }
+        body { font-family: 'Roboto', sans-serif; margin: 0; background: #151515; color: #ddd; padding: 20px; box-sizing: border-box; min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow-x: hidden; /* Volvemos a solo ocultar X si es necesario */ }
+        .container { width: 100%; max-width: 800px; background: rgba(25, 25, 25, 0.97); border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); padding: 20px; margin: auto; animation: fadeInUp 0.5s ease-out; position: relative; z-index: 10; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         h1 { text-align: center; color: #fff; font-size: 1.8em; margin: 15px 0 10px 0; padding: 0 10px; animation: textGlow 2s infinite alternate; }
         @keyframes textGlow { 0% { text-shadow: 0 0 5px rgba(255, 107, 107, 0.3); } 100% { text-shadow: 0 0 15px rgba(255, 107, 107, 0.6); } }
-        h1 a.link-button { color: inherit; text-decoration: none; background: none !important; border: none !important; padding: 5px 10px; display: inline !important; transition: color 0.3s; box-shadow: none !important; animation: none !important; transform: none !important; } /* Estilo específico para el H1 */
+        h1 a.link-button { color: inherit; text-decoration: none; background: none !important; border: none !important; padding: 5px 10px; display: inline !important; transition: color 0.3s; box-shadow: none !important; animation: none !important; transform: none !important; }
         h1 a.link-button:hover { color: #ff4081; background: none !important; }
 
         /* --- ESTILOS MONITOR DE ESTADO (INTEGRADOS) --- */
@@ -52,7 +53,7 @@
         .grid-links { display: none; grid-template-columns: 1fr; gap: 12px; padding: 15px 20px; animation: slideDown 0.4s ease-out; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         .section.active .grid-links { display: grid; }
-        .link-button { padding: 15px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; color: #ddd; text-decoration: none; font-size: 0.95em; transition: all 0.3s ease; animation: fadeIn 0.5s ease-out; display: block; /* Asegurar display block para botones */ }
+        .link-button { padding: 15px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; color: #ddd; text-decoration: none; font-size: 0.95em; transition: all 0.3s ease; animation: fadeIn 0.5s ease-out; display: block; }
         .link-button:hover { background: rgba(255, 64, 129, 0.15); transform: translateY(-3px); box-shadow: 0 4px 10px rgba(255, 64, 129, 0.1); }
         .new-badge { background: #ff4081; color: white; font-size: 0.65em; padding: 3px 8px; border-radius: 10px; margin-left: 8px; animation: pulse 1.5s infinite; display: inline-block; vertical-align: middle; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
@@ -77,25 +78,26 @@
         #volume-slider::-moz-range-thumb { width: 10px; height: 10px; background: #fff; cursor: pointer; border-radius: 50%; border: none; }
         #volume-slider:hover { opacity: 1; }
 
-        /* Media Queries Originales + Ajuste Monitor */
-        @media (min-width: 768px) {
-             /* No forzar espacio entre elementos en pantallas anchas */
-        }
+        /* Media Queries */
         @media (min-width: 600px) { .grid-links { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; } .link-button { padding: 18px 25px; } #status-monitor { font-size: 0.9em; } }
         @media (max-width: 767px) { #status-monitor p.status-line { flex-direction: column; align-items: center; gap: 4px; } .right-group { margin-left: 0; justify-content: center; } }
-        @media (max-width: 599px) { body { padding: 10px; overflow-x: hidden; } .container { width: 95%; padding: 15px; } h1 { font-size: 1.5em; margin: 10px 0 15px 0; } #status-monitor { font-size: 0.85em; padding: 6px 0; margin-bottom: 15px; } .live-time { min-width: 105px; font-size: 0.9em; } .countdown-timer { min-width: 70px; font-size: 0.9em; } .section { margin-bottom: 10px; } .section-header { padding: 12px 15px; } .section-title { font-size: 0.9em; } .grid-links { padding: 10px; gap: 8px; } .link-button { padding: 10px 12px; font-size: 0.85em; } #search-input { width: 100%; max-width: none; padding: 10px; margin-bottom: 15px; } #music-player-container { bottom: 5px; left: 5px; padding: 5px; gap: 5px; } #track-name { font-size: 0.7em; } #controls-container { gap: 3px; } #play-pause-button, #prev-button, #next-button { padding: 3px; font-size: 0.9em; } #volume-slider { width: 40px; height: 3px; } #volume-slider::-webkit-slider-thumb { width: 6px; height: 6px; } #volume-slider::-moz-range-thumb { width: 6px; height: 6px; } }
+        @media (max-width: 599px) { body { padding: 10px; } .container { width: 95%; padding: 15px; } h1 { font-size: 1.5em; margin: 10px 0 15px 0; } #status-monitor { font-size: 0.85em; padding: 6px 0; margin-bottom: 15px; } .live-time { min-width: 105px; font-size: 0.9em; } .countdown-timer { min-width: 70px; font-size: 0.9em; } .section { margin-bottom: 10px; } .section-header { padding: 12px 15px; } .section-title { font-size: 0.9em; } .grid-links { padding: 10px; gap: 8px; } .link-button { padding: 10px 12px; font-size: 0.85em; } #search-input { width: 100%; max-width: none; padding: 10px; margin-bottom: 15px; } #music-player-container { bottom: 5px; left: 5px; padding: 5px; gap: 5px; } #track-name { font-size: 0.7em; } #controls-container { gap: 3px; } #play-pause-button, #prev-button, #next-button { padding: 3px; font-size: 0.9em; } #volume-slider { width: 40px; height: 3px; } #volume-slider::-webkit-slider-thumb { width: 6px; height: 6px; } #volume-slider::-moz-range-thumb { width: 6px; height: 6px; } }
     </style>
 </head>
 <body>
-    <div id="loading-screen"><div class="loading-spinner"></div><p>Cargando... UnevennesX Projects</p></div>
+    <!-- Pantalla de Carga -->
+    <div id="loading-screen">
+        <div class="loading-spinner"></div>
+        <p>Cargando... UnevennesX Projects</p>
+    </div>
+
+    <!-- Contenedor Principal -->
     <div class="container">
         <h1>
             <a href="https://unevennesx.github.io/consultas/" class="link-button">UnevennesX 👻 EvannescencE</a>
         </h1>
 
-        <!-- ================================================ -->
-        <!-- === MONITOR DE ESTADO INSERTADO AQUÍ === -->
-        <!-- ================================================ -->
+        <!-- MONITOR DE ESTADO -->
         <div id="status-monitor">
              <p class="status-line" id="london-status-line">
                  <span class="left-group">
@@ -126,9 +128,7 @@
                  </span>
             </p>
         </div>
-        <!-- ================================================ -->
-        <!-- === FIN MONITOR DE ESTADO === -->
-        <!-- ================================================ -->
+        <!-- FIN MONITOR DE ESTADO -->
 
         <input type="text" id="search-input" placeholder="Buscar proyectos...">
         <div id="no-results-message" style="display:none; color: white; text-align: center; margin-top: 10px;">No se encontraron resultados.</div>
@@ -147,11 +147,9 @@
     <!-- Modal Contraseña Original -->
     <div id="passwordModal" class="modal"> <div class="modal-content"> <span class="close-button" id="closeModal">×</span> <h2>Acceso Owner</h2> <label for="usernameInput">Usuario:</label> <input type="text" id="usernameInput" placeholder="Usuario" value="UnevennesX" readonly> <label for="passwordInput">Contraseña:</label> <input type="password" id="passwordInput" placeholder="Contraseña"> <button id="submitPassword">Entrar</button> <p id="passwordError" style="color: red; display: none;">Usuario o contraseña incorrectos.</p> </div> </div>
 
-    <!-- Script de Nieve (Snowstorm) -->
-    <script> var snowStorm = { autoStart: true, flakesMax: 96, flakesMaxActive: 64, animationInterval: 33, flakeBottom: null, useTwinkleEffect: true, useMeltEffect: true, snowStick: true, snowColor: '#fff', vMaxX: 3, vMaxY: 3 }; </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Snowstorm/20131208/snowstorm-min.js"></script>
+    <!-- NO HAY SCRIPT DE NIEVE AQUÍ -->
 
-    <!-- Tu Script Principal (Combinado) -->
+    <!-- Tu Script Principal (Combinado y Corregido - SIN Nieve) -->
     <script>
         "use strict";
 
@@ -159,85 +157,99 @@
         function normalizeString(str) { return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }
         document.querySelectorAll('.section-header').forEach(header => { if (header.id !== 'owner-header') { header.addEventListener('click', () => { const section = header.parentElement; section.classList.toggle('active'); document.querySelectorAll('.section').forEach(otherSection => { if (otherSection !== section && otherSection.id !== 'owner-section' && otherSection.classList.contains('active')) { otherSection.classList.remove('active'); } }); }); } });
         const searchInput = document.getElementById('search-input'); const noResultsMessage = document.getElementById('no-results-message');
-        searchInput?.addEventListener('input', function () { /* ... Código de búsqueda original ... */
+        searchInput?.addEventListener('input', function () {
             let searchTerm = searchInput.value; searchTerm = normalizeString(searchTerm); let hasResults = false;
             const ownerSectionElem = document.getElementById('owner-section'); const isOwnerAuth = localStorage.getItem('isAuthenticated') === 'true';
-            const isOwnerVisible = ownerSectionElem?.style.display !== 'none';
-            if (searchTerm.length < 2) { document.querySelectorAll('.section').forEach(section => { section.style.display = section.id === 'owner-section' && !isOwnerAuth ? 'none' : 'block'; }); document.querySelectorAll('.link-button').forEach(link => { link.style.display = 'block'; }); if(noResultsMessage) noResultsMessage.style.display = 'none'; return; }
-            document.querySelectorAll('.section').forEach(section => { if (section.id !== 'owner-section' || !isOwnerAuth) { section.style.display = 'none'; section.classList.remove('active'); } else { section.style.display = 'block'; } });
-            document.querySelectorAll('.link-button').forEach(link => { const isOwnerLink = ownerSectionElem?.contains(link); if (!isOwnerLink || !isOwnerAuth) { link.style.display = 'none'; } else { link.style.display = 'block'; } });
-            document.querySelectorAll('.link-button').forEach(link => { const linkText = normalizeString(link.textContent); const section = link.closest('.section'); if (section && linkText.includes(searchTerm)) { const isOwnerLink = section.id === 'owner-section'; if (!isOwnerLink || isOwnerAuth) { link.style.display = 'block'; section.style.display = 'block'; section.classList.add('active'); hasResults = true; } else { link.style.display = 'none'; } } else { const isOwnerLink = section?.id === 'owner-section'; if(isOwnerLink && isOwnerAuth) { link.style.display = 'none'; } } });
-             if(ownerSectionElem && isOwnerAuth && hasResults) ownerSectionElem.style.display = 'block';
+            if (searchTerm.length < 2) { document.querySelectorAll('.section').forEach(section => { section.style.display = section.id === 'owner-section' && !isOwnerAuth ? 'none' : 'block'; section.classList.remove('active'); }); document.querySelectorAll('.link-button').forEach(link => { link.style.display = 'block'; }); if(noResultsMessage) noResultsMessage.style.display = 'none'; return; }
+            document.querySelectorAll('.section').forEach(section => { if (section.id === 'owner-section') { section.style.display = isOwnerAuth ? 'block' : 'none'; } else { section.style.display = 'none'; } section.classList.remove('active'); });
+            document.querySelectorAll('.link-button').forEach(link => { link.style.display = 'none'; });
+            document.querySelectorAll('.link-button').forEach(link => { const linkText = normalizeString(link.textContent); const section = link.closest('.section'); if (section && linkText.includes(searchTerm)) { const isOwnerLink = section.id === 'owner-section'; if (!isOwnerLink || isOwnerAuth) { link.style.display = 'block'; section.style.display = 'block'; section.classList.add('active'); hasResults = true; } } });
             if(noResultsMessage) noResultsMessage.style.display = hasResults ? 'none' : 'block';
+            if(ownerSectionElem && isOwnerAuth && ownerSectionElem.querySelector('.link-button[style*="display: block"]')) { ownerSectionElem.style.display = 'block'; ownerSectionElem.classList.add('active'); } else if (ownerSectionElem && !isOwnerAuth) { ownerSectionElem.style.display = 'none'; } else if (ownerSectionElem && isOwnerAuth && !ownerSectionElem.querySelector('.link-button[style*="display: block"]')) { ownerSectionElem.style.display = 'block'; ownerSectionElem.classList.remove('active');}
         });
         const audio = document.getElementById('background-music'); const playPauseButton = document.getElementById('play-pause-button'); const prevButton = document.getElementById('prev-button'); const nextButton = document.getElementById('next-button'); const volumeSlider = document.getElementById('volume-slider'); const trackNameDisplay = document.getElementById('track-name'); let isPlaying = false; let currentTrackIndex = 0;
         const tracks = [{ src: "newyork.mp3", name: "New York" }, { src: "miami.mp3", name: "Miami" }, { src: "rd.mp3", name: "RD" },];
-        function loadTrack(trackIndex) { /* ... Código original loadTrack ... */
-            if(trackIndex<0){trackIndex=tracks.length-1}else if(trackIndex>=tracks.length){trackIndex=0}currentTrackIndex=trackIndex;if(audio){const e=tracks[trackIndex].src;const t=audio.currentSrc?new URL(audio.currentSrc,window.location.href).pathname:null;const n=new URL(e,window.location.href).pathname;if(audio.src===""||t!==n){audio.src=e;audio.load()}}if(trackNameDisplay)trackNameDisplay.textContent=tracks[trackIndex].name;localStorage.setItem("currentTrackIndex",currentTrackIndex)
+        function loadTrack(trackIndex) {
+            if(trackIndex<0){trackIndex=tracks.length-1}else if(trackIndex>=tracks.length){trackIndex=0}currentTrackIndex=trackIndex;if(audio){const e=tracks[trackIndex].src;const t=audio.currentSrc?new URL(audio.currentSrc,window.location.href).pathname:null;const n=new URL(e,window.location.href).pathname;if(audio.src===""||t!==n){try { audio.src = e; audio.load(); } catch(err){ console.error("Error setting audio src:", err); }}}if(trackNameDisplay)trackNameDisplay.textContent=tracks[trackIndex].name;localStorage.setItem("currentTrackIndex",currentTrackIndex)
          }
-        playPauseButton?.addEventListener('click', () => { /* ... Código original play/pause ... */
-            if(isPlaying){audio.pause();playPauseButton.innerHTML='<i class="fas fa-play"></i>';localStorage.setItem("musicState","paused")}else{loadTrack(currentTrackIndex);audio.play().then(()=>{playPauseButton.innerHTML='<i class="fas fa-pause"></i>';localStorage.setItem("musicState","playing")}).catch(e=>{console.error("Error playing audio:",e);isPlaying=!isPlaying})}isPlaying=!isPlaying
+        playPauseButton?.addEventListener('click', () => {
+            if(isPlaying){audio.pause();playPauseButton.innerHTML='<i class="fas fa-play"></i>';localStorage.setItem("musicState","paused")}else{if(!audio.src || audio.src === window.location.href){ loadTrack(currentTrackIndex); } audio.play().then(()=>{playPauseButton.innerHTML='<i class="fas fa-pause"></i>';localStorage.setItem("musicState","playing")}).catch(e=>{console.error("Error playing audio:",e); isPlaying = !isPlaying; })} isPlaying=!isPlaying
         });
-        prevButton?.addEventListener('click', () => { /* ... Código original prev ... */
-            loadTrack(currentTrackIndex-1);if(isPlaying){audio.play().catch(e=>console.error("Error playing audio:",e))}
+        prevButton?.addEventListener('click', () => {
+            loadTrack(currentTrackIndex-1);if(isPlaying){audio.play().catch(e=>console.error("Error playing prev audio:",e))}
         });
-        nextButton?.addEventListener('click', () => { /* ... Código original next ... */
-            loadTrack(currentTrackIndex+1);if(isPlaying){audio.play().catch(e=>console.error("Error playing audio:",e))}
+        nextButton?.addEventListener('click', () => {
+            loadTrack(currentTrackIndex+1);if(isPlaying){audio.play().catch(e=>console.error("Error playing next audio:",e))}
         });
-        volumeSlider?.addEventListener('input', () => { /* ... Código original volume ... */
-             audio.volume=volumeSlider.value;localStorage.setItem("volume",volumeSlider.value)
+        volumeSlider?.addEventListener('input', () => {
+             if (audio) audio.volume=volumeSlider.value; localStorage.setItem("volume",volumeSlider.value)
         });
-        audio?.addEventListener('ended', () => { /* ... Código original ended ... */
+        audio?.addEventListener('ended', () => {
              if(isPlaying){loadTrack(currentTrackIndex+1);audio.play().catch(e=>console.error("Error playing audio on ended:",e))}else{loadTrack(currentTrackIndex+1)}
         });
-        function loadSavedState() { /* ... Código original loadSavedState ... */
+        function loadSavedState() {
              const e=localStorage.getItem("currentTrackIndex");currentTrackIndex=e!==null?parseInt(e,10):0;const t=localStorage.getItem("volume");if(volumeSlider){volumeSlider.value=t!==null?t:.1}if(audio)audio.volume=t!==null?t:.1;if(playPauseButton){playPauseButton.innerHTML='<i class="fas fa-play"></i>'}loadTrack(currentTrackIndex)
          }
-        let hasInteracted = false; function initialUserInteraction() { /* ... Código original interaction ... */
-            if(!hasInteracted){hasInteracted=!0;loadSavedState();if(localStorage.getItem("musicState")==="playing"&&audio){audio.play().then(()=>{isPlaying=!0;if(playPauseButton)playPauseButton.innerHTML='<i class="fas fa-pause"></i>'}).catch(e=>{console.warn("Autoplay failed:",e)})}document.removeEventListener("click",initialUserInteraction)}}
-        document.addEventListener('click', initialUserInteraction);
+        let hasInteracted = false; function initialUserInteraction() {
+            if(!hasInteracted && audio){ hasInteracted=!0; loadSavedState(); if(localStorage.getItem("musicState")==="playing"){ audio.play().then(()=>{isPlaying=!0; if(playPauseButton)playPauseButton.innerHTML='<i class="fas fa-pause"></i>'}).catch(e=>{ console.warn("Autoplay failed:",e); localStorage.setItem("musicState","paused"); isPlaying = false; if(playPauseButton) playPauseButton.innerHTML='<i class="fas fa-play"></i>'; })} } document.removeEventListener("click",initialUserInteraction); document.removeEventListener("touchstart", initialUserInteraction);
+         }
+        document.addEventListener('click', initialUserInteraction, { once: true });
+        document.addEventListener('touchstart', initialUserInteraction, { once: true });
+
         const passwordModal = document.getElementById('passwordModal'); const closeModalButton = document.getElementById('closeModal'); const submitPasswordButton = document.getElementById('submitPassword'); const passwordInput = document.getElementById('passwordInput'); const usernameInput = document.getElementById('usernameInput'); const ownerSection = document.getElementById('owner-section'); const ownerHeader = document.getElementById('owner-header'); const ownerLinks = document.getElementById('owner-links'); const passwordError = document.getElementById('passwordError');
         const correctUsername = "UnevennesX"; const correctPassword = "EvannescencE"; let isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
         if(ownerLinks) ownerLinks.style.display = 'none';
-        function checkPassword() { /* ... Código original checkPassword ... */
-            const e=usernameInput.value,t=passwordInput.value;if(e===correctUsername&&t===correctPassword){isAuthenticated=!0;localStorage.setItem("isAuthenticated","true");if(passwordModal)passwordModal.style.display="none";if(ownerLinks)ownerLinks.style.display="grid";if(ownerSection)ownerSection.classList.add("active");if(passwordError)passwordError.style.display="none";if(passwordInput)passwordInput.value=""}else{if(passwordError)passwordError.style.display="block"}updateOwnerSectionVisibility()
+        if(ownerSection && !isAuthenticated) ownerSection.style.display = 'none';
+
+        function checkPassword() {
+            const e=usernameInput.value,t=passwordInput.value;if(e===correctUsername&&t===correctPassword){isAuthenticated=!0;localStorage.setItem("isAuthenticated","true");if(passwordModal)passwordModal.style.display="none";if(ownerSection)ownerSection.style.display="block"; if(ownerLinks)ownerLinks.style.display="grid";if(ownerSection)ownerSection.classList.add("active");if(passwordError)passwordError.style.display="none";if(passwordInput)passwordInput.value=""}else{if(passwordError)passwordError.style.display="block"}updateOwnerSectionVisibility()
          }
-        function updateOwnerSectionVisibility() { /* ... Código original updateOwner ... */
-            if(!ownerSection||!ownerLinks)return;if(isAuthenticated){ownerLinks.style.display=ownerSection.classList.contains("active")?"grid":"none";ownerSection.style.display="block"}else{ownerLinks.style.display="none";ownerSection.classList.remove("active");ownerSection.style.display="block"}
+        function updateOwnerSectionVisibility() {
+            if(!ownerSection||!ownerLinks)return;
+            const isCurrentlyActive = ownerSection.classList.contains('active');
+            if(isAuthenticated){
+                ownerSection.style.display="block";
+                ownerLinks.style.display = isCurrentlyActive ? "grid" : "none";
+            } else {
+                ownerLinks.style.display="none";
+                ownerSection.classList.remove("active");
+                ownerSection.style.display="none";
+            }
+            if (searchInput && searchInput.value.length >= 2) {
+                searchInput.dispatchEvent(new Event('input'));
+            }
          }
-        ownerHeader?.addEventListener('click', function (event) { /* ... Código original ownerHeader click ... */
-             event.preventDefault();if(!isAuthenticated){if(passwordModal)passwordModal.style.display="block";if(passwordInput)passwordInput.focus()}else{if(ownerSection)ownerSection.classList.toggle("active");updateOwnerSectionVisibility()}
+        ownerHeader?.addEventListener('click', function (event) {
+             event.preventDefault();
+             if(!isAuthenticated){ if(passwordModal)passwordModal.style.display="block"; if(passwordInput)passwordInput.focus(); } else { if(ownerSection)ownerSection.classList.toggle("active"); updateOwnerSectionVisibility(); }
          });
-        closeModalButton?.addEventListener('click', function () { /* ... Código original closeModal ... */
+        closeModalButton?.addEventListener('click', function () {
             if(passwordModal)passwordModal.style.display="none"
         });
         submitPasswordButton?.addEventListener('click', checkPassword);
-        passwordInput?.addEventListener('keypress', function (event) { /* ... Código original password keypress ... */
+        passwordInput?.addEventListener('keypress', function (event) {
             if(event.key==="Enter"){checkPassword()}
         });
-        window.addEventListener('click', function (event) { /* ... Código original window click modal ... */
+        window.addEventListener('click', function (event) {
             if(event.target===passwordModal&&passwordModal){passwordModal.style.display="none"}
         });
         // --- [ FIN Funciones Originales ] ---
 
-
-        // === CÓDIGO DEL MONITOR DE ESTADO (v1.7 insertado aquí) ===
+        // === CÓDIGO DEL MONITOR DE ESTADO ===
         const monitorConfig = {
             locations: [
                 { key: 'london', timezone: 'Europe/London', activeStartHour: 3, activeEndHour: 15, ui: {} },
                 { key: 'la', timezone: 'America/Los_Angeles', activeStartHour: 9, activeEndHour: 21, ui: {} }
             ],
-            checkInterval: 1000,
-            debug: false // Desactivado por defecto
+            checkInterval: 1000, debug: false
         };
         monitorConfig.locations.forEach(loc => {
              loc.ui = { liveTimeDisplay: document.getElementById(`${loc.key}-time-display`), dot: document.getElementById(`${loc.key}-status-dot`), text: document.getElementById(`${loc.key}-status-text`), countdown: document.getElementById(`${loc.key}-countdown`), cdLabel: document.getElementById(`${loc.key}-cd-label`) };
          });
-
         const StatusMonitor = {
             formatters: {
                 liveTime12h: (tz) => new Intl.DateTimeFormat('en-US', { timeZone: tz, hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true }),
-                localHour24: (tz) => new Intl.DateTimeFormat('en-CA', { timeZone: tz, hour: 'numeric', hourCycle: 'h23' })
+                localHour24: (tz) => new Intl.DateTimeFormat('en-CA', { timeZone: tz, hour: 'numeric', minute: 'numeric', second: 'numeric', hourCycle: 'h23' })
             },
             checkElements: (locations) => {
                  for(const loc of locations){if(!loc.ui){console.error(`[SETUP_ERROR] UI object not defined for '${loc.key}'`);return!1}for(const key in loc.ui){if(!loc.ui[key]){console.error(`[SETUP_ERROR] UI Element '${key}' not found for '${loc.key}'`);return!1}}}if(typeof Intl=="undefined"||!Intl.DateTimeFormat().resolvedOptions().timeZone){console.error("[SETUP_ERROR] Intl or TimeZone API not supported.");const e=document.getElementById("status-monitor");e&&(e.innerHTML="<p style='color:red; text-align:center;'>Error: Time functions not supported.</p>");return!1}return!0
@@ -245,40 +257,80 @@
             formatCountdown: (totalSeconds) => {
                  if (isNaN(totalSeconds) || totalSeconds < 0) totalSeconds = 0; const h = Math.floor(totalSeconds / 3600); const m = Math.floor((totalSeconds % 3600) / 60); const s = Math.floor(totalSeconds % 60); return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
              },
+            getDateInTimezone: (tz, referenceDate = new Date()) => {
+                try {
+                    const formatter = new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hourCycle: 'h23' });
+                    const parts = formatter.formatToParts(referenceDate); const dateParts = {}; parts.forEach(({type, value}) => { dateParts[type] = parseInt(value); });
+                     return { year: dateParts.year, month: dateParts.month, day: dateParts.day, hour: dateParts.hour === 24 ? 0 : dateParts.hour, minute: dateParts.minute, second: dateParts.second };
+                } catch (e) { console.error(`[ERROR][${tz}] getDateInTimezone failed:`, e); return null; }
+            },
             getUTCTimestampForLocalHour: (targetHour24, tz, referenceDate) => {
-                 try { const dateInTZ = new Date(referenceDate.toLocaleString('en-US', { timeZone: tz })); dateInTZ.setHours(targetHour24, 0, 0, 0); const timestamp = dateInTZ.getTime(); if (isNaN(timestamp)) throw new Error("Timestamp is NaN"); return timestamp; } catch (e) { console.error(`[ERROR][${tz}] getUTCTimestamp failed for hour ${targetHour24}:`, e); return null; }
+                try {
+                    const nowInTz = StatusMonitor.getDateInTimezone(tz, referenceDate); if (!nowInTz) throw new Error("Could not get 'now' in timezone");
+                    const dateAtTargetHourUTC = new Date(Date.UTC( nowInTz.year, nowInTz.month - 1, nowInTz.day, targetHour24, 0, 0 ));
+                    const formatterForOffset = new Intl.DateTimeFormat('en-CA', { timeZone: tz, timeZoneName: 'longOffset' }); const parts = formatterForOffset.formatToParts(dateAtTargetHourUTC); const offsetString = parts.find(p => p.type === 'timeZoneName')?.value;
+                    if (!offsetString || !offsetString.includes('GMT')) { console.warn(`[WARN][${tz}] Could not get precise offset string for ${targetHour24}:00. Estimating offset.`); const nowOffsetMillis = referenceDate.getTime() - (new Date(referenceDate.toLocaleString('en-US', {timeZone: tz}))).getTime(); return dateAtTargetHourUTC.getTime() + nowOffsetMillis; }
+                    const offsetMatch = offsetString.match(/GMT([+-])(\d{1,2})(?::(\d{2}))?/); if (!offsetMatch) throw new Error(`Could not parse offset: ${offsetString}`);
+                    const sign = offsetMatch[1] === '+' ? 1 : -1; const hoursOffset = parseInt(offsetMatch[2], 10); const minutesOffset = parseInt(offsetMatch[3] || "0", 10); const totalOffsetMillis = sign * (hoursOffset * 3600 + minutesOffset * 60) * 1000;
+                    const timestamp = dateAtTargetHourUTC.getTime() - totalOffsetMillis; if (isNaN(timestamp)) throw new Error("Timestamp is NaN"); return timestamp;
+                } catch (e) { console.error(`[ERROR][${tz}] getUTCTimestamp failed for hour ${targetHour24}:`, e); return null; }
             },
             updateLocationUI: (location, config) => {
-                const { key, timezone, activeStartHour, activeEndHour, ui } = location; const { debug } = config; const now = new Date(); const nowTimestamp = now.getTime(); if (ui.liveTimeDisplay) ui.liveTimeDisplay.style.color = ''; if (ui.text) ui.text.style.color = ''; try { if (ui.liveTimeDisplay) { ui.liveTimeDisplay.textContent = StatusMonitor.formatters.liveTime12h(timezone).format(now); } let currentHour24 = -1; let isActive = false; try { const hourStr = StatusMonitor.formatters.localHour24(timezone).format(now); currentHour24 = parseInt(hourStr, 10); if (currentHour24 === 24) currentHour24 = 0; if (isNaN(currentHour24)) throw new Error("Hora local inválida"); isActive = (currentHour24 >= activeStartHour && currentHour24 < activeEndHour); if (debug) { console.log(`[STATE_CHECK][${key}] Hora Local 24h = ${currentHour24} | Rango Activo = [${activeStartHour} - ${activeEndHour}) | ¿Activo? ${isActive}`); } } catch (e) { console.error(`[ERROR][${key}] Fallo al obtener hora local:`, e); isActive = false; } const statusText = isActive ? 'Activo' : 'Inactivo'; const statusClass = isActive ? 'status-green' : 'status-red'; if (ui.dot && ui.dot.className !== `status-dot ${statusClass}`) ui.dot.className = `status-dot ${statusClass}`; if (ui.text && ui.text.textContent !== statusText) { ui.text.textContent = statusText; ui.text.className = `status-text ${statusClass}`; } let nextChangeTimestamp = null; try { const today = new Date(now); const tomorrow = new Date(now); tomorrow.setDate(now.getDate() + 1); const dayAfter = new Date(now); dayAfter.setDate(now.getDate() + 2); const relevantDates = [today, tomorrow, dayAfter]; const eventTimestamps = []; relevantDates.forEach(dateRef => { const startTs = StatusMonitor.getUTCTimestampForLocalHour(activeStartHour, timezone, dateRef); const endTs = StatusMonitor.getUTCTimestampForLocalHour(activeEndHour, timezone, dateRef); if (startTs !== null) eventTimestamps.push(startTs); if (endTs !== null) eventTimestamps.push(endTs); }); const futureEvents = eventTimestamps.filter(ts => ts > nowTimestamp + 500).sort((a, b) => a - b); if (futureEvents.length > 0) { nextChangeTimestamp = futureEvents[0]; } else { if(debug) console.warn(`[WARN][${key}] No se encontraron eventos futuros para countdown.`); } } catch (e) { console.error(`[ERROR][${key}] Fallo al calcular timestamps para countdown:`, e); nextChangeTimestamp = null; } if (ui.countdown && ui.cdLabel) { if (nextChangeTimestamp !== null) { const secondsRemaining = Math.max(0, (nextChangeTimestamp - nowTimestamp) / 1000); ui.countdown.textContent = StatusMonitor.formatCountdown(secondsRemaining); ui.cdLabel.style.display = ''; ui.countdown.style.display = ''; } else { ui.countdown.textContent = "--:--:--"; ui.cdLabel.style.display = 'none'; ui.countdown.style.display = 'none'; } } } catch (error) { console.error(`[ERROR][${key}] Update failed:`, error); if (ui.liveTimeDisplay) { ui.liveTimeDisplay.textContent = 'Error'; ui.liveTimeDisplay.style.color = 'red'; } if (ui.dot) ui.dot.className = 'status-dot'; if (ui.text) { ui.text.textContent = 'Error'; ui.text.className = 'status-text'; ui.text.style.color='red';} if (ui.countdown) ui.countdown.textContent = 'Error'; if (ui.cdLabel) ui.cdLabel.style.display = ''; }
+                const { key, timezone, activeStartHour, activeEndHour, ui } = location; const { debug } = config; const now = new Date(); const nowTimestamp = now.getTime();
+                if (ui.liveTimeDisplay) ui.liveTimeDisplay.style.color = ''; if (ui.text) ui.text.style.color = '';
+                try {
+                    if (ui.liveTimeDisplay) { ui.liveTimeDisplay.textContent = StatusMonitor.formatters.liveTime12h(timezone).format(now); }
+                    let currentHourLocal = -1; let isActive = false;
+                    try { const dateInTZ = StatusMonitor.getDateInTimezone(timezone, now); if (!dateInTZ) throw new Error("Hora local inválida"); currentHourLocal = dateInTZ.hour; isActive = (currentHourLocal >= activeStartHour && currentHourLocal < activeEndHour); if (debug) { console.log(`[STATE_CHECK][${key}] Local Time = ${dateInTZ.hour}:${dateInTZ.minute}:${dateInTZ.second} | Active Range = [${activeStartHour} - ${activeEndHour}) | Active? ${isActive}`); } } catch (e) { console.error(`[ERROR][${key}] Failed to get local time/status:`, e); isActive = false; }
+                    const statusText = isActive ? 'Activo' : 'Inactivo'; const statusClass = isActive ? 'status-green' : 'status-red';
+                    if (ui.dot && ui.dot.className !== `status-dot ${statusClass}`) { ui.dot.className = `status-dot ${statusClass}`; }
+                    if (ui.text && (ui.text.textContent !== statusText || !ui.text.classList.contains(statusClass))) { ui.text.textContent = statusText; ui.text.className = `status-text ${statusClass}`; }
+                    let nextChangeTimestamp = null;
+                    try {
+                        const today = new Date(now); const tomorrow = new Date(now); tomorrow.setDate(now.getDate() + 1); const dayAfter = new Date(now); dayAfter.setDate(now.getDate() + 2); const relevantDates = [today, tomorrow, dayAfter]; const eventTimestamps = [];
+                        relevantDates.forEach(dateRef => { const startTs = StatusMonitor.getUTCTimestampForLocalHour(activeStartHour, timezone, dateRef); const endTs = StatusMonitor.getUTCTimestampForLocalHour(activeEndHour, timezone, dateRef); if (startTs !== null) eventTimestamps.push(startTs); if (endTs !== null) eventTimestamps.push(endTs); });
+                        const futureEvents = eventTimestamps .filter(ts => ts > nowTimestamp + 500) .sort((a, b) => a - b);
+                        if (futureEvents.length > 0) { nextChangeTimestamp = futureEvents[0]; } else { if(debug) console.warn(`[WARN][${key}] No future event timestamps found for countdown calculation.`); }
+                    } catch (e) { console.error(`[ERROR][${key}] Failed to calculate event timestamps for countdown:`, e); nextChangeTimestamp = null; }
+                    if (ui.countdown && ui.cdLabel) {
+                        if (nextChangeTimestamp !== null) { const secondsRemaining = Math.max(0, (nextChangeTimestamp - nowTimestamp) / 1000); ui.countdown.textContent = StatusMonitor.formatCountdown(secondsRemaining); ui.cdLabel.style.display = ''; ui.countdown.style.display = ''; } else { ui.countdown.textContent = "--:--:--"; ui.cdLabel.style.display = 'none'; ui.countdown.style.display = 'none'; }
+                    }
+                } catch (error) { console.error(`[ERROR][${key}] Full update cycle failed:`, error); if (ui.liveTimeDisplay) { ui.liveTimeDisplay.textContent = 'Error'; ui.liveTimeDisplay.style.color = 'red'; } if (ui.dot) ui.dot.className = 'status-dot'; if (ui.text) { ui.text.textContent = 'Error'; ui.text.className = 'status-text'; ui.text.style.color='red'; } if (ui.countdown) ui.countdown.textContent = 'Error'; if (ui.cdLabel) ui.cdLabel.style.display = ''; }
             },
             run: (config) => {
-                 if(!StatusMonitor.checkElements(config.locations)){console.error("[FATAL] Monitor UI elements missing. Aborting.");return}if(config.debug)console.log("[INFO] Starting Status Monitor...");const e=()=>{if(config.debug&&Math.random()<.01)console.log("[INFO] Monitor update tick...");config.locations.forEach(t=>StatusMonitor.updateLocationUI(t,config))};try{e();setInterval(e,config.checkInterval);if(config.debug)console.log("[INFO] Monitor update interval started.")}catch(t){console.error("[FATAL] Error during initial monitor setup:",t);const n=document.getElementById("status-monitor");n&&(n.innerHTML="<p style='color:red; text-align:center;'>FATAL MONITOR INIT ERROR. See console.</p>")}}
+                 if(!StatusMonitor.checkElements(config.locations)){console.error("[FATAL] Monitor UI elements missing. Aborting initialization.");return}if(config.debug)console.log("[INFO] Starting Status Monitor...");const e=()=>{if(config.debug&&Math.random()<.01)console.log(`[INFO] Monitor update tick @ ${new Date().toISOString()}`);config.locations.forEach(t=>StatusMonitor.updateLocationUI(t,config))};try{e();setInterval(e,config.checkInterval);if(config.debug)console.log("[INFO] Monitor update interval started.")}catch(t){console.error("[FATAL] Error during initial monitor setup:",t);const n=document.getElementById("status-monitor");n&&(n.innerHTML="<p style='color:red; text-align:center;'>FATAL MONITOR INIT ERROR. See console.</p>")}}
         };
         // === FIN CÓDIGO MONITOR ===
 
         // ----- INICIALIZACIÓN (COMBINADA) -----
         document.addEventListener("DOMContentLoaded", () => {
-            // Pantalla de carga original
             const loadingScreen = document.getElementById('loading-screen');
             if (loadingScreen) {
-                loadingScreen.style.transition = "opacity 0.5s";
-                loadingScreen.style.opacity = "0";
+                loadingScreen.classList.add('hidden');
                 loadingScreen.addEventListener('transitionend', () => {
                     loadingScreen.style.display = 'none';
-                });
+                }, { once: true });
+                setTimeout(() => {
+                     if (loadingScreen.style.display !== 'none') {
+                        console.warn("Loading screen fallback triggered.");
+                        loadingScreen.style.display = 'none';
+                     }
+                }, 700);
             }
-
-            // Iniciar Monitor de Estado
-            StatusMonitor.run(monitorConfig);
-
-            // Iniciar otras funcionalidades originales
-            updateOwnerSectionVisibility(); // Estado inicial Owner
-            initialUserInteraction();       // Preparar reproductor
-            // (El resto de listeners ya están añadidos fuera del DOMContentLoaded)
-
-            console.log("UnevennesX Page Initialized (v1.8 - Combined).");
+            try {
+                StatusMonitor.run(monitorConfig);
+            } catch (monitorError) {
+                console.error("Error initializing Status Monitor:", monitorError);
+                 const monitorDiv = document.getElementById("status-monitor");
+                 if(monitorDiv) monitorDiv.innerHTML = "<p style='color:red;text-align:center;'>Error al cargar el monitor de estado.</p>";
+            }
+            updateOwnerSectionVisibility();
+            console.log("UnevennesX Page Initialized (v1.12 - No Snow)."); // Mensaje actualizado
         });
+
     </script>
+
+    <!-- NO HAY SCRIPT DE SEGUIMIENTO DE CURSOR AQUÍ -->
 
 </body>
 </html>
