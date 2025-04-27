@@ -4,736 +4,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UnevennesX</title>
+    <title>UnevennesX - Completo + Monitor + Nieve</title> <!-- Título actualizado -->
     <link rel="icon" type="image/png"
         href="https://cdn.dribbble.com/users/7549673/screenshots/17206704/media/1210a9d0ec8af427967e735935861eeb.png?resize=400x300&vertical=center">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        /* Estilos para la pantalla de carga */
-        #loading-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #151515; color: #fff; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; z-index: 1000;
-        }
-        .loading-spinner {
-            border: 8px solid rgba(255, 255, 255, 0.3); border-radius: 50%;
-            border-top: 8px solid #ff4081; width: 60px; height: 60px;
-            animation: spin 2s linear infinite; margin-bottom: 20px;
-        }
+        /* --- Estilos Originales + Ajustes Monitor --- */
+        #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #151515; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; }
+        .loading-spinner { border: 8px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top: 8px solid #ff4081; width: 60px; height: 60px; animation: spin 2s linear infinite; margin-bottom: 20px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        body {
-            font-family: 'Roboto', sans-serif; margin: 0; background: #151515;
-            color: #ddd; padding: 20px; box-sizing: border-box; min-height: 100vh;
-            display: flex; justify-content: center; align-items: center; overflow-x: hidden;
-        }
-        .container {
-            width: 100%; max-width: 800px; background: rgba(25, 25, 25, 0.97);
-            border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px; margin: auto; animation: fadeInUp 0.5s ease-out;
-        }
+        body { font-family: 'Roboto', sans-serif; margin: 0; background: #151515; color: #ddd; padding: 20px; box-sizing: border-box; min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow-x: hidden; }
+        .container { width: 100%; max-width: 800px; background: rgba(25, 25, 25, 0.97); border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); padding: 20px; margin: auto; animation: fadeInUp 0.5s ease-out; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        h1 {
-            text-align: center; color: #fff; font-size: 1.8em;
-            margin: 15px 0 10px 0; /* Reducido margen inferior */
-            padding: 0 10px; animation: textGlow 2s infinite alternate;
-        }
+        h1 { text-align: center; color: #fff; font-size: 1.8em; margin: 15px 0 10px 0; padding: 0 10px; animation: textGlow 2s infinite alternate; }
         @keyframes textGlow { 0% { text-shadow: 0 0 5px rgba(255, 107, 107, 0.3); } 100% { text-shadow: 0 0 15px rgba(255, 107, 107, 0.6); } }
+        h1 a.link-button { color: inherit; text-decoration: none; background: none !important; border: none !important; padding: 5px 10px; display: inline !important; transition: color 0.3s; box-shadow: none !important; animation: none !important; transform: none !important; } /* Estilo específico para el H1 */
+        h1 a.link-button:hover { color: #ff4081; background: none !important; }
 
-        /* --- ESTILOS PARA HORARIOS COMPACTOS --- */
-        #compact-clocks {
-            text-align: center;
-            font-size: 0.9em; /* Tamaño de fuente ligeramente reducido */
-            margin-bottom: 20px; /* Espacio antes del buscador */
-            padding: 8px 0; /* Padding vertical sutil */
-            border-top: 1px solid rgba(255, 255, 255, 0.08); /* Línea separadora superior */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Línea separadora inferior */
-            color: #bbb; /* Color ligeramente más suave */
-        }
-        #compact-clocks p {
-            margin: 4px 0; /* Margen vertical reducido entre líneas */
-            display: flex; /* Usar flex para alinear iconos y texto */
-            justify-content: center; /* Centrar contenido horizontalmente */
-            align-items: center; /* Alinear verticalmente */
-            gap: 8px; /* Espacio entre elementos */
-            flex-wrap: wrap; /* Permitir que se envuelva en pantallas pequeñas */
-        }
-        #compact-clocks i {
-             color: #ff6b6b; /* Color del icono */
-             font-size: 0.9em; /* Tamaño del icono */
-        }
-        #compact-clocks .location-label { /* Estilo para "Londres:", "LA:" */
-            color: #ddd; /* Color más brillante para la ubicación */
-            /* font-weight: bold; */ /* Opcional: poner en negrita */
-        }
-        #compact-clocks .processing-label { /* Estilo para "Proceso:" */
-             color: #aaa;
-        }
-        #compact-clocks .fixed-time { /* Estilo para "3 AM/PM", "9 AM/PM" */
-             color: #ccc;
-             font-style: italic;
-        }
-        #compact-clocks .current-label { /* Estilo para "Actual:" */
-             color: #aaa;
-             margin-left: 5px; /* Pequeño espacio antes de "Actual:" */
-        }
-        #compact-clocks .live-time { /* El reloj en vivo */
-            font-weight: bold;
-            color: #fff;
-            background-color: rgba(0,0,0,0.3);
-            padding: 2px 6px; /* Padding reducido */
-            border-radius: 4px;
-            font-family: 'Courier New', Courier, monospace;
-            display: inline-block;
-            min-width: 90px; /* Ajustar si es necesario */
-            text-align: center;
-            font-size: 0.95em; /* Tamaño ligeramente ajustado */
-            line-height: 1.2; /* Ajuste de altura de línea */
-        }
-        /* --- FIN ESTILOS HORARIOS COMPACTOS --- */
+        /* --- ESTILOS MONITOR DE ESTADO (INTEGRADOS) --- */
+        #status-monitor { text-align: center; font-size: 0.9em; margin-bottom: 20px; padding: 8px 0; border-top: 1px solid rgba(255, 255, 255, 0.08); border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #bbb; }
+        #status-monitor p.status-line { margin: 5px 0; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .status-line .left-group, .status-line .right-group { display: flex; align-items: center; gap: 6px; flex-shrink: 0; flex-wrap: nowrap; }
+        #status-monitor i.location-icon { color: #ff6b6b; font-size: 1em; margin-right: 2px;}
+        #status-monitor .location-label { color: #ddd; font-weight: bold;}
+        #status-monitor .live-time { font-weight: bold; color: #fff; background-color: rgba(0,0,0,0.3); padding: 1px 5px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; min-width: 105px; text-align: center; font-size: 0.95em; line-height: 1.2; margin: 0 4px; }
+        #status-monitor .fixed-schedule { font-size: 0.9em; color: #a0a0a0; font-style: italic; margin-right: 5px; }
+        #status-monitor .status-dot { width: 10px; height: 10px; border-radius: 50%; background-color: #555; box-shadow: 0 0 4px rgba(0,0,0,.5); transition: background-color .5s ease,box-shadow .5s ease; display: inline-block; vertical-align: middle; margin-left: 4px; }
+        #status-monitor .status-dot.status-green { background-color: #4CAF50; box-shadow: 0 0 6px #4CAF50; }
+        #status-monitor .status-dot.status-red { background-color: #F44336; box-shadow: 0 0 6px #F44336; }
+        #status-monitor .status-text { font-weight: bold; transition: color .5s ease; margin-right: 8px; min-width: 70px; text-align: left; }
+        #status-monitor .status-text.status-green { color: #81C784; }
+        #status-monitor .status-text.status-red { color: #E57373; }
+        #status-monitor .countdown-label { color: #aaa; font-style: italic; font-size: 0.9em; }
+        #status-monitor .countdown-timer { color: #64b5f6; background-color: rgba(0,0,0,0.3); padding: 1px 5px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; min-width: 70px; text-align: center; font-size: 0.95em; font-weight: bold; margin-left: 4px; }
+        /* --- FIN ESTILOS MONITOR --- */
 
-        .section {
-            margin-bottom: 12px; border-radius: 8px; background: rgba(40, 40, 40, 0.6);
-            overflow: hidden; transition: all 0.3s ease;
-        }
+        /* --- Estilos Secciones, Botones, etc. (Originales) --- */
+        .section { margin-bottom: 12px; border-radius: 8px; background: rgba(40, 40, 40, 0.6); overflow: hidden; transition: all 0.3s ease; }
         .section:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); }
-        .section-header {
-            padding: 15px 20px; display: flex; align-items: center;
-            justify-content: space-between; cursor: pointer; transition: background 0.3s ease;
-        }
+        .section-header { padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.3s ease; }
         .section-header:hover { background: rgba(255, 255, 255, 0.05); }
-        .section-title {
-            font-size: 1em; color: #ff6b6b; margin: 0; display: flex;
-            align-items: center; gap: 8px;
-        }
+        .section-title { font-size: 1em; color: #ff6b6b; margin: 0; display: flex; align-items: center; gap: 8px; }
         .arrow { transition: transform 0.3s ease; font-size: 0.9em; color: #888; }
         .section.active .arrow { transform: rotate(180deg); }
-
-        .grid-links {
-            display: none; grid-template-columns: 1fr; gap: 12px;
-            padding: 15px 20px; animation: slideDown 0.4s ease-out;
-        }
+        .grid-links { display: none; grid-template-columns: 1fr; gap: 12px; padding: 15px 20px; animation: slideDown 0.4s ease-out; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         .section.active .grid-links { display: grid; }
-
-        .link-button {
-            padding: 15px 20px; background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px;
-            color: #ddd; text-decoration: none; font-size: 0.95em;
-            transition: all 0.3s ease; animation: fadeIn 0.5s ease-out;
-        }
+        .link-button { padding: 15px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; color: #ddd; text-decoration: none; font-size: 0.95em; transition: all 0.3s ease; animation: fadeIn 0.5s ease-out; display: block; /* Asegurar display block para botones */ }
         .link-button:hover { background: rgba(255, 64, 129, 0.15); transform: translateY(-3px); box-shadow: 0 4px 10px rgba(255, 64, 129, 0.1); }
-
-        .new-badge {
-            background: #ff4081; color: white; font-size: 0.65em; padding: 3px 8px;
-            border-radius: 10px; margin-left: 8px; animation: pulse 1.5s infinite;
-        }
+        .new-badge { background: #ff4081; color: white; font-size: 0.65em; padding: 3px 8px; border-radius: 10px; margin-left: 8px; animation: pulse 1.5s infinite; display: inline-block; vertical-align: middle; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-
-        #search-input {
-            width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #444;
-            background-color: #222; color: #ddd; border-radius: 5px;
-            box-sizing: border-box; font-size: 1em;
-        }
-
-        /* Estilos para el modal de login */
-        .modal {
-            display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%;
-            height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.4);
-        }
-        .modal-content {
-            background-color: #333; color: #ddd; margin: 15% auto; padding: 20px;
-            border: 1px solid #888; max-width: 500px; width: 90%; border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); text-align: center;
-        }
+        #search-input { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #444; background-color: #222; color: #ddd; border-radius: 5px; box-sizing: border-box; font-size: 1em; }
+        .modal { display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.4); }
+        .modal-content { background-color: #333; color: #ddd; margin: 15% auto; padding: 20px; border: 1px solid #888; max-width: 500px; width: 90%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); text-align: center; }
         .modal-content h2 { margin-top: 0; color: #ff6b6b; font-size: 1.5em; margin-bottom: 20px; }
         .modal-content label { display: block; margin-bottom: 5px; color: #fff; text-align: left; }
-        .modal-content input[type="text"], .modal-content input[type="password"] {
-            width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #444;
-            background-color: #222; color: #ddd; border-radius: 5px; box-sizing: border-box;
-        }
-        .modal-content button {
-            background-color: #ff4081; color: white; padding: 12px 20px; border: none;
-            border-radius: 5px; cursor: pointer; font-size: 1em; transition: background-color 0.3s ease;
-        }
+        .modal-content input[type="text"], .modal-content input[type="password"] { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #444; background-color: #222; color: #ddd; border-radius: 5px; box-sizing: border-box; }
+        .modal-content button { background-color: #ff4081; color: white; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; transition: background-color 0.3s ease; }
         .modal-content button:hover { background-color: #d43268; }
         .modal-content p#passwordError { color: red; display: none; margin-top: 10px; }
-        .close-button {
-            color: #aaa; float: right; font-size: 28px; font-weight: bold;
-        }
+        .close-button { color: #aaa; float: right; font-size: 28px; font-weight: bold; }
         .close-button:hover, .close-button:focus { color: #fff; text-decoration: none; cursor: pointer; }
-
-        /* Estilos para el reproductor de música */
-        #music-player-container {
-            position: fixed; bottom: 10px; left: 10px; background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px; border-radius: 5px; z-index: 100; display: flex;
-            align-items: center; gap: 10px;
-        }
+        #music-player-container { position: fixed; bottom: 10px; left: 10px; background-color: rgba(0, 0, 0, 0.5); padding: 10px; border-radius: 5px; z-index: 100; display: flex; align-items: center; gap: 10px; }
         #track-name { color: #fff; font-size: 0.8em; }
         #controls-container { display: flex; align-items: center; gap: 4px; }
-        #play-pause-button, #prev-button, #next-button {
-            background-color: transparent; color: #fff; border: none; padding: 4px;
-            font-size: 1em; cursor: pointer; transition: color 0.3s ease;
-        }
+        #play-pause-button, #prev-button, #next-button { background-color: transparent; color: #fff; border: none; padding: 4px; font-size: 1em; cursor: pointer; transition: color 0.3s ease; }
         #play-pause-button:hover, #prev-button:hover, #next-button:hover { color: #ff4081; }
-        #volume-slider {
-            width: 60px; height: 4px; background: #555; outline: none; opacity: 0.7;
-            transition: opacity .2s; cursor: pointer; border-radius: 3px;
-        }
-        #volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none; appearance: none; width: 8px; height: 8px;
-            background: #fff; cursor: pointer; border-radius: 50%;
-        }
+        #volume-slider { width: 60px; height: 4px; background: #555; outline: none; opacity: 0.7; transition: opacity .2s; cursor: pointer; border-radius: 3px; -webkit-appearance: none; appearance: none; vertical-align: middle; }
+        #volume-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 10px; height: 10px; background: #fff; cursor: pointer; border-radius: 50%; }
+        #volume-slider::-moz-range-thumb { width: 10px; height: 10px; background: #fff; cursor: pointer; border-radius: 50%; border: none; }
         #volume-slider:hover { opacity: 1; }
 
-        /* Estilos para pantallas más grandes */
-        @media (min-width: 600px) {
-            .grid-links { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-            .link-button { padding: 18px 25px; }
-             /* En pantallas grandes, podemos hacer que el flex no envuelva */
-            #compact-clocks p { flex-wrap: nowrap; }
+        /* Media Queries Originales + Ajuste Monitor */
+        @media (min-width: 768px) {
+             /* No forzar espacio entre elementos en pantallas anchas */
         }
-
-        /* Estilos específicos para pantallas más pequeñas (móviles) */
-        @media (max-width: 599px) {
-            body { padding: 10px; overflow-x: hidden; }
-            .container { width: 95%; padding: 15px; }
-            h1 { font-size: 1.5em; margin: 10px 0 10px 0; }
-
-            /* Ajustes para horarios compactos en móvil */
-            #compact-clocks { font-size: 0.85em; padding: 6px 0; margin-bottom: 15px;}
-            #compact-clocks p { gap: 5px; } /* Reducir gap */
-            #compact-clocks .live-time { min-width: 85px; font-size: 0.9em; }
-
-            .section { margin-bottom: 10px; }
-            .section-header { padding: 12px 15px; }
-            .section-title { font-size: 0.9em; }
-            .grid-links { padding: 10px; gap: 8px; }
-            .link-button { padding: 10px 12px; font-size: 0.85em; }
-            #search-input { width: 100%; max-width: none; padding: 10px; margin-bottom: 15px; }
-
-            #music-player-container { bottom: 5px; left: 5px; padding: 5px; gap: 5px; }
-            #track-name { font-size: 0.7em; }
-            #controls-container { gap: 3px; }
-            #play-pause-button, #prev-button, #next-button { padding: 3px; font-size: 0.9em; }
-            #volume-slider { width: 40px; height: 3px; }
-            #volume-slider::-webkit-slider-thumb { width: 6px; height: 6px; }
-        }
+        @media (min-width: 600px) { .grid-links { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; } .link-button { padding: 18px 25px; } #status-monitor { font-size: 0.9em; } }
+        @media (max-width: 767px) { #status-monitor p.status-line { flex-direction: column; align-items: center; gap: 4px; } .right-group { margin-left: 0; justify-content: center; } }
+        @media (max-width: 599px) { body { padding: 10px; overflow-x: hidden; } .container { width: 95%; padding: 15px; } h1 { font-size: 1.5em; margin: 10px 0 15px 0; } #status-monitor { font-size: 0.85em; padding: 6px 0; margin-bottom: 15px; } .live-time { min-width: 105px; font-size: 0.9em; } .countdown-timer { min-width: 70px; font-size: 0.9em; } .section { margin-bottom: 10px; } .section-header { padding: 12px 15px; } .section-title { font-size: 0.9em; } .grid-links { padding: 10px; gap: 8px; } .link-button { padding: 10px 12px; font-size: 0.85em; } #search-input { width: 100%; max-width: none; padding: 10px; margin-bottom: 15px; } #music-player-container { bottom: 5px; left: 5px; padding: 5px; gap: 5px; } #track-name { font-size: 0.7em; } #controls-container { gap: 3px; } #play-pause-button, #prev-button, #next-button { padding: 3px; font-size: 0.9em; } #volume-slider { width: 40px; height: 3px; } #volume-slider::-webkit-slider-thumb { width: 6px; height: 6px; } #volume-slider::-moz-range-thumb { width: 6px; height: 6px; } }
     </style>
 </head>
-
 <body>
-    <!-- Pantalla de carga -->
-    <div id="loading-screen">
-        <div class="loading-spinner"></div>
-        <p>Cargando... UnevennesX Projects</p>
-    </div>
-
+    <div id="loading-screen"><div class="loading-spinner"></div><p>Cargando... UnevennesX Projects</p></div>
     <div class="container">
         <h1>
-            <a href="https://unevennesx.github.io/consultas/" class="link-button" style="display: inline-block;">
-               UnevennesX 👻 EvannescencE
-            </a>
+            <a href="https://unevennesx.github.io/consultas/" class="link-button">UnevennesX 👻 EvannescencE</a>
         </h1>
 
-        <!-- === SECCIÓN DE HORARIOS COMPACTA === -->
-        <div id="compact-clocks">
-            <p>
-                <i class="fas fa-city"></i> <span class="location-label">Londres:</span>
-                <span class="processing-label">Proceso</span> <span class="fixed-time">3 AM/PM</span> |
-                <span class="current-label">Actual:</span>
-                <span class="live-time" id="current-london-time">--:--:-- --</span>
+        <!-- ================================================ -->
+        <!-- === MONITOR DE ESTADO INSERTADO AQUÍ === -->
+        <!-- ================================================ -->
+        <div id="status-monitor">
+             <p class="status-line" id="london-status-line">
+                 <span class="left-group">
+                    <i class="fas fa-city location-icon"></i>
+                    <span class="location-label">Londres:</span>
+                    <span class="live-time" id="london-time-display">--:--:-- --</span>
+                    <span class="fixed-schedule">(3 AM - 3 PM)</span>
+                 </span>
+                 <span class="right-group">
+                    <span class="status-dot status-red" id="london-status-dot"></span>
+                    <span class="status-text status-red" id="london-status-text">Inactivo</span>
+                    <span class="countdown-label" id="london-cd-label">Próx. Cambio:</span>
+                    <span class="countdown-timer" id="london-countdown">--:--:--</span>
+                 </span>
             </p>
-            <p>
-                <i class="fas fa-sun"></i> <span class="location-label">Los Ángeles:</span>
-                <span class="processing-label">Proceso</span> <span class="fixed-time">9 AM/PM</span> |
-                <span class="current-label">Actual:</span>
-                <span class="live-time" id="current-la-time">--:--:-- --</span>
+            <p class="status-line" id="la-status-line">
+                <span class="left-group">
+                    <i class="fas fa-sun location-icon"></i>
+                    <span class="location-label">Los Ángeles:</span>
+                    <span class="live-time" id="la-time-display">--:--:-- --</span>
+                    <span class="fixed-schedule">(9 AM - 9 PM)</span>
+                 </span>
+                 <span class="right-group">
+                    <span class="status-dot status-red" id="la-status-dot"></span>
+                    <span class="status-text status-red" id="la-status-text">Inactivo</span>
+                    <span class="countdown-label" id="la-cd-label">Próx. Cambio:</span>
+                    <span class="countdown-timer" id="la-countdown">--:--:--</span>
+                 </span>
             </p>
         </div>
-        <!-- === FIN SECCIÓN HORARIOS COMPACTA === -->
+        <!-- ================================================ -->
+        <!-- === FIN MONITOR DE ESTADO === -->
+        <!-- ================================================ -->
 
         <input type="text" id="search-input" placeholder="Buscar proyectos...">
-        <div id="no-results-message" style="display:none; color: white; text-align: center; margin-top: 10px;">No se
-            encontraron resultados.</div>
+        <div id="no-results-message" style="display:none; color: white; text-align: center; margin-top: 10px;">No se encontraron resultados.</div>
 
-        <!-- Sección Principal -->
-        <div class="section" data-section-name="Principales">
-            <div class="section-header">
-                <div class="section-title">🌟 Principales</div>
-                <div class="arrow">▼</div>
-            </div>
-            <div class="grid-links">
-                <a href="https://extension-de-pg.vercel.app/" class="link-button">Precio del $ 🤑🔥</a>
-                <a href="https://mi-pg.vercel.app/login/" class="link-button">UnevennesX</a>
-                <a href="https://unevennesx.github.io/UserAgent/" class="link-button">User Agent 2.0</a>
-                <a href="https://unevennesx.github.io/Avanced-UnevennesX/" class="link-button">Avanced-EvanneS 🔥</a>
-                <a href="https://unevennesx.github.io/zipcodes/" class="link-button">Zipcode</a>
-            </div>
-        </div>
+        <!-- Secciones Originales -->
+        <div class="section" data-section-name="Principales"> <div class="section-header"> <div class="section-title">🌟 Principales</div> <div class="arrow">▼</div> </div> <div class="grid-links"> <a href="https://extension-de-pg.vercel.app/" class="link-button"> Precio del $ 🤑🔥 </a> <a href="https://mi-pg.vercel.app/login/" class="link-button">UnevennesX</a> <a href="https://unevennesx.github.io/UserAgent/" class="link-button">User Agent 2.0</a> <a href="https://unevennesx.github.io/Avanced-UnevennesX/" class="link-button">Avanced-EvanneS 🔥</a> <a href="https://unevennesx.github.io/zipcodes/" class="link-button"> Zipcode </a> </div> </div>
+        <div class="section" data-section-name="Destacados"> <div class="section-header"> <div class="section-title">🚀 Destacados</div> <div class="arrow">▼</div> </div> <div class="grid-links"> <a href="https://unevennesx.github.io/-CheckLinks-/" class="link-button"> ALL SAMPLICIOUS </a> <a href="https://unevennesx.github.io/app/" class="link-button"> glimpsehere.com </a> <a href="https://unevennesx.github.io/zamplia/" class="link-button"> Zamplia </a> <a href="https://unevennesx.github.io/UnevennesX/" class="link-button">Armador V1</a> <a href="https://unevennesx.github.io/cube/" class="link-button"> Sample-Cube </a> <a href="https://unevennesx.github.io/savanta/" class="link-button"> Savanta </a> <a href="https://unevennesx.github.io/ISA/" class="link-button"> ISA - </a> <a href="https://unevennesx.github.io/Survey.Dashmr/" class="link-button"> Survey.Dashmr </a> <a href="https://unevennesx.github.io/Survey-Cint/" class="link-button"> Sw.Cint </a> <a href="https://unevennesx.github.io/tsid/" class="link-button"> TSID </a> <a href="https://unevennesx.github.io/rd-secured/" class="link-button"> Rd.Secured👻 </a> <a href="https://unevennesx.github.io/RD-SIN-rd_proj_ud-/" class="link-button"> Rd.🚫"rd_proj_ud"🚫 </a> <a href="https://unevennesx.github.io/All-Spectrum/" class="link-button"> ALL Spectrum👾 <span class="new-badge">Mejorado</span> </a> <a href="https://unevennesx.github.io/spectrum-corto/" class="link-button"> ⚠️Spectrum Corto⚠️ <span class="new-badge">Corto</span> </a> <a href="https://unevennesx.github.io/Survey.Emi/" class="link-button"> Survey.Emi🤫 <span class="new-badge">New</span> </a> </div> </div>
+        <div class="section" data-section-name="Técnicas"> <div class="section-header"> <div class="section-title">⚙️ Técnicas</div> <div class="arrow">▼</div> </div> <div class="grid-links"> <a href="https://unevennesx.github.io/fakename/" class="link-button"> Fake-Name </a> <a href="https://unevennesx.github.io/cpx-tap-bit/" class="link-button">CPX</a> <a href="https://unevennesx.github.io/calculadora/" class="link-button"> Calculadora </a> </div> </div>
+        <div class="section" data-section-name="Utilidades"> <div class="section-header"> <div class="section-title">🔧 Utilidades</div> <div class="arrow">▼</div> </div> <div class="grid-links"> <a href="https://unevennesx.github.io/UID-ONLY/" class="link-button">Bitlabs</a> <a href="https://unevennesx.github.io/userv1/" class="link-button"> User Agent 1.0 </a> <a href="https://unevennesx.github.io/agg-consultas/" class="link-button"> Admin de consultas </a> </div> </div>
+        <div class="section" data-section-name="👑 Owner" id="owner-section"> <div class="section-header" id="owner-header"> <div class="section-title">👑 Owner</div> <div class="arrow">▼</div> </div> <div class="grid-links" id="owner-links"> <a href="https://unevennesx.github.io/user-owner/" class="link-button"> UserAgent V3 👑 </a> <a href="https://mi-pg.vercel.app/extraer-links/" class="link-button"> Links UnevennesX 👑 </a> <a href="https://mi-pg.vercel.app/offline_backup/manage/" class="link-button"> Backup UnevennesX 👑 </a> </div> </div>
 
-        <!-- Proyectos Destacados -->
-        <div class="section" data-section-name="Destacados">
-            <div class="section-header">
-                <div class="section-title">🚀 Destacados</div>
-                <div class="arrow">▼</div>
-            </div>
-             <div class="grid-links">
-                 <a href="https://unevennesx.github.io/-CheckLinks-/" class="link-button">ALL SAMPLICIOUS</a>
-                <a href="https://unevennesx.github.io/app/" class="link-button">glimpsehere.com</a>
-                <a href="https://unevennesx.github.io/zamplia/" class="link-button">Zamplia</a>
-                <a href="https://unevennesx.github.io/UnevennesX/" class="link-button">Armador V1</a>
-                <a href="https://unevennesx.github.io/cube/" class="link-button">Sample-Cube</a>
-                <a href="https://unevennesx.github.io/savanta/" class="link-button">Savanta</a>
-                <a href="https://unevennesx.github.io/ISA/" class="link-button">ISA -</a>
-                <a href="https://unevennesx.github.io/Survey.Dashmr/" class="link-button">Survey.Dashmr</a>
-                <a href="https://unevennesx.github.io/Survey-Cint/" class="link-button">Sw.Cint</a>
-                <a href="https://unevennesx.github.io/tsid/" class="link-button">TSID</a>
-                <a href="https://unevennesx.github.io/rd-secured/" class="link-button">Rd.Secured👻</a>
-                <a href="https://unevennesx.github.io/RD-SIN-rd_proj_ud-/" class="link-button">Rd.🚫"rd_proj_ud"🚫</a>
-                <a href="https://unevennesx.github.io/All-Spectrum/" class="link-button">ALL Spectrum👾 <span class="new-badge">Mejorado</span></a>
-                <a href="https://unevennesx.github.io/spectrum-corto/" class="link-button">⚠️Spectrum Corto⚠️ <span class="new-badge">Corto</span></a>
-                <a href="https://unevennesx.github.io/Survey.Emi/" class="link-button">Survey.Emi🤫 <span class="new-badge">New</span></a>
-            </div>
-        </div>
-
-        <!-- Herramientas Técnicas -->
-        <div class="section" data-section-name="Técnicas">
-            <div class="section-header">
-                <div class="section-title">⚙️ Técnicas</div>
-                <div class="arrow">▼</div>
-            </div>
-            <div class="grid-links">
-                <a href="https://unevennesx.github.io/fakename/" class="link-button">Fake-Name</a>
-                <a href="https://unevennesx.github.io/cpx-tap-bit/" class="link-button">CPX</a>
-                <a href="https://unevennesx.github.io/calculadora/" class="link-button">Calculadora</a>
-            </div>
-        </div>
-
-        <!-- Utilidades -->
-        <div class="section" data-section-name="Utilidades">
-            <div class="section-header">
-                <div class="section-title">🔧 Utilidades</div>
-                <div class="arrow">▼</div>
-            </div>
-            <div class="grid-links">
-                <a href="https://unevennesx.github.io/UID-ONLY/" class="link-button">Bitlabs</a>
-                <a href="https://unevennesx.github.io/userv1/" class="link-button">User Agent 1.0</a>
-                <a href="https://unevennesx.github.io/agg-consultas/" class="link-button">Admin de consultas</a>
-            </div>
-        </div>
-
-
-        <!-- 👑 Owner -->
-        <div class="section" data-section-name="👑 Owner" id="owner-section">
-            <div class="section-header" id="owner-header">
-                <div class="section-title">👑 Owner</div>
-                <div class="arrow">▼</div>
-            </div>
-            <div class="grid-links" id="owner-links">
-                 <a href="https://unevennesx.github.io/user-owner/" class="link-button">UserAgent V3 👑</a>
-                <a href="https://mi-pg.vercel.app/extraer-links/" class="link-button">Links UnevennesX 👑</a>
-                <a href="https://mi-pg.vercel.app/offline_backup/manage/" class="link-button">Backup UnevennesX 👑</a>
-            </div>
-        </div>
-
-        <!-- Reproductor de Música -->
-        <div id="music-player-container">
-            <span id="track-name">New York</span>
-            <div id="controls-container">
-                <button id="prev-button"><i class="fas fa-backward"></i></button>
-                <button id="play-pause-button"><i class="fas fa-play"></i></button>
-                <button id="next-button"><i class="fas fa-forward"></i></button>
-                <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.1">
-            </div>
-            <audio id="background-music" loop>
-                <source src="newyork.mp3" type="audio/mpeg">
-                <source src="miami.mp3" type="audio/mpeg">
-                <source src="rd.mp3" type="audio/mpeg">
-            </audio>
-        </div>
+        <!-- Reproductor de Música Original -->
+        <div id="music-player-container"> <span id="track-name">New York</span> <div id="controls-container"> <button id="prev-button"><i class="fas fa-backward"></i></button> <button id="play-pause-button"><i class="fas fa-play"></i></button> <button id="next-button"><i class="fas fa-forward"></i></button> <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.1"> </div> <audio id="background-music" loop> <source src="newyork.mp3" type="audio/mpeg"> <source src="miami.mp3" type="audio/mpeg"> <source src="rd.mp3" type="audio/mpeg"> </audio> </div>
     </div>
 
-    <!-- Modal para la contraseña del Owner -->
-    <div id="passwordModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" id="closeModal">×</span>
-            <h2>Acceso Owner</h2>
-            <label for="usernameInput">Usuario:</label>
-            <input type="text" id="usernameInput" placeholder="Usuario" value="UnevennesX" readonly>
-            <label for="passwordInput">Contraseña:</label>
-            <input type="password" id="passwordInput" placeholder="Contraseña">
-            <button id="submitPassword">Entrar</button>
-            <p id="passwordError" style="color: red; display: none;">Usuario o contraseña incorrectos.</p>
-        </div>
-    </div>
+    <!-- Modal Contraseña Original -->
+    <div id="passwordModal" class="modal"> <div class="modal-content"> <span class="close-button" id="closeModal">×</span> <h2>Acceso Owner</h2> <label for="usernameInput">Usuario:</label> <input type="text" id="usernameInput" placeholder="Usuario" value="UnevennesX" readonly> <label for="passwordInput">Contraseña:</label> <input type="password" id="passwordInput" placeholder="Contraseña"> <button id="submitPassword">Entrar</button> <p id="passwordError" style="color: red; display: none;">Usuario o contraseña incorrectos.</p> </div> </div>
 
+    <!-- Script de Nieve (Snowstorm) -->
+    <script> var snowStorm = { autoStart: true, flakesMax: 96, flakesMaxActive: 64, animationInterval: 33, flakeBottom: null, useTwinkleEffect: true, useMeltEffect: true, snowStick: true, snowColor: '#fff', vMaxX: 3, vMaxY: 3 }; </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Snowstorm/20131208/snowstorm-min.js"></script>
+
+    <!-- Tu Script Principal (Combinado) -->
     <script>
-        // --- [ TODO EL JAVASCRIPT ANTERIOR SIGUE AQUÍ EXACTAMENTE IGUAL ] ---
-        // (Incluyendo normalizeString, event listeners de secciones, búsqueda,
-        // reproductor de música, pantalla de carga, protección de contraseña)
+        "use strict";
 
-        // --- [ SOLO ASEGÚRATE DE QUE LA PARTE DEL RELOJ SIGA PRESENTE ] ---
-
-        // ---------- FUNCIONALIDAD RELOJ EN TIEMPO REAL ----------
-        const londonTimeSpan = document.getElementById('current-london-time');
-        const laTimeSpan = document.getElementById('current-la-time');
-
-        function updateTimes() {
-            const now = new Date();
-            const timeOptions = {
-                hour: '2-digit', minute: '2-digit', second: '2-digit',
-                hour12: true, // Formato AM/PM
-            };
-
-            try {
-                // Hora Londres (Europe/London) - Usando 'en-US' para asegurar AM/PM consistentemente
-                const londonTimeStr = now.toLocaleTimeString('en-US', { ...timeOptions, timeZone: 'Europe/London' });
-                londonTimeSpan.textContent = londonTimeStr;
-
-                // Hora Los Angeles (America/Los_Angeles)
-                const laTimeStr = now.toLocaleTimeString('en-US', { ...timeOptions, timeZone: 'America/Los_Angeles' });
-                laTimeSpan.textContent = laTimeStr;
-
-            } catch (error) {
-                 console.error("Error updating time:", error);
-                 // Comprobar si los elementos existen antes de intentar actualizar
-                 if (londonTimeSpan) londonTimeSpan.textContent = "Error";
-                 if (laTimeSpan) laTimeSpan.textContent = "Error";
-            }
-        }
-
-        // Actualiza la hora cada segundo
-        let clockInterval = setInterval(updateTimes, 1000);
-
-        // Llama una vez al inicio (después de cargar el DOM)
-         document.addEventListener('DOMContentLoaded', updateTimes); // Más seguro que onload para esto
-
-        // --- [ EL RESTO DEL JAVASCRIPT ANTERIOR CONTINÚA AQUÍ ] ---
-        // (Funciones del reproductor, modal, etc.)
-        // Función para eliminar acentos y convertir a minúsculas
-        function normalizeString(str) {
-            return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-        }
-
-        document.querySelectorAll('.section-header').forEach(header => {
-            // Excluir el header de Owner del comportamiento general de toggle
-            if (header.id !== 'owner-header') {
-                header.addEventListener('click', () => {
-                    const section = header.parentElement;
-                    section.classList.toggle('active');
-
-                    // Cerrar otras secciones (excepto Owner si está abierta)
-                    document.querySelectorAll('.section').forEach(otherSection => {
-                        if (otherSection !== section && otherSection.id !== 'owner-section' && otherSection.classList.contains('active')) {
-                            otherSection.classList.remove('active');
-                        }
-                    });
-                });
-            }
+        // --- [ Funciones Originales del Usuario ] ---
+        function normalizeString(str) { return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }
+        document.querySelectorAll('.section-header').forEach(header => { if (header.id !== 'owner-header') { header.addEventListener('click', () => { const section = header.parentElement; section.classList.toggle('active'); document.querySelectorAll('.section').forEach(otherSection => { if (otherSection !== section && otherSection.id !== 'owner-section' && otherSection.classList.contains('active')) { otherSection.classList.remove('active'); } }); }); } });
+        const searchInput = document.getElementById('search-input'); const noResultsMessage = document.getElementById('no-results-message');
+        searchInput?.addEventListener('input', function () { /* ... Código de búsqueda original ... */
+            let searchTerm = searchInput.value; searchTerm = normalizeString(searchTerm); let hasResults = false;
+            const ownerSectionElem = document.getElementById('owner-section'); const isOwnerAuth = localStorage.getItem('isAuthenticated') === 'true';
+            const isOwnerVisible = ownerSectionElem?.style.display !== 'none';
+            if (searchTerm.length < 2) { document.querySelectorAll('.section').forEach(section => { section.style.display = section.id === 'owner-section' && !isOwnerAuth ? 'none' : 'block'; }); document.querySelectorAll('.link-button').forEach(link => { link.style.display = 'block'; }); if(noResultsMessage) noResultsMessage.style.display = 'none'; return; }
+            document.querySelectorAll('.section').forEach(section => { if (section.id !== 'owner-section' || !isOwnerAuth) { section.style.display = 'none'; section.classList.remove('active'); } else { section.style.display = 'block'; } });
+            document.querySelectorAll('.link-button').forEach(link => { const isOwnerLink = ownerSectionElem?.contains(link); if (!isOwnerLink || !isOwnerAuth) { link.style.display = 'none'; } else { link.style.display = 'block'; } });
+            document.querySelectorAll('.link-button').forEach(link => { const linkText = normalizeString(link.textContent); const section = link.closest('.section'); if (section && linkText.includes(searchTerm)) { const isOwnerLink = section.id === 'owner-section'; if (!isOwnerLink || isOwnerAuth) { link.style.display = 'block'; section.style.display = 'block'; section.classList.add('active'); hasResults = true; } else { link.style.display = 'none'; } } else { const isOwnerLink = section?.id === 'owner-section'; if(isOwnerLink && isOwnerAuth) { link.style.display = 'none'; } } });
+             if(ownerSectionElem && isOwnerAuth && hasResults) ownerSectionElem.style.display = 'block';
+            if(noResultsMessage) noResultsMessage.style.display = hasResults ? 'none' : 'block';
         });
-
-
-        const searchInput = document.getElementById('search-input');
-        const noResultsMessage = document.getElementById('no-results-message');
-
-        searchInput.addEventListener('input', function () {
-            let searchTerm = searchInput.value;
-            searchTerm = normalizeString(searchTerm);
-
-            let hasResults = false;
-
-            // Verificar la longitud del término de búsqueda
-            if (searchTerm.length < 2) {
-                // Si el término tiene menos de 2 caracteres, mostrar todas las secciones y enlaces
-                document.querySelectorAll('.section').forEach(section => {
-                    section.style.display = 'block';
-                     // No cerrar secciones automáticamente al borrar búsqueda
-                    // section.classList.remove('active');
-                });
-                document.querySelectorAll('.link-button').forEach(link => {
-                    link.style.display = 'block'; // O 'grid' si es necesario según tu CSS
-                });
-                noResultsMessage.style.display = 'none';
-                return; // Salir de la función
-            }
-
-            // Obtener todos los elementos link-button
-            const allLinks = document.querySelectorAll('.link-button');
-
-            // Ocultar todas las secciones y enlaces al inicio (excepto Owner si está autenticado)
-            document.querySelectorAll('.section').forEach(section => {
-                 if (section.id !== 'owner-section' || !isAuthenticated) { // No ocultar Owner si está autenticado
-                      section.style.display = 'none';
-                      section.classList.remove('active');
-                 } else if (section.id === 'owner-section' && isAuthenticated){
-                     section.style.display = 'block'; // Asegurarse que Owner sigue visible
-                 }
-            });
-             document.querySelectorAll('.link-button').forEach(link => {
-                 // Ocultar solo los enlaces que no estén dentro de la sección Owner autenticada
-                 const ownerSection = document.getElementById('owner-section');
-                 // Asegurarse de que ownerSection no sea null antes de usar contains
-                 if (!ownerSection || !ownerSection.contains(link) || !isAuthenticated) {
-                     link.style.display = 'none';
-                 } else {
-                     link.style.display = 'block'; // O 'grid'
-                 }
-             });
-
-
-            // Iterar a través de cada enlace y determinar si debe mostrarse u ocultarse
-            allLinks.forEach(link => {
-                const linkText = normalizeString(link.textContent); // Normalizar el texto del enlace
-                const section = link.closest('.section'); // Obtener la sección contenedora
-
-                // Asegurarse que section existe antes de acceder a sus propiedades
-                if (section && linkText.includes(searchTerm)) {
-                    link.style.display = 'block'; // Mostrar el enlace si coincide con la búsqueda (o 'grid')
-                    hasResults = true;
-
-                    // Mostrar la sección si no está ya visible
-                    section.style.display = 'block';
-                    section.classList.add('active'); // Abrir la sección
-                } else if (!linkText.includes(searchTerm)) {
-                     // Ocultar solo si no coincide Y no está en la sección Owner autenticada (ya manejado arriba)
-                     const ownerSection = document.getElementById('owner-section');
-                     // Asegurarse de que ownerSection no sea null antes de usar contains
-                    if (section && (!ownerSection || !ownerSection.contains(link) || !isAuthenticated)) {
-                        link.style.display = 'none';
-                     }
-                }
-            });
-
-            // Mostrar/Ocultar el mensaje de "No se encontraron resultados"
-            noResultsMessage.style.display = hasResults ? 'none' : 'block';
+        const audio = document.getElementById('background-music'); const playPauseButton = document.getElementById('play-pause-button'); const prevButton = document.getElementById('prev-button'); const nextButton = document.getElementById('next-button'); const volumeSlider = document.getElementById('volume-slider'); const trackNameDisplay = document.getElementById('track-name'); let isPlaying = false; let currentTrackIndex = 0;
+        const tracks = [{ src: "newyork.mp3", name: "New York" }, { src: "miami.mp3", name: "Miami" }, { src: "rd.mp3", name: "RD" },];
+        function loadTrack(trackIndex) { /* ... Código original loadTrack ... */
+            if(trackIndex<0){trackIndex=tracks.length-1}else if(trackIndex>=tracks.length){trackIndex=0}currentTrackIndex=trackIndex;if(audio){const e=tracks[trackIndex].src;const t=audio.currentSrc?new URL(audio.currentSrc,window.location.href).pathname:null;const n=new URL(e,window.location.href).pathname;if(audio.src===""||t!==n){audio.src=e;audio.load()}}if(trackNameDisplay)trackNameDisplay.textContent=tracks[trackIndex].name;localStorage.setItem("currentTrackIndex",currentTrackIndex)
+         }
+        playPauseButton?.addEventListener('click', () => { /* ... Código original play/pause ... */
+            if(isPlaying){audio.pause();playPauseButton.innerHTML='<i class="fas fa-play"></i>';localStorage.setItem("musicState","paused")}else{loadTrack(currentTrackIndex);audio.play().then(()=>{playPauseButton.innerHTML='<i class="fas fa-pause"></i>';localStorage.setItem("musicState","playing")}).catch(e=>{console.error("Error playing audio:",e);isPlaying=!isPlaying})}isPlaying=!isPlaying
         });
-
-
-        // -----------  REPRODUCTOR MEJORADO  ------------
-        const audio = document.getElementById('background-music');
-        const playPauseButton = document.getElementById('play-pause-button');
-        const prevButton = document.getElementById('prev-button');
-        const nextButton = document.getElementById('next-button');
-        const volumeSlider = document.getElementById('volume-slider');
-        const trackNameDisplay = document.getElementById('track-name');
-
-        let isPlaying = false;
-        let currentTrackIndex = 0;
-
-        const tracks = [
-            { src: "newyork.mp3", name: "New York" },
-            { src: "miami.mp3", name: "Miami" },
-            { src: "rd.mp3", name: "RD" },
-        ];
-
-        function loadTrack(trackIndex) {
-            if (trackIndex < 0) trackIndex = tracks.length - 1;
-            else if (trackIndex >= tracks.length) trackIndex = 0;
-
-            currentTrackIndex = trackIndex;
-             // Verifica si la fuente es diferente antes de cambiar y cargar
-             const newSrc = tracks[currentTrackIndex].src;
-             // Normaliza las rutas por si acaso (ej. ./file.mp3 vs file.mp3)
-             const currentSrcAbs = audio.currentSrc ? new URL(audio.currentSrc, window.location.href).pathname : null;
-             const newSrcAbs = new URL(newSrc, window.location.href).pathname;
-
-             if (audio.src === '' || currentSrcAbs !== newSrcAbs) {
-                 audio.src = newSrc;
-                 audio.load(); // Carga la nueva fuente solo si es necesario
-             }
-            if(trackNameDisplay) trackNameDisplay.textContent = tracks[currentTrackIndex].name;
-            localStorage.setItem('currentTrackIndex', currentTrackIndex);
-        }
-
-
-        if(playPauseButton) {
-            playPauseButton.addEventListener('click', () => {
-                if (isPlaying) {
-                    audio.pause();
-                    playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
-                    localStorage.setItem('musicState', 'paused');
-                } else {
-                    loadTrack(currentTrackIndex); // Asegurar carga
-                    audio.play().then(() => {
-                         playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
-                         localStorage.setItem('musicState', 'playing');
-                    }).catch(error => {
-                        console.error("Error playing audio:", error);
-                        isPlaying = !isPlaying; // Revertir estado si falla
-                    });
-                }
-                isPlaying = !isPlaying;
-            });
-        }
-
-        if(prevButton) {
-            prevButton.addEventListener('click', () => {
-                loadTrack(currentTrackIndex - 1);
-                if (isPlaying) {
-                    audio.play().catch(error => console.error("Error playing audio:", error));
-                }
-            });
-        }
-
-       if(nextButton) {
-            nextButton.addEventListener('click', () => {
-                loadTrack(currentTrackIndex + 1);
-                if (isPlaying) {
-                    audio.play().catch(error => console.error("Error playing audio:", error));
-                }
-            });
-        }
-
-        if(volumeSlider) {
-            volumeSlider.addEventListener('input', () => {
-                audio.volume = volumeSlider.value;
-                localStorage.setItem('volume', volumeSlider.value);
-            });
-        }
-
-        audio.addEventListener('ended', () => {
-             if (isPlaying) {
-                 loadTrack(currentTrackIndex + 1);
-                 audio.play().catch(error => console.error("Error playing audio on ended:", error));
-             } else {
-                 loadTrack(currentTrackIndex + 1);
-             }
+        prevButton?.addEventListener('click', () => { /* ... Código original prev ... */
+            loadTrack(currentTrackIndex-1);if(isPlaying){audio.play().catch(e=>console.error("Error playing audio:",e))}
         });
-
-        function loadSavedState() {
-            const savedTrackIndex = localStorage.getItem('currentTrackIndex');
-            currentTrackIndex = savedTrackIndex !== null ? parseInt(savedTrackIndex, 10) : 0;
-
-            const savedVolume = localStorage.getItem('volume');
-             if (volumeSlider) { // Comprobar si existe
-                 volumeSlider.value = savedVolume !== null ? savedVolume : 0.1;
-             }
-             audio.volume = savedVolume !== null ? savedVolume : 0.1; // Ajustar volumen directamente
-
-             if (playPauseButton) { // Comprobar si existe
-                playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
-             }
-            loadTrack(currentTrackIndex); // Carga la pista guardada
-        }
-
-        loadSavedState();
-
-        let hasInteracted = false;
-        function initialUserInteraction() {
-            if (!hasInteracted) {
-                hasInteracted = true;
-                const savedMusicState = localStorage.getItem('musicState');
-                if (savedMusicState === 'playing' && playPauseButton) {
-                    playPauseButton.click();
-                }
-                document.removeEventListener('click', initialUserInteraction);
-                document.removeEventListener('touchstart', initialUserInteraction);
-            }
-        }
+        nextButton?.addEventListener('click', () => { /* ... Código original next ... */
+            loadTrack(currentTrackIndex+1);if(isPlaying){audio.play().catch(e=>console.error("Error playing audio:",e))}
+        });
+        volumeSlider?.addEventListener('input', () => { /* ... Código original volume ... */
+             audio.volume=volumeSlider.value;localStorage.setItem("volume",volumeSlider.value)
+        });
+        audio?.addEventListener('ended', () => { /* ... Código original ended ... */
+             if(isPlaying){loadTrack(currentTrackIndex+1);audio.play().catch(e=>console.error("Error playing audio on ended:",e))}else{loadTrack(currentTrackIndex+1)}
+        });
+        function loadSavedState() { /* ... Código original loadSavedState ... */
+             const e=localStorage.getItem("currentTrackIndex");currentTrackIndex=e!==null?parseInt(e,10):0;const t=localStorage.getItem("volume");if(volumeSlider){volumeSlider.value=t!==null?t:.1}if(audio)audio.volume=t!==null?t:.1;if(playPauseButton){playPauseButton.innerHTML='<i class="fas fa-play"></i>'}loadTrack(currentTrackIndex)
+         }
+        let hasInteracted = false; function initialUserInteraction() { /* ... Código original interaction ... */
+            if(!hasInteracted){hasInteracted=!0;loadSavedState();if(localStorage.getItem("musicState")==="playing"&&audio){audio.play().then(()=>{isPlaying=!0;if(playPauseButton)playPauseButton.innerHTML='<i class="fas fa-pause"></i>'}).catch(e=>{console.warn("Autoplay failed:",e)})}document.removeEventListener("click",initialUserInteraction)}}
         document.addEventListener('click', initialUserInteraction);
-        document.addEventListener('touchstart', initialUserInteraction);
+        const passwordModal = document.getElementById('passwordModal'); const closeModalButton = document.getElementById('closeModal'); const submitPasswordButton = document.getElementById('submitPassword'); const passwordInput = document.getElementById('passwordInput'); const usernameInput = document.getElementById('usernameInput'); const ownerSection = document.getElementById('owner-section'); const ownerHeader = document.getElementById('owner-header'); const ownerLinks = document.getElementById('owner-links'); const passwordError = document.getElementById('passwordError');
+        const correctUsername = "UnevennesX"; const correctPassword = "EvannescencE"; let isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+        if(ownerLinks) ownerLinks.style.display = 'none';
+        function checkPassword() { /* ... Código original checkPassword ... */
+            const e=usernameInput.value,t=passwordInput.value;if(e===correctUsername&&t===correctPassword){isAuthenticated=!0;localStorage.setItem("isAuthenticated","true");if(passwordModal)passwordModal.style.display="none";if(ownerLinks)ownerLinks.style.display="grid";if(ownerSection)ownerSection.classList.add("active");if(passwordError)passwordError.style.display="none";if(passwordInput)passwordInput.value=""}else{if(passwordError)passwordError.style.display="block"}updateOwnerSectionVisibility()
+         }
+        function updateOwnerSectionVisibility() { /* ... Código original updateOwner ... */
+            if(!ownerSection||!ownerLinks)return;if(isAuthenticated){ownerLinks.style.display=ownerSection.classList.contains("active")?"grid":"none";ownerSection.style.display="block"}else{ownerLinks.style.display="none";ownerSection.classList.remove("active");ownerSection.style.display="block"}
+         }
+        ownerHeader?.addEventListener('click', function (event) { /* ... Código original ownerHeader click ... */
+             event.preventDefault();if(!isAuthenticated){if(passwordModal)passwordModal.style.display="block";if(passwordInput)passwordInput.focus()}else{if(ownerSection)ownerSection.classList.toggle("active");updateOwnerSectionVisibility()}
+         });
+        closeModalButton?.addEventListener('click', function () { /* ... Código original closeModal ... */
+            if(passwordModal)passwordModal.style.display="none"
+        });
+        submitPasswordButton?.addEventListener('click', checkPassword);
+        passwordInput?.addEventListener('keypress', function (event) { /* ... Código original password keypress ... */
+            if(event.key==="Enter"){checkPassword()}
+        });
+        window.addEventListener('click', function (event) { /* ... Código original window click modal ... */
+            if(event.target===passwordModal&&passwordModal){passwordModal.style.display="none"}
+        });
+        // --- [ FIN Funciones Originales ] ---
 
-        // --- FIN DEL REPRODUCTOR MEJORADO ----
 
-        window.addEventListener('load', function () {
+        // === CÓDIGO DEL MONITOR DE ESTADO (v1.7 insertado aquí) ===
+        const monitorConfig = {
+            locations: [
+                { key: 'london', timezone: 'Europe/London', activeStartHour: 3, activeEndHour: 15, ui: {} },
+                { key: 'la', timezone: 'America/Los_Angeles', activeStartHour: 9, activeEndHour: 21, ui: {} }
+            ],
+            checkInterval: 1000,
+            debug: false // Desactivado por defecto
+        };
+        monitorConfig.locations.forEach(loc => {
+             loc.ui = { liveTimeDisplay: document.getElementById(`${loc.key}-time-display`), dot: document.getElementById(`${loc.key}-status-dot`), text: document.getElementById(`${loc.key}-status-text`), countdown: document.getElementById(`${loc.key}-countdown`), cdLabel: document.getElementById(`${loc.key}-cd-label`) };
+         });
+
+        const StatusMonitor = {
+            formatters: {
+                liveTime12h: (tz) => new Intl.DateTimeFormat('en-US', { timeZone: tz, hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true }),
+                localHour24: (tz) => new Intl.DateTimeFormat('en-CA', { timeZone: tz, hour: 'numeric', hourCycle: 'h23' })
+            },
+            checkElements: (locations) => {
+                 for(const loc of locations){if(!loc.ui){console.error(`[SETUP_ERROR] UI object not defined for '${loc.key}'`);return!1}for(const key in loc.ui){if(!loc.ui[key]){console.error(`[SETUP_ERROR] UI Element '${key}' not found for '${loc.key}'`);return!1}}}if(typeof Intl=="undefined"||!Intl.DateTimeFormat().resolvedOptions().timeZone){console.error("[SETUP_ERROR] Intl or TimeZone API not supported.");const e=document.getElementById("status-monitor");e&&(e.innerHTML="<p style='color:red; text-align:center;'>Error: Time functions not supported.</p>");return!1}return!0
+             },
+            formatCountdown: (totalSeconds) => {
+                 if (isNaN(totalSeconds) || totalSeconds < 0) totalSeconds = 0; const h = Math.floor(totalSeconds / 3600); const m = Math.floor((totalSeconds % 3600) / 60); const s = Math.floor(totalSeconds % 60); return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+             },
+            getUTCTimestampForLocalHour: (targetHour24, tz, referenceDate) => {
+                 try { const dateInTZ = new Date(referenceDate.toLocaleString('en-US', { timeZone: tz })); dateInTZ.setHours(targetHour24, 0, 0, 0); const timestamp = dateInTZ.getTime(); if (isNaN(timestamp)) throw new Error("Timestamp is NaN"); return timestamp; } catch (e) { console.error(`[ERROR][${tz}] getUTCTimestamp failed for hour ${targetHour24}:`, e); return null; }
+            },
+            updateLocationUI: (location, config) => {
+                const { key, timezone, activeStartHour, activeEndHour, ui } = location; const { debug } = config; const now = new Date(); const nowTimestamp = now.getTime(); if (ui.liveTimeDisplay) ui.liveTimeDisplay.style.color = ''; if (ui.text) ui.text.style.color = ''; try { if (ui.liveTimeDisplay) { ui.liveTimeDisplay.textContent = StatusMonitor.formatters.liveTime12h(timezone).format(now); } let currentHour24 = -1; let isActive = false; try { const hourStr = StatusMonitor.formatters.localHour24(timezone).format(now); currentHour24 = parseInt(hourStr, 10); if (currentHour24 === 24) currentHour24 = 0; if (isNaN(currentHour24)) throw new Error("Hora local inválida"); isActive = (currentHour24 >= activeStartHour && currentHour24 < activeEndHour); if (debug) { console.log(`[STATE_CHECK][${key}] Hora Local 24h = ${currentHour24} | Rango Activo = [${activeStartHour} - ${activeEndHour}) | ¿Activo? ${isActive}`); } } catch (e) { console.error(`[ERROR][${key}] Fallo al obtener hora local:`, e); isActive = false; } const statusText = isActive ? 'Activo' : 'Inactivo'; const statusClass = isActive ? 'status-green' : 'status-red'; if (ui.dot && ui.dot.className !== `status-dot ${statusClass}`) ui.dot.className = `status-dot ${statusClass}`; if (ui.text && ui.text.textContent !== statusText) { ui.text.textContent = statusText; ui.text.className = `status-text ${statusClass}`; } let nextChangeTimestamp = null; try { const today = new Date(now); const tomorrow = new Date(now); tomorrow.setDate(now.getDate() + 1); const dayAfter = new Date(now); dayAfter.setDate(now.getDate() + 2); const relevantDates = [today, tomorrow, dayAfter]; const eventTimestamps = []; relevantDates.forEach(dateRef => { const startTs = StatusMonitor.getUTCTimestampForLocalHour(activeStartHour, timezone, dateRef); const endTs = StatusMonitor.getUTCTimestampForLocalHour(activeEndHour, timezone, dateRef); if (startTs !== null) eventTimestamps.push(startTs); if (endTs !== null) eventTimestamps.push(endTs); }); const futureEvents = eventTimestamps.filter(ts => ts > nowTimestamp + 500).sort((a, b) => a - b); if (futureEvents.length > 0) { nextChangeTimestamp = futureEvents[0]; } else { if(debug) console.warn(`[WARN][${key}] No se encontraron eventos futuros para countdown.`); } } catch (e) { console.error(`[ERROR][${key}] Fallo al calcular timestamps para countdown:`, e); nextChangeTimestamp = null; } if (ui.countdown && ui.cdLabel) { if (nextChangeTimestamp !== null) { const secondsRemaining = Math.max(0, (nextChangeTimestamp - nowTimestamp) / 1000); ui.countdown.textContent = StatusMonitor.formatCountdown(secondsRemaining); ui.cdLabel.style.display = ''; ui.countdown.style.display = ''; } else { ui.countdown.textContent = "--:--:--"; ui.cdLabel.style.display = 'none'; ui.countdown.style.display = 'none'; } } } catch (error) { console.error(`[ERROR][${key}] Update failed:`, error); if (ui.liveTimeDisplay) { ui.liveTimeDisplay.textContent = 'Error'; ui.liveTimeDisplay.style.color = 'red'; } if (ui.dot) ui.dot.className = 'status-dot'; if (ui.text) { ui.text.textContent = 'Error'; ui.text.className = 'status-text'; ui.text.style.color='red';} if (ui.countdown) ui.countdown.textContent = 'Error'; if (ui.cdLabel) ui.cdLabel.style.display = ''; }
+            },
+            run: (config) => {
+                 if(!StatusMonitor.checkElements(config.locations)){console.error("[FATAL] Monitor UI elements missing. Aborting.");return}if(config.debug)console.log("[INFO] Starting Status Monitor...");const e=()=>{if(config.debug&&Math.random()<.01)console.log("[INFO] Monitor update tick...");config.locations.forEach(t=>StatusMonitor.updateLocationUI(t,config))};try{e();setInterval(e,config.checkInterval);if(config.debug)console.log("[INFO] Monitor update interval started.")}catch(t){console.error("[FATAL] Error during initial monitor setup:",t);const n=document.getElementById("status-monitor");n&&(n.innerHTML="<p style='color:red; text-align:center;'>FATAL MONITOR INIT ERROR. See console.</p>")}}
+        };
+        // === FIN CÓDIGO MONITOR ===
+
+        // ----- INICIALIZACIÓN (COMBINADA) -----
+        document.addEventListener("DOMContentLoaded", () => {
+            // Pantalla de carga original
             const loadingScreen = document.getElementById('loading-screen');
-            if (loadingScreen) { // Comprobar si existe
+            if (loadingScreen) {
                 loadingScreen.style.transition = "opacity 0.5s";
                 loadingScreen.style.opacity = "0";
                 loadingScreen.addEventListener('transitionend', () => {
                     loadingScreen.style.display = 'none';
                 });
             }
-            // La llamada inicial a updateTimes se hace con DOMContentLoaded ahora
+
+            // Iniciar Monitor de Estado
+            StatusMonitor.run(monitorConfig);
+
+            // Iniciar otras funcionalidades originales
+            updateOwnerSectionVisibility(); // Estado inicial Owner
+            initialUserInteraction();       // Preparar reproductor
+            // (El resto de listeners ya están añadidos fuera del DOMContentLoaded)
+
+            console.log("UnevennesX Page Initialized (v1.8 - Combined).");
         });
-
-        // ---------------------  PROTECCIÓN DE CONTRASEÑA  ------------------------
-        const passwordModal = document.getElementById('passwordModal');
-        const closeModalButton = document.getElementById('closeModal');
-        const submitPasswordButton = document.getElementById('submitPassword');
-        const passwordInput = document.getElementById('passwordInput');
-        const usernameInput = document.getElementById('usernameInput');
-        const ownerSection = document.getElementById('owner-section');
-        const ownerHeader = document.getElementById('owner-header');
-        const ownerLinks = document.getElementById('owner-links');
-        const passwordError = document.getElementById('passwordError');
-
-        const correctUsername = "UnevennesX";
-        const correctPassword = "EvannescencE";
-        let isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
-
-        function updateOwnerSectionVisibility() {
-             // Asegurarse que los elementos existen
-             if (!ownerSection || !ownerLinks) return;
-
-            if (isAuthenticated) {
-                ownerLinks.style.display = 'grid';
-                ownerSection.classList.add('active');
-            } else {
-                ownerLinks.style.display = 'none';
-                ownerSection.classList.remove('active');
-            }
-            ownerSection.style.display = 'block'; // Siempre visible
-        }
-
-        function checkPassword() {
-             // Asegurarse que los elementos existen
-            if (!usernameInput || !passwordInput || !passwordModal || !passwordError) return;
-
-            const enteredUsername = usernameInput.value;
-            const enteredPassword = passwordInput.value;
-
-            if (enteredUsername === correctUsername && enteredPassword === correctPassword) {
-                isAuthenticated = true;
-                localStorage.setItem('isAuthenticated', 'true');
-                passwordModal.style.display = 'none';
-                passwordError.style.display = 'none';
-                passwordInput.value = '';
-                updateOwnerSectionVisibility();
-            } else {
-                passwordError.style.display = 'block';
-                isAuthenticated = false;
-                localStorage.setItem('isAuthenticated', 'false');
-                updateOwnerSectionVisibility();
-            }
-        }
-
-        if (ownerHeader) { // Comprobar si existe
-            ownerHeader.addEventListener('click', function () {
-                if (!isAuthenticated) {
-                    if (passwordError) passwordError.style.display = 'none';
-                    if (passwordModal) passwordModal.style.display = 'block';
-                    if (passwordInput) passwordInput.focus();
-                } else {
-                     if (ownerSection) ownerSection.classList.toggle('active');
-                     if (ownerLinks && ownerSection) {
-                        ownerLinks.style.display = ownerSection.classList.contains('active') ? 'grid' : 'none';
-                    }
-                }
-            });
-        }
-
-        if (closeModalButton) closeModalButton.addEventListener('click', () => { if(passwordModal) passwordModal.style.display = 'none'; });
-        if (submitPasswordButton) submitPasswordButton.addEventListener('click', checkPassword);
-        if (passwordInput) {
-            passwordInput.addEventListener('keypress', function (event) {
-                if (event.key === 'Enter') checkPassword();
-            });
-        }
-
-        window.addEventListener('click', function (event) {
-            if (event.target === passwordModal && passwordModal) {
-                passwordModal.style.display = 'none';
-            }
-        });
-
-        // Al cargar la página, verificar y establecer el estado inicial
-        updateOwnerSectionVisibility();
-
     </script>
 
 </body>
