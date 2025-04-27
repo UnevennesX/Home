@@ -13,578 +13,214 @@
     <style>
         /* Estilos para la pantalla de carga */
         #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #151515;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            /* Asegura que esté por encima de todo */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #151515; color: #fff; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 1000;
         }
-
         .loading-spinner {
-            border: 8px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top: 8px solid #ff4081;
-            width: 60px;
-            height: 60px;
-            animation: spin 2s linear infinite;
-            margin-bottom: 20px;
+            border: 8px solid rgba(255, 255, 255, 0.3); border-radius: 50%;
+            border-top: 8px solid #ff4081; width: 60px; height: 60px;
+            animation: spin 2s linear infinite; margin-bottom: 20px;
         }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            background: #151515;
-            color: #ddd;
-            padding: 20px;
-            box-sizing: border-box;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            /* Oculta el scroll horizontal en el body */
+            font-family: 'Roboto', sans-serif; margin: 0; background: #151515;
+            color: #ddd; padding: 20px; box-sizing: border-box; min-height: 100vh;
+            display: flex; justify-content: center; align-items: center; overflow-x: hidden;
         }
-
         .container {
-            width: 100%;
-            max-width: 800px;
-            background: rgba(25, 25, 25, 0.97);
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            margin: auto;
-            animation: fadeInUp 0.5s ease-out;
+            width: 100%; max-width: 800px; background: rgba(25, 25, 25, 0.97);
+            border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px; margin: auto; animation: fadeInUp 0.5s ease-out;
         }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         h1 {
+            text-align: center; color: #fff; font-size: 1.8em;
+            margin: 15px 0 10px 0; /* Reducido margen inferior */
+            padding: 0 10px; animation: textGlow 2s infinite alternate;
+        }
+        @keyframes textGlow { 0% { text-shadow: 0 0 5px rgba(255, 107, 107, 0.3); } 100% { text-shadow: 0 0 15px rgba(255, 107, 107, 0.6); } }
+
+        /* --- ESTILOS PARA HORARIOS COMPACTOS --- */
+        #compact-clocks {
             text-align: center;
-            color: #fff;
-            font-size: 1.8em;
-            margin: 15px 0 25px 0;
-            padding: 0 10px;
-            animation: textGlow 2s infinite alternate;
+            font-size: 0.9em; /* Tamaño de fuente ligeramente reducido */
+            margin-bottom: 20px; /* Espacio antes del buscador */
+            padding: 8px 0; /* Padding vertical sutil */
+            border-top: 1px solid rgba(255, 255, 255, 0.08); /* Línea separadora superior */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Línea separadora inferior */
+            color: #bbb; /* Color ligeramente más suave */
         }
-
-        @keyframes textGlow {
-            0% {
-                text-shadow: 0 0 5px rgba(255, 107, 107, 0.3);
-            }
-
-            100% {
-                text-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
-            }
+        #compact-clocks p {
+            margin: 4px 0; /* Margen vertical reducido entre líneas */
+            display: flex; /* Usar flex para alinear iconos y texto */
+            justify-content: center; /* Centrar contenido horizontalmente */
+            align-items: center; /* Alinear verticalmente */
+            gap: 8px; /* Espacio entre elementos */
+            flex-wrap: wrap; /* Permitir que se envuelva en pantallas pequeñas */
         }
-
-        /* --- ESTILOS PARA HORARIO DE PROCESAMIENTO --- */
-        #processing-times-container {
-            background: rgba(40, 40, 40, 0.6);
-            border-radius: 8px;
-            padding: 15px 20px;
-            margin-bottom: 20px; /* Aumentado espacio inferior */
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: #ddd;
+        #compact-clocks i {
+             color: #ff6b6b; /* Color del icono */
+             font-size: 0.9em; /* Tamaño del icono */
         }
-
-        #processing-times-container h3 {
-            color: #ff6b6b; /* Color temático */
-            margin-top: 0;
-            margin-bottom: 10px;
-            text-align: center;
-            font-size: 1.1em;
+        #compact-clocks .location-label { /* Estilo para "Londres:", "LA:" */
+            color: #ddd; /* Color más brillante para la ubicación */
+            /* font-weight: bold; */ /* Opcional: poner en negrita */
         }
-
-        #processing-times-container p { /* Estilo para el texto introductorio */
-            margin-bottom: 10px;
-            font-size: 0.95em;
-            text-align: center;
+        #compact-clocks .processing-label { /* Estilo para "Proceso:" */
+             color: #aaa;
         }
-
-        #processing-times-container ul {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0;
-            text-align: center;
+        #compact-clocks .fixed-time { /* Estilo para "3 AM/PM", "9 AM/PM" */
+             color: #ccc;
+             font-style: italic;
         }
-
-         #processing-times-container li {
-            margin-bottom: 8px;
-            font-size: 0.95em;
-         }
-
-         #processing-times-container strong {
-             color: #eee;
-             display: inline-block; /* Para que el width funcione */
-             min-width: 160px; /* Ajusta según necesites para alinear (un poco más ancho para AM/PM) */
-             text-align: left;
-             padding-right: 5px; /* Espacio extra */
-         }
-
-        #current-times {
-            margin-top: 15px;
-            padding-top: 10px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9em;
-            text-align: center;
+        #compact-clocks .current-label { /* Estilo para "Actual:" */
+             color: #aaa;
+             margin-left: 5px; /* Pequeño espacio antes de "Actual:" */
         }
-
-         #current-times p {
-             margin: 5px 0;
-         }
-
-        #current-times span { /* El reloj */
+        #compact-clocks .live-time { /* El reloj en vivo */
             font-weight: bold;
             color: #fff;
-            background-color: rgba(0,0,0,0.3); /* Fondo sutil */
-            padding: 3px 8px; /* Un poco más de padding horizontal */
+            background-color: rgba(0,0,0,0.3);
+            padding: 2px 6px; /* Padding reducido */
             border-radius: 4px;
-            font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada */
+            font-family: 'Courier New', Courier, monospace;
             display: inline-block;
-            min-width: 95px; /* Ancho mínimo para evitar saltos con AM/PM */
+            min-width: 90px; /* Ajustar si es necesario */
             text-align: center;
+            font-size: 0.95em; /* Tamaño ligeramente ajustado */
+            line-height: 1.2; /* Ajuste de altura de línea */
         }
-        /* --- FIN ESTILOS HORARIO --- */
-
+        /* --- FIN ESTILOS HORARIOS COMPACTOS --- */
 
         .section {
-            margin-bottom: 12px;
-            border-radius: 8px;
-            background: rgba(40, 40, 40, 0.6);
-            overflow: hidden;
-            transition: all 0.3s ease;
+            margin-bottom: 12px; border-radius: 8px; background: rgba(40, 40, 40, 0.6);
+            overflow: hidden; transition: all 0.3s ease;
         }
-
-        .section:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
+        .section:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); }
         .section-header {
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: background 0.3s ease;
+            padding: 15px 20px; display: flex; align-items: center;
+            justify-content: space-between; cursor: pointer; transition: background 0.3s ease;
         }
-
-        .section-header:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
+        .section-header:hover { background: rgba(255, 255, 255, 0.05); }
         .section-title {
-            font-size: 1em;
-            color: #ff6b6b;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 1em; color: #ff6b6b; margin: 0; display: flex;
+            align-items: center; gap: 8px;
         }
-
-        .arrow {
-            transition: transform 0.3s ease;
-            font-size: 0.9em;
-            color: #888;
-        }
-
-        .section.active .arrow {
-            transform: rotate(180deg);
-        }
+        .arrow { transition: transform 0.3s ease; font-size: 0.9em; color: #888; }
+        .section.active .arrow { transform: rotate(180deg); }
 
         .grid-links {
-            display: none;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            padding: 15px 20px;
-            animation: slideDown 0.4s ease-out;
+            display: none; grid-template-columns: 1fr; gap: 12px;
+            padding: 15px 20px; animation: slideDown 0.4s ease-out;
         }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section.active .grid-links {
-            display: grid;
-        }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .section.active .grid-links { display: grid; }
 
         .link-button {
-            padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
-            color: #ddd;
-            text-decoration: none;
-            font-size: 0.95em;
-            transition: all 0.3s ease;
-            animation: fadeIn 0.5s ease-out;
+            padding: 15px 20px; background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px;
+            color: #ddd; text-decoration: none; font-size: 0.95em;
+            transition: all 0.3s ease; animation: fadeIn 0.5s ease-out;
         }
-
-        .link-button:hover {
-            background: rgba(255, 64, 129, 0.15);
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(255, 64, 129, 0.1);
-        }
+        .link-button:hover { background: rgba(255, 64, 129, 0.15); transform: translateY(-3px); box-shadow: 0 4px 10px rgba(255, 64, 129, 0.1); }
 
         .new-badge {
-            background: #ff4081;
-            color: white;
-            font-size: 0.65em;
-            padding: 3px 8px;
-            border-radius: 10px;
-            margin-left: 8px;
-            animation: pulse 1.5s infinite;
+            background: #ff4081; color: white; font-size: 0.65em; padding: 3px 8px;
+            border-radius: 10px; margin-left: 8px; animation: pulse 1.5s infinite;
         }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
         #search-input {
-            width: 100%;
-            padding: 12px; /* Aumentado padding */
-            margin-bottom: 20px; /* Aumentado espacio inferior */
-            border: 1px solid #444;
-            background-color: #222;
-            color: #ddd;
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 1em; /* Mejorado tamaño de fuente */
+            width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #444;
+            background-color: #222; color: #ddd; border-radius: 5px;
+            box-sizing: border-box; font-size: 1em;
         }
 
         /* Estilos para el modal de login */
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
+            display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%;
+            height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.4);
         }
-
-        /* Estilos para el contenido del modal */
         .modal-content {
-            background-color: #333;
-            color: #ddd;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            max-width: 500px;
-            width: 90%;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
+            background-color: #333; color: #ddd; margin: 15% auto; padding: 20px;
+            border: 1px solid #888; max-width: 500px; width: 90%; border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); text-align: center;
         }
-
-        /* Estilos para el título del modal */
-        .modal-content h2 {
-            margin-top: 0;
-            color: #ff6b6b;
-            font-size: 1.5em;
-            margin-bottom: 20px;
+        .modal-content h2 { margin-top: 0; color: #ff6b6b; font-size: 1.5em; margin-bottom: 20px; }
+        .modal-content label { display: block; margin-bottom: 5px; color: #fff; text-align: left; }
+        .modal-content input[type="text"], .modal-content input[type="password"] {
+            width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #444;
+            background-color: #222; color: #ddd; border-radius: 5px; box-sizing: border-box;
         }
-
-        /* Estilos para las etiquetas de los campos de entrada */
-        .modal-content label {
-            display: block;
-            margin-bottom: 5px;
-            color: #fff;
-            text-align: left;
-        }
-
-        /* Estilos para los campos de entrada */
-        .modal-content input[type="text"],
-        .modal-content input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #444;
-            background-color: #222;
-            color: #ddd;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        /* Estilos para el botón de envío */
         .modal-content button {
-            background-color: #ff4081;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
+            background-color: #ff4081; color: white; padding: 12px 20px; border: none;
+            border-radius: 5px; cursor: pointer; font-size: 1em; transition: background-color 0.3s ease;
         }
-
-        .modal-content button:hover {
-            background-color: #d43268;
-        }
-
-        /* Estilos para el mensaje de error */
-        .modal-content p#passwordError {
-            color: red;
-            display: none;
-            margin-top: 10px;
-        }
-
-        /* Estilos para el botón de cierre */
+        .modal-content button:hover { background-color: #d43268; }
+        .modal-content p#passwordError { color: red; display: none; margin-top: 10px; }
         .close-button {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+            color: #aaa; float: right; font-size: 28px; font-weight: bold;
         }
-
-        .close-button:hover,
-        .close-button:focus {
-            color: #fff;
-            text-decoration: none;
-            cursor: pointer;
-        }
+        .close-button:hover, .close-button:focus { color: #fff; text-decoration: none; cursor: pointer; }
 
         /* Estilos para el reproductor de música */
         #music-player-container {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 5px;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            position: fixed; bottom: 10px; left: 10px; background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px; border-radius: 5px; z-index: 100; display: flex;
+            align-items: center; gap: 10px;
         }
-
-        #track-name {
-            color: #fff;
-            font-size: 0.8em;
+        #track-name { color: #fff; font-size: 0.8em; }
+        #controls-container { display: flex; align-items: center; gap: 4px; }
+        #play-pause-button, #prev-button, #next-button {
+            background-color: transparent; color: #fff; border: none; padding: 4px;
+            font-size: 1em; cursor: pointer; transition: color 0.3s ease;
         }
-
-        #controls-container {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        #play-pause-button,
-        #prev-button,
-        #next-button {
-            background-color: transparent;
-            color: #fff;
-            border: none;
-            padding: 4px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        #play-pause-button:hover,
-        #prev-button:hover,
-        #next-button:hover {
-            color: #ff4081;
-        }
-
+        #play-pause-button:hover, #prev-button:hover, #next-button:hover { color: #ff4081; }
         #volume-slider {
-            width: 60px;
-            height: 4px;
-            background: #555;
-            outline: none;
-            opacity: 0.7;
-            transition: opacity .2s;
-            cursor: pointer;
-            border-radius: 3px;
+            width: 60px; height: 4px; background: #555; outline: none; opacity: 0.7;
+            transition: opacity .2s; cursor: pointer; border-radius: 3px;
         }
-
         #volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 8px;
-            height: 8px;
-            background: #fff;
-            cursor: pointer;
-            border-radius: 50%;
+            -webkit-appearance: none; appearance: none; width: 8px; height: 8px;
+            background: #fff; cursor: pointer; border-radius: 50%;
         }
-
-        #volume-slider:hover {
-            opacity: 1;
-        }
+        #volume-slider:hover { opacity: 1; }
 
         /* Estilos para pantallas más grandes */
         @media (min-width: 600px) {
-            .grid-links {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 15px;
-            }
-
-            .link-button {
-                padding: 18px 25px;
-            }
-             #processing-times-container li {
-                display: flex; /* Usar flex para alinear */
-                justify-content: center; /* Centrar elementos en la línea */
-                align-items: center; /* Alinear verticalmente */
-                gap: 10px; /* Espacio entre strong y el texto */
-             }
-             #processing-times-container strong {
-                 min-width: auto; /* Quitar ancho fijo en pantallas grandes */
-                 width: auto;
-                 text-align: right; /* Alinear a la derecha para que quede pegado al texto */
-             }
-
+            .grid-links { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+            .link-button { padding: 18px 25px; }
+             /* En pantallas grandes, podemos hacer que el flex no envuelva */
+            #compact-clocks p { flex-wrap: nowrap; }
         }
-
 
         /* Estilos específicos para pantallas más pequeñas (móviles) */
         @media (max-width: 599px) {
+            body { padding: 10px; overflow-x: hidden; }
+            .container { width: 95%; padding: 15px; }
+            h1 { font-size: 1.5em; margin: 10px 0 10px 0; }
 
-            body {
-                padding: 10px;
-                overflow-x: hidden;
-                /* Important: Hide horizontal scroll */
-            }
+            /* Ajustes para horarios compactos en móvil */
+            #compact-clocks { font-size: 0.85em; padding: 6px 0; margin-bottom: 15px;}
+            #compact-clocks p { gap: 5px; } /* Reducir gap */
+            #compact-clocks .live-time { min-width: 85px; font-size: 0.9em; }
 
-            .container {
-                width: 95%;
-                padding: 15px;
-            }
+            .section { margin-bottom: 10px; }
+            .section-header { padding: 12px 15px; }
+            .section-title { font-size: 0.9em; }
+            .grid-links { padding: 10px; gap: 8px; }
+            .link-button { padding: 10px 12px; font-size: 0.85em; }
+            #search-input { width: 100%; max-width: none; padding: 10px; margin-bottom: 15px; }
 
-            h1 {
-                font-size: 1.5em;
-                margin: 10px 0 15px 0;
-            }
-
-            /* Ajustes para sección de horario en móvil */
-            #processing-times-container {
-                padding: 12px 15px;
-            }
-            #processing-times-container h3 {
-                font-size: 1em;
-            }
-            #processing-times-container p,
-            #processing-times-container li,
-            #current-times {
-                 font-size: 0.9em;
-             }
-             #processing-times-container strong {
-                 min-width: 140px; /* Ajustar ancho si es necesario en móvil para AM/PM */
-             }
-            #current-times span {
-                min-width: 90px; /* Ajustar ancho reloj en móvil */
-            }
-
-
-            .section {
-                margin-bottom: 10px;
-            }
-
-            .section-header {
-                padding: 12px 15px;
-            }
-
-            .section-title {
-                font-size: 0.9em;
-            }
-
-            .grid-links {
-                padding: 10px;
-                gap: 8px;
-            }
-
-            .link-button {
-                padding: 10px 12px;
-                font-size: 0.85em;
-            }
-
-            #search-input {
-                width: 100%;
-                max-width: none;
-                padding: 10px;
-                margin-bottom: 15px;
-            }
-
-            #music-player-container {
-                bottom: 5px;
-                left: 5px;
-                padding: 5px;
-                gap: 5px;
-            }
-
-            #track-name {
-                font-size: 0.7em;
-            }
-
-            #controls-container {
-                gap: 3px;
-            }
-
-            #play-pause-button,
-            #prev-button,
-            #next-button {
-                padding: 3px;
-                font-size: 0.9em;
-            }
-
-            #volume-slider {
-                width: 40px;
-                height: 3px;
-            }
-
-            #volume-slider::-webkit-slider-thumb {
-                width: 6px;
-                height: 6px;
-            }
-
+            #music-player-container { bottom: 5px; left: 5px; padding: 5px; gap: 5px; }
+            #track-name { font-size: 0.7em; }
+            #controls-container { gap: 3px; }
+            #play-pause-button, #prev-button, #next-button { padding: 3px; font-size: 0.9em; }
+            #volume-slider { width: 40px; height: 3px; }
+            #volume-slider::-webkit-slider-thumb { width: 6px; height: 6px; }
         }
     </style>
 </head>
@@ -598,25 +234,27 @@
 
     <div class="container">
         <h1>
-            <a href="https://unevennesx.github.io/consultas/" class="link-button" style="display: inline-block; margin-bottom: 10px;"> <!-- Ajuste para que el h1 no ocupe todo el ancho -->
+            <a href="https://unevennesx.github.io/consultas/" class="link-button" style="display: inline-block;">
                UnevennesX 👻 EvannescencE
             </a>
         </h1>
 
-        <!-- === SECCIÓN DE HORARIO DE PROCESAMIENTO === -->
-        <div id="processing-times-container">
-            <h3><i class="fas fa-clock"></i> Horario de Procesamiento de Pagos</h3>
-            <p>Nuestro equipo procesa los pagos dos veces al día en los siguientes horarios fijos:</p>
-            <ul>
-                <li><strong><i class="fas fa-gbp-sign"></i> Hora de Londres:</strong> 3:00 AM y 3:00 PM</li> <!-- Cambiado a AM/PM -->
-                <li><strong><i class="fas fa-dollar-sign"></i> Hora de Los Ángeles:</strong> 9:00 AM y 9:00 PM</li> <!-- Cambiado a AM/PM -->
-            </ul>
-            <div id="current-times">
-                <p>Hora actual Londres: <span id="current-london-time">--:--:-- --</span></p>
-                <p>Hora actual Los Ángeles: <span id="current-la-time">--:--:-- --</span></p>
-            </div>
+        <!-- === SECCIÓN DE HORARIOS COMPACTA === -->
+        <div id="compact-clocks">
+            <p>
+                <i class="fas fa-city"></i> <span class="location-label">Londres:</span>
+                <span class="processing-label">Proceso</span> <span class="fixed-time">3 AM/PM</span> |
+                <span class="current-label">Actual:</span>
+                <span class="live-time" id="current-london-time">--:--:-- --</span>
+            </p>
+            <p>
+                <i class="fas fa-sun"></i> <span class="location-label">Los Ángeles:</span>
+                <span class="processing-label">Proceso</span> <span class="fixed-time">9 AM/PM</span> |
+                <span class="current-label">Actual:</span>
+                <span class="live-time" id="current-la-time">--:--:-- --</span>
+            </p>
         </div>
-        <!-- === FIN SECCIÓN HORARIO === -->
+        <!-- === FIN SECCIÓN HORARIOS COMPACTA === -->
 
         <input type="text" id="search-input" placeholder="Buscar proyectos...">
         <div id="no-results-message" style="display:none; color: white; text-align: center; margin-top: 10px;">No se
@@ -629,16 +267,11 @@
                 <div class="arrow">▼</div>
             </div>
             <div class="grid-links">
-                <a href="https://extension-de-pg.vercel.app/" class="link-button">
-                    Precio del $
-                    🤑🔥
-                </a>
+                <a href="https://extension-de-pg.vercel.app/" class="link-button">Precio del $ 🤑🔥</a>
                 <a href="https://mi-pg.vercel.app/login/" class="link-button">UnevennesX</a>
                 <a href="https://unevennesx.github.io/UserAgent/" class="link-button">User Agent 2.0</a>
                 <a href="https://unevennesx.github.io/Avanced-UnevennesX/" class="link-button">Avanced-EvanneS 🔥</a>
-                <a href="https://unevennesx.github.io/zipcodes/" class="link-button">
-                    Zipcode
-                </a>
+                <a href="https://unevennesx.github.io/zipcodes/" class="link-button">Zipcode</a>
             </div>
         </div>
 
@@ -648,53 +281,22 @@
                 <div class="section-title">🚀 Destacados</div>
                 <div class="arrow">▼</div>
             </div>
-            <div class="grid-links">
-                 <a href="https://unevennesx.github.io/-CheckLinks-/" class="link-button">
-                    ALL SAMPLICIOUS
-                </a>
-                <a href="https://unevennesx.github.io/app/" class="link-button">
-                    glimpsehere.com
-                </a>
-                <a href="https://unevennesx.github.io/zamplia/" class="link-button">
-                    Zamplia
-                </a>
+             <div class="grid-links">
+                 <a href="https://unevennesx.github.io/-CheckLinks-/" class="link-button">ALL SAMPLICIOUS</a>
+                <a href="https://unevennesx.github.io/app/" class="link-button">glimpsehere.com</a>
+                <a href="https://unevennesx.github.io/zamplia/" class="link-button">Zamplia</a>
                 <a href="https://unevennesx.github.io/UnevennesX/" class="link-button">Armador V1</a>
-                <a href="https://unevennesx.github.io/cube/" class="link-button">
-                    Sample-Cube
-                </a>
-                <a href="https://unevennesx.github.io/savanta/" class="link-button">
-                    Savanta
-                </a>
-                <a href="https://unevennesx.github.io/ISA/" class="link-button">
-                    ISA -
-                </a>
-                <a href="https://unevennesx.github.io/Survey.Dashmr/" class="link-button">
-                    Survey.Dashmr
-                </a>
-                <a href="https://unevennesx.github.io/Survey-Cint/" class="link-button">
-                    Sw.Cint
-                </a>
-                <a href="https://unevennesx.github.io/tsid/" class="link-button">
-                    TSID
-                </a>
-                <a href="https://unevennesx.github.io/rd-secured/" class="link-button">
-                    Rd.Secured👻
-                </a>
-                <a href="https://unevennesx.github.io/RD-SIN-rd_proj_ud-/" class="link-button">
-                    Rd.🚫"rd_proj_ud"🚫
-                </a>
-                <a href="https://unevennesx.github.io/All-Spectrum/" class="link-button">
-                    ALL Spectrum👾
-                    <span class="new-badge">Mejorado</span>
-                </a>
-                <a href="https://unevennesx.github.io/spectrum-corto/" class="link-button">
-                    ⚠️Spectrum Corto⚠️
-                    <span class="new-badge">Corto</span>
-                </a>
-                <a href="https://unevennesx.github.io/Survey.Emi/" class="link-button">
-                    Survey.Emi🤫
-                    <span class="new-badge">New</span>
-                </a>
+                <a href="https://unevennesx.github.io/cube/" class="link-button">Sample-Cube</a>
+                <a href="https://unevennesx.github.io/savanta/" class="link-button">Savanta</a>
+                <a href="https://unevennesx.github.io/ISA/" class="link-button">ISA -</a>
+                <a href="https://unevennesx.github.io/Survey.Dashmr/" class="link-button">Survey.Dashmr</a>
+                <a href="https://unevennesx.github.io/Survey-Cint/" class="link-button">Sw.Cint</a>
+                <a href="https://unevennesx.github.io/tsid/" class="link-button">TSID</a>
+                <a href="https://unevennesx.github.io/rd-secured/" class="link-button">Rd.Secured👻</a>
+                <a href="https://unevennesx.github.io/RD-SIN-rd_proj_ud-/" class="link-button">Rd.🚫"rd_proj_ud"🚫</a>
+                <a href="https://unevennesx.github.io/All-Spectrum/" class="link-button">ALL Spectrum👾 <span class="new-badge">Mejorado</span></a>
+                <a href="https://unevennesx.github.io/spectrum-corto/" class="link-button">⚠️Spectrum Corto⚠️ <span class="new-badge">Corto</span></a>
+                <a href="https://unevennesx.github.io/Survey.Emi/" class="link-button">Survey.Emi🤫 <span class="new-badge">New</span></a>
             </div>
         </div>
 
@@ -705,13 +307,9 @@
                 <div class="arrow">▼</div>
             </div>
             <div class="grid-links">
-                <a href="https://unevennesx.github.io/fakename/" class="link-button">
-                    Fake-Name
-                </a>
+                <a href="https://unevennesx.github.io/fakename/" class="link-button">Fake-Name</a>
                 <a href="https://unevennesx.github.io/cpx-tap-bit/" class="link-button">CPX</a>
-                <a href="https://unevennesx.github.io/calculadora/" class="link-button">
-                    Calculadora
-                </a>
+                <a href="https://unevennesx.github.io/calculadora/" class="link-button">Calculadora</a>
             </div>
         </div>
 
@@ -723,12 +321,8 @@
             </div>
             <div class="grid-links">
                 <a href="https://unevennesx.github.io/UID-ONLY/" class="link-button">Bitlabs</a>
-                <a href="https://unevennesx.github.io/userv1/" class="link-button">
-                    User Agent 1.0
-                </a>
-                <a href="https://unevennesx.github.io/agg-consultas/" class="link-button">
-                    Admin de consultas
-                </a>
+                <a href="https://unevennesx.github.io/userv1/" class="link-button">User Agent 1.0</a>
+                <a href="https://unevennesx.github.io/agg-consultas/" class="link-button">Admin de consultas</a>
             </div>
         </div>
 
@@ -740,18 +334,9 @@
                 <div class="arrow">▼</div>
             </div>
             <div class="grid-links" id="owner-links">
-                 <a href="https://unevennesx.github.io/user-owner/" class="link-button">
-                    UserAgent V3
-                    👑
-                </a>
-                <a href="https://mi-pg.vercel.app/extraer-links/" class="link-button">
-                    Links UnevennesX
-                    👑
-                </a>
-                <a href="https://mi-pg.vercel.app/offline_backup/manage/" class="link-button">
-                    Backup UnevennesX
-                    👑
-                </a>
+                 <a href="https://unevennesx.github.io/user-owner/" class="link-button">UserAgent V3 👑</a>
+                <a href="https://mi-pg.vercel.app/extraer-links/" class="link-button">Links UnevennesX 👑</a>
+                <a href="https://mi-pg.vercel.app/offline_backup/manage/" class="link-button">Backup UnevennesX 👑</a>
             </div>
         </div>
 
@@ -786,8 +371,49 @@
         </div>
     </div>
 
-
     <script>
+        // --- [ TODO EL JAVASCRIPT ANTERIOR SIGUE AQUÍ EXACTAMENTE IGUAL ] ---
+        // (Incluyendo normalizeString, event listeners de secciones, búsqueda,
+        // reproductor de música, pantalla de carga, protección de contraseña)
+
+        // --- [ SOLO ASEGÚRATE DE QUE LA PARTE DEL RELOJ SIGA PRESENTE ] ---
+
+        // ---------- FUNCIONALIDAD RELOJ EN TIEMPO REAL ----------
+        const londonTimeSpan = document.getElementById('current-london-time');
+        const laTimeSpan = document.getElementById('current-la-time');
+
+        function updateTimes() {
+            const now = new Date();
+            const timeOptions = {
+                hour: '2-digit', minute: '2-digit', second: '2-digit',
+                hour12: true, // Formato AM/PM
+            };
+
+            try {
+                // Hora Londres (Europe/London) - Usando 'en-US' para asegurar AM/PM consistentemente
+                const londonTimeStr = now.toLocaleTimeString('en-US', { ...timeOptions, timeZone: 'Europe/London' });
+                londonTimeSpan.textContent = londonTimeStr;
+
+                // Hora Los Angeles (America/Los_Angeles)
+                const laTimeStr = now.toLocaleTimeString('en-US', { ...timeOptions, timeZone: 'America/Los_Angeles' });
+                laTimeSpan.textContent = laTimeStr;
+
+            } catch (error) {
+                 console.error("Error updating time:", error);
+                 // Comprobar si los elementos existen antes de intentar actualizar
+                 if (londonTimeSpan) londonTimeSpan.textContent = "Error";
+                 if (laTimeSpan) laTimeSpan.textContent = "Error";
+            }
+        }
+
+        // Actualiza la hora cada segundo
+        let clockInterval = setInterval(updateTimes, 1000);
+
+        // Llama una vez al inicio (después de cargar el DOM)
+         document.addEventListener('DOMContentLoaded', updateTimes); // Más seguro que onload para esto
+
+        // --- [ EL RESTO DEL JAVASCRIPT ANTERIOR CONTINÚA AQUÍ ] ---
+        // (Funciones del reproductor, modal, etc.)
         // Función para eliminar acentos y convertir a minúsculas
         function normalizeString(str) {
             return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -850,7 +476,8 @@
              document.querySelectorAll('.link-button').forEach(link => {
                  // Ocultar solo los enlaces que no estén dentro de la sección Owner autenticada
                  const ownerSection = document.getElementById('owner-section');
-                 if (!ownerSection.contains(link) || !isAuthenticated) {
+                 // Asegurarse de que ownerSection no sea null antes de usar contains
+                 if (!ownerSection || !ownerSection.contains(link) || !isAuthenticated) {
                      link.style.display = 'none';
                  } else {
                      link.style.display = 'block'; // O 'grid'
@@ -874,7 +501,8 @@
                 } else if (!linkText.includes(searchTerm)) {
                      // Ocultar solo si no coincide Y no está en la sección Owner autenticada (ya manejado arriba)
                      const ownerSection = document.getElementById('owner-section');
-                     if (section && (!ownerSection.contains(link) || !isAuthenticated)) {
+                     // Asegurarse de que ownerSection no sea null antes de usar contains
+                    if (section && (!ownerSection || !ownerSection.contains(link) || !isAuthenticated)) {
                         link.style.display = 'none';
                      }
                 }
@@ -903,115 +531,109 @@
         ];
 
         function loadTrack(trackIndex) {
-            if (trackIndex < 0) {
-                trackIndex = tracks.length - 1;
-            } else if (trackIndex >= tracks.length) {
-                trackIndex = 0;
-            }
+            if (trackIndex < 0) trackIndex = tracks.length - 1;
+            else if (trackIndex >= tracks.length) trackIndex = 0;
+
             currentTrackIndex = trackIndex;
-            // Solo cambia el src si es diferente para evitar recargas innecesarias
-            if (audio.currentSrc !== tracks[trackIndex].src) {
-                 audio.src = tracks[trackIndex].src;
-                 audio.load(); // Carga la nueva fuente
-            }
-            trackNameDisplay.textContent = tracks[trackIndex].name;
+             // Verifica si la fuente es diferente antes de cambiar y cargar
+             const newSrc = tracks[currentTrackIndex].src;
+             // Normaliza las rutas por si acaso (ej. ./file.mp3 vs file.mp3)
+             const currentSrcAbs = audio.currentSrc ? new URL(audio.currentSrc, window.location.href).pathname : null;
+             const newSrcAbs = new URL(newSrc, window.location.href).pathname;
+
+             if (audio.src === '' || currentSrcAbs !== newSrcAbs) {
+                 audio.src = newSrc;
+                 audio.load(); // Carga la nueva fuente solo si es necesario
+             }
+            if(trackNameDisplay) trackNameDisplay.textContent = tracks[currentTrackIndex].name;
             localStorage.setItem('currentTrackIndex', currentTrackIndex);
         }
 
 
-        playPauseButton.addEventListener('click', () => {
-            if (isPlaying) {
-                audio.pause();
-                playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
-                localStorage.setItem('musicState', 'paused');
-            } else {
-                // Asegurarse de que la pista correcta está cargada antes de reproducir
-                loadTrack(currentTrackIndex);
-                audio.play().catch(error => console.error("Error playing audio:", error)); // Manejar posible error de reproducción
-                playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
-                localStorage.setItem('musicState', 'playing');
-            }
-            isPlaying = !isPlaying;
-        });
+        if(playPauseButton) {
+            playPauseButton.addEventListener('click', () => {
+                if (isPlaying) {
+                    audio.pause();
+                    playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+                    localStorage.setItem('musicState', 'paused');
+                } else {
+                    loadTrack(currentTrackIndex); // Asegurar carga
+                    audio.play().then(() => {
+                         playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
+                         localStorage.setItem('musicState', 'playing');
+                    }).catch(error => {
+                        console.error("Error playing audio:", error);
+                        isPlaying = !isPlaying; // Revertir estado si falla
+                    });
+                }
+                isPlaying = !isPlaying;
+            });
+        }
 
-        prevButton.addEventListener('click', () => {
-            loadTrack(currentTrackIndex - 1);
-            if (isPlaying) {
-                audio.play().catch(error => console.error("Error playing audio:", error));
-            }
-        });
+        if(prevButton) {
+            prevButton.addEventListener('click', () => {
+                loadTrack(currentTrackIndex - 1);
+                if (isPlaying) {
+                    audio.play().catch(error => console.error("Error playing audio:", error));
+                }
+            });
+        }
 
-        nextButton.addEventListener('click', () => {
-            loadTrack(currentTrackIndex + 1);
-            if (isPlaying) {
-                audio.play().catch(error => console.error("Error playing audio:", error));
-            }
-        });
+       if(nextButton) {
+            nextButton.addEventListener('click', () => {
+                loadTrack(currentTrackIndex + 1);
+                if (isPlaying) {
+                    audio.play().catch(error => console.error("Error playing audio:", error));
+                }
+            });
+        }
 
-        volumeSlider.addEventListener('input', () => {
-            audio.volume = volumeSlider.value;
-            localStorage.setItem('volume', volumeSlider.value);
-        });
+        if(volumeSlider) {
+            volumeSlider.addEventListener('input', () => {
+                audio.volume = volumeSlider.value;
+                localStorage.setItem('volume', volumeSlider.value);
+            });
+        }
 
         audio.addEventListener('ended', () => {
-             // Solo avanza si está reproduciendo activamente
              if (isPlaying) {
                  loadTrack(currentTrackIndex + 1);
                  audio.play().catch(error => console.error("Error playing audio on ended:", error));
              } else {
-                 // Si no estaba reproduciendo, solo carga la siguiente pista pero no la reproduce
                  loadTrack(currentTrackIndex + 1);
              }
         });
 
         function loadSavedState() {
-            const savedMusicState = localStorage.getItem('musicState');
-            // isPlaying = savedMusicState === 'playing'; // No establecer isPlaying aquí, se hace con la interacción
-
             const savedTrackIndex = localStorage.getItem('currentTrackIndex');
-            if (savedTrackIndex !== null) { // Verificar que no sea null
-                currentTrackIndex = parseInt(savedTrackIndex, 10); // Usar base 10
-            } else {
-                currentTrackIndex = 0; // Valor por defecto
-            }
+            currentTrackIndex = savedTrackIndex !== null ? parseInt(savedTrackIndex, 10) : 0;
 
             const savedVolume = localStorage.getItem('volume');
-            if (savedVolume !== null) {
-                volumeSlider.value = savedVolume;
-                audio.volume = savedVolume;
-            } else {
-                volumeSlider.value = 0.1;
-                audio.volume = 0.1;
-            }
+             if (volumeSlider) { // Comprobar si existe
+                 volumeSlider.value = savedVolume !== null ? savedVolume : 0.1;
+             }
+             audio.volume = savedVolume !== null ? savedVolume : 0.1; // Ajustar volumen directamente
 
-            // No cambiar el icono de play/pause aquí, se hará al interactuar
-            playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
-
+             if (playPauseButton) { // Comprobar si existe
+                playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+             }
             loadTrack(currentTrackIndex); // Carga la pista guardada
         }
 
-        // Cargar estado inicial sin intentar reproducir
         loadSavedState();
 
-        // Iniciar reproducción solo después de la interacción del usuario
         let hasInteracted = false;
         function initialUserInteraction() {
             if (!hasInteracted) {
-                hasInteracted = true; // Marcar interacción
-
-                // Intentar reproducir si el estado guardado era 'playing'
+                hasInteracted = true;
                 const savedMusicState = localStorage.getItem('musicState');
-                if (savedMusicState === 'playing') {
-                    // Llama al evento click del botón para manejar la lógica de play/pause
+                if (savedMusicState === 'playing' && playPauseButton) {
                     playPauseButton.click();
                 }
-
-                // Remover los listeners para que no se ejecuten múltiples veces
                 document.removeEventListener('click', initialUserInteraction);
                 document.removeEventListener('touchstart', initialUserInteraction);
             }
         }
-        // Añadir listeners para la primera interacción (click o toque)
         document.addEventListener('click', initialUserInteraction);
         document.addEventListener('touchstart', initialUserInteraction);
 
@@ -1019,15 +641,14 @@
 
         window.addEventListener('load', function () {
             const loadingScreen = document.getElementById('loading-screen');
-            loadingScreen.style.transition = "opacity 0.5s";
-            loadingScreen.style.opacity = "0";
-
-            loadingScreen.addEventListener('transitionend', () => {
-                loadingScreen.style.display = 'none';
-            });
-
-            // Llama a la actualización inicial de la hora aquí también, después de que cargue la página
-            updateTimes();
+            if (loadingScreen) { // Comprobar si existe
+                loadingScreen.style.transition = "opacity 0.5s";
+                loadingScreen.style.opacity = "0";
+                loadingScreen.addEventListener('transitionend', () => {
+                    loadingScreen.style.display = 'none';
+                });
+            }
+            // La llamada inicial a updateTimes se hace con DOMContentLoaded ahora
         });
 
         // ---------------------  PROTECCIÓN DE CONTRASEÑA  ------------------------
@@ -1039,28 +660,30 @@
         const ownerSection = document.getElementById('owner-section');
         const ownerHeader = document.getElementById('owner-header');
         const ownerLinks = document.getElementById('owner-links');
-        const passwordError = document.getElementById('passwordError'); // Referencia al mensaje de error
+        const passwordError = document.getElementById('passwordError');
 
         const correctUsername = "UnevennesX";
         const correctPassword = "EvannescencE";
         let isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
 
-        // Función para manejar el estado visual de la sección Owner
         function updateOwnerSectionVisibility() {
+             // Asegurarse que los elementos existen
+             if (!ownerSection || !ownerLinks) return;
+
             if (isAuthenticated) {
-                ownerLinks.style.display = 'grid'; // Mostrar links
-                ownerSection.classList.add('active'); // Asegurarse que la sección está marcada como activa
+                ownerLinks.style.display = 'grid';
+                ownerSection.classList.add('active');
             } else {
-                ownerLinks.style.display = 'none'; // Ocultar links
-                ownerSection.classList.remove('active'); // Quitar estado activo si no está autenticado
+                ownerLinks.style.display = 'none';
+                ownerSection.classList.remove('active');
             }
-             // Siempre mostrar la sección Owner en sí (el contenedor)
-            ownerSection.style.display = 'block';
+            ownerSection.style.display = 'block'; // Siempre visible
         }
 
-
-        // Función para verificar la contraseña
         function checkPassword() {
+             // Asegurarse que los elementos existen
+            if (!usernameInput || !passwordInput || !passwordModal || !passwordError) return;
+
             const enteredUsername = usernameInput.value;
             const enteredPassword = passwordInput.value;
 
@@ -1068,94 +691,50 @@
                 isAuthenticated = true;
                 localStorage.setItem('isAuthenticated', 'true');
                 passwordModal.style.display = 'none';
-                passwordError.style.display = 'none'; // Ocultar error
-                passwordInput.value = ''; // Limpiar campo contraseña
-                updateOwnerSectionVisibility(); // Actualizar visibilidad
+                passwordError.style.display = 'none';
+                passwordInput.value = '';
+                updateOwnerSectionVisibility();
             } else {
-                passwordError.style.display = 'block'; // Mostrar error
-                isAuthenticated = false; // Asegurar que no esté autenticado
-                localStorage.setItem('isAuthenticated', 'false'); // Guardar estado no autenticado
-                updateOwnerSectionVisibility(); // Actualizar (ocultará los links)
+                passwordError.style.display = 'block';
+                isAuthenticated = false;
+                localStorage.setItem('isAuthenticated', 'false');
+                updateOwnerSectionVisibility();
             }
         }
 
-        // Comportamiento al hacer clic en el encabezado de Owner
-        ownerHeader.addEventListener('click', function () {
-            if (!isAuthenticated) {
-                passwordError.style.display = 'none'; // Ocultar error previo al mostrar modal
-                passwordModal.style.display = 'block'; // Mostrar modal si no está autenticado
-                passwordInput.focus(); // Poner foco en el input de contraseña
-            } else {
-                // Si está autenticado, simplemente alterna la visibilidad de los links
-                ownerSection.classList.toggle('active');
-                ownerLinks.style.display = ownerSection.classList.contains('active') ? 'grid' : 'none';
-            }
-        });
+        if (ownerHeader) { // Comprobar si existe
+            ownerHeader.addEventListener('click', function () {
+                if (!isAuthenticated) {
+                    if (passwordError) passwordError.style.display = 'none';
+                    if (passwordModal) passwordModal.style.display = 'block';
+                    if (passwordInput) passwordInput.focus();
+                } else {
+                     if (ownerSection) ownerSection.classList.toggle('active');
+                     if (ownerLinks && ownerSection) {
+                        ownerLinks.style.display = ownerSection.classList.contains('active') ? 'grid' : 'none';
+                    }
+                }
+            });
+        }
 
+        if (closeModalButton) closeModalButton.addEventListener('click', () => { if(passwordModal) passwordModal.style.display = 'none'; });
+        if (submitPasswordButton) submitPasswordButton.addEventListener('click', checkPassword);
+        if (passwordInput) {
+            passwordInput.addEventListener('keypress', function (event) {
+                if (event.key === 'Enter') checkPassword();
+            });
+        }
 
-        // Cerrar el modal con el botón de cerrar
-        closeModalButton.addEventListener('click', function () {
-            passwordModal.style.display = 'none';
-        });
-
-        // Enviar la contraseña al presionar el botón
-        submitPasswordButton.addEventListener('click', checkPassword);
-
-        // Enviar la contraseña al presionar Enter en el campo de contraseña
-        passwordInput.addEventListener('keypress', function (event) {
-            if (event.key === 'Enter') {
-                checkPassword();
-            }
-        });
-
-        // Cerrar el modal si se hace clic fuera del contenido del modal
         window.addEventListener('click', function (event) {
-            if (event.target === passwordModal) {
+            if (event.target === passwordModal && passwordModal) {
                 passwordModal.style.display = 'none';
             }
         });
 
-        // Al cargar la página, verificar y establecer el estado inicial de la sección Owner
+        // Al cargar la página, verificar y establecer el estado inicial
         updateOwnerSectionVisibility();
-
-        // ---------- FUNCIONALIDAD RELOJ EN TIEMPO REAL ----------
-        const londonTimeSpan = document.getElementById('current-london-time');
-        const laTimeSpan = document.getElementById('current-la-time');
-
-        function updateTimes() {
-            const now = new Date();
-
-            const timeOptions = {
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: true, // <<---- CAMBIO AQUÍ: true para formato AM/PM
-                // timeZoneName: 'short' // Puedes quitar o mantener esto según preferencia
-            };
-
-            try {
-                // Hora Londres (Europe/London) - Usando 'en-US' para asegurar AM/PM consistentemente
-                const londonTimeStr = now.toLocaleTimeString('en-US', { ...timeOptions, timeZone: 'Europe/London' });
-                londonTimeSpan.textContent = londonTimeStr; //.replace(/ (GMT|BST).*/,''); // El replace de zona horaria es menos necesario con AM/PM
-
-                // Hora Los Angeles (America/Los_Angeles)
-                const laTimeStr = now.toLocaleTimeString('en-US', { ...timeOptions, timeZone: 'America/Los_Angeles' });
-                laTimeSpan.textContent = laTimeStr; // .replace(/ (PST|PDT).*/, ''); // El replace de zona horaria es menos necesario con AM/PM
-
-            } catch (error) {
-                 console.error("Error updating time:", error);
-                 londonTimeSpan.textContent = "Error";
-                 laTimeSpan.textContent = "Error";
-            }
-        }
-
-        // Actualiza la hora cada segundo
-        setInterval(updateTimes, 1000);
-        // Llama una vez al inicio (ya se llama en window.onload)
-        // updateTimes();
 
     </script>
 
 </body>
-
 </html>
