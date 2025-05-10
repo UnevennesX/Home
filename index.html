@@ -4,150 +4,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EvannescencE</title> <!-- Título Actualizado -->
+    <title>✨Evanes-Uneven✨</title>
     <link rel="icon" type="image/png"
         href="https://cdn.dribbble.com/users/7549673/screenshots/17206704/media/1210a9d0ec8af427967e735935861eeb.png?resize=400x300&vertical=center">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
-        /* Estilos CSS (sin cambios respecto a v1.16) */
-        #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #151515; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; transition: opacity 0.5s ease-out; }
-        #loading-screen.hidden { opacity: 0; pointer-events: none; }
-        .loading-spinner { border: 8px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top: 8px solid #ff4081; width: 60px; height: 60px; animation: spin 2s linear infinite; margin-bottom: 20px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        body { font-family: 'Roboto', sans-serif; margin: 0; background: #151515; color: #ddd; padding: 20px; box-sizing: border-box; min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow-x: hidden; }
-        .container { width: 100%; max-width: 800px; background: rgba(25, 25, 25, 0.97); border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); padding: 20px; margin: auto; animation: fadeInUp 0.5s ease-out; position: relative; z-index: 10; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        h1 { text-align: center; color: #fff; font-size: 1.8em; margin: 15px 0 10px 0; padding: 0 10px; animation: textGlow 2s infinite alternate; }
-        @keyframes textGlow { 0% { text-shadow: 0 0 5px rgba(255, 107, 107, 0.3); } 100% { text-shadow: 0 0 15px rgba(255, 107, 107, 0.6); } }
-        h1 a.link-button { color: inherit; text-decoration: none; background: none !important; border: none !important; padding: 5px 10px; display: inline !important; transition: color 0.3s; box-shadow: none !important; animation: none !important; transform: none !important; }
-        h1 a.link-button:hover { color: #ff4081; background: none !important; }
-        #status-monitor { text-align: center; font-size: 0.9em; margin-bottom: 20px; padding: 8px 0; border-top: 1px solid rgba(255, 255, 255, 0.08); border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #bbb; }
-        #status-monitor p.status-line { margin: 5px 0; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; }
-        .status-line .left-group, .status-line .right-group { display: flex; align-items: center; gap: 6px; flex-shrink: 0; flex-wrap: nowrap; }
-        #status-monitor i.location-icon { color: #ff6b6b; font-size: 1em; margin-right: 2px;}
-        #status-monitor .location-label { color: #ddd; font-weight: bold;}
-        #status-monitor .live-time { font-weight: bold; color: #fff; background-color: rgba(0,0,0,0.3); padding: 1px 5px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; min-width: 105px; text-align: center; font-size: 0.95em; line-height: 1.2; margin: 0 4px; }
-        #status-monitor .fixed-schedule { font-size: 0.9em; color: #a0a0a0; font-style: italic; margin-right: 5px; }
-        #status-monitor .status-dot { width: 10px; height: 10px; border-radius: 50%; background-color: #555; box-shadow: 0 0 4px rgba(0,0,0,.5); transition: background-color .5s ease,box-shadow .5s ease; display: inline-block; vertical-align: middle; margin-left: 4px; }
-        #status-monitor .status-dot.status-green { background-color: #4CAF50; box-shadow: 0 0 6px #4CAF50; }
-        #status-monitor .status-dot.status-red { background-color: #F44336; box-shadow: 0 0 6px #F44336; }
-        #status-monitor .status-text { font-weight: bold; transition: color .5s ease; margin-right: 8px; min-width: 70px; text-align: left; }
-        #status-monitor .status-text.status-green { color: #81C784; }
-        #status-monitor .status-text.status-red { color: #E57373; }
-        #status-monitor .countdown-label { color: #aaa; font-style: italic; font-size: 0.9em; min-width: 105px; text-align: right; margin-right: 3px; }
-        #status-monitor .countdown-timer { color: #64b5f6; background-color: rgba(0,0,0,0.3); padding: 1px 5px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; min-width: 70px; text-align: center; font-size: 0.95em; font-weight: bold; margin-left: 0px; }
-        .section { margin-bottom: 12px; border-radius: 8px; background: rgba(40, 40, 40, 0.6); overflow: hidden; transition: all 0.3s ease; }
-        .section:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); }
-        .section-header { padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.3s ease; }
-        .section-header:hover { background: rgba(255, 255, 255, 0.05); }
-        .section-title { font-size: 1em; color: #ff6b6b; margin: 0; display: flex; align-items: center; gap: 8px; }
-        .arrow { transition: transform 0.3s ease; font-size: 0.9em; color: #888; }
-        .section.active .arrow { transform: rotate(180deg); }
-        .grid-links { display: none; grid-template-columns: 1fr; gap: 12px; padding: 15px 20px; animation: slideDown 0.4s ease-out; }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        .section.active .grid-links { display: grid; }
-        .link-button { padding: 15px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; color: #ddd; text-decoration: none; font-size: 0.95em; transition: all 0.3s ease; animation: fadeIn 0.5s ease-out; display: block; }
-        .link-button:hover { background: rgba(255, 64, 129, 0.15); transform: translateY(-3px); box-shadow: 0 4px 10px rgba(255, 64, 129, 0.1); }
-        .new-badge { background: #ff4081; color: white; font-size: 0.65em; padding: 3px 8px; border-radius: 10px; margin-left: 8px; animation: pulse 1.5s infinite; display: inline-block; vertical-align: middle; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-        #search-input { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #444; background-color: #222; color: #ddd; border-radius: 5px; box-sizing: border-box; font-size: 1em; }
-        .modal { display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.4); }
-        .modal-content { background-color: #333; color: #ddd; margin: 15% auto; padding: 20px; border: 1px solid #888; max-width: 500px; width: 90%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); text-align: center; }
-        .modal-content h2 { margin-top: 0; color: #ff6b6b; font-size: 1.5em; margin-bottom: 20px; }
-        .modal-content label { display: block; margin-bottom: 5px; color: #fff; text-align: left; }
-        .modal-content input[type="text"], .modal-content input[type="password"] { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #444; background-color: #222; color: #ddd; border-radius: 5px; box-sizing: border-box; }
-        .modal-content button { background-color: #ff4081; color: white; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; transition: background-color 0.3s ease; }
-        .modal-content button:hover { background-color: #d43268; }
-        .modal-content p#passwordError { color: red; display: none; margin-top: 10px; }
-        .close-button { color: #aaa; float: right; font-size: 28px; font-weight: bold; }
-        .close-button:hover, .close-button:focus { color: #fff; text-decoration: none; cursor: pointer; }
-        #music-player-container { position: fixed; bottom: 10px; left: 10px; background-color: rgba(0, 0, 0, 0.5); padding: 10px; border-radius: 5px; z-index: 100; display: flex; align-items: center; gap: 10px; }
-        #track-name { color: #fff; font-size: 0.8em; }
-        #controls-container { display: flex; align-items: center; gap: 4px; }
-        #play-pause-button, #prev-button, #next-button { background-color: transparent; color: #fff; border: none; padding: 4px; font-size: 1em; cursor: pointer; transition: color 0.3s ease; }
-        #play-pause-button:hover, #prev-button:hover, #next-button:hover { color: #ff4081; }
-        #volume-slider { width: 60px; height: 4px; background: #555; outline: none; opacity: 0.7; transition: opacity .2s; cursor: pointer; border-radius: 3px; -webkit-appearance: none; appearance: none; vertical-align: middle; }
-        #volume-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 10px; height: 10px; background: #fff; cursor: pointer; border-radius: 50%; }
-        #volume-slider::-moz-range-thumb { width: 10px; height: 10px; background: #fff; cursor: pointer; border-radius: 50%; border: none; }
+        :root {
+            --bg-color: #151515;
+            --container-bg: rgba(25, 25, 25, 0.97);
+            --section-bg: rgba(40, 40, 40, 0.6);
+            --primary-accent: #ff4081;
+            --primary-accent-hover: #d43268;
+            --section-title-color: #ff6b6b;
+            --text-color: #ddd;
+            --text-color-light: #fff;
+            --text-muted-color: #888;
+            --border-color-light: rgba(255, 255, 255, 0.08);
+            --border-color-dark: #444;
+            --input-bg: #222;
+            --link-button-bg: rgba(255, 255, 255, 0.05);
+            --link-button-hover-bg: rgba(255, 64, 129, 0.15);
+            --modal-bg: #333;
+            --modal-border: #888;
+            --shadow-color-light: rgba(0, 0, 0, 0.2);
+            --shadow-color-medium: rgba(0, 0, 0, 0.3);
+            --h1-glow-start: rgba(255, 107, 107, 0.3);
+            --h1-glow-end: rgba(255, 107, 107, 0.6);
+            --font-family: 'Roboto', sans-serif;
+            --font-size-base: 1rem;
+            --font-size-sm: 0.875rem;
+            --font-size-md: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-h1: 1.8rem;
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --border-radius-sm: 0.25rem;
+            --border-radius-md: 0.5rem;
+            --border-radius-lg: 0.75rem;
+        }
+        html { font-size: var(--font-size-base); height: 100%; }
+        
+        #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-color); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10000; opacity: 1; visibility: visible; overflow: hidden; }
+        .loading-title-container { perspective: 800px; text-align: center; position: relative; width: 90%; max-width: 600px; }
+        .loading-title { font-family: 'Roboto', sans-serif; font-weight: 900; font-size: clamp(2.5rem, 8vw, 4.5rem); color: var(--text-color-light); display: flex; justify-content: center; flex-wrap: nowrap; will-change: transform, opacity; }
+        .loading-title span.char { display: inline-block; opacity: 0; transform: translateY(30px) scale(0.8); will-change: transform, opacity; margin: 0 0.03em; color: var(--text-color-light); }
+        #loading-title-unevennesx { opacity: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) translateY(20px); width: 100%; }
+
+        body { font-family: var(--font-family); font-size: var(--font-size-md); line-height: 1.6; margin: 0; background-color: var(--bg-color); color: var(--text-color); padding: var(--spacing-sm); box-sizing: border-box; min-height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow-x: hidden; opacity: 0; }
+        .gsap-hidden { opacity: 0; visibility: hidden; }
+        .container { width: 100%; max-width: 50rem; background: var(--container-bg); border-radius: var(--border-radius-lg); box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light); padding: var(--spacing-lg) var(--spacing-xl); margin: var(--spacing-sm) auto; position: relative; z-index: 10; border: 1px solid var(--border-color-light); }
+        h1 { text-align: center; color: var(--text-color-light); font-size: var(--font-size-h1); font-weight: 500; margin: var(--spacing-md) 0 var(--spacing-lg); padding: var(--spacing-sm); cursor: pointer; display: inline-block; position: relative; left: 50%; transform: translateX(-50%); transition: color 0.3s ease; }
+        h1 .title-ghost { opacity: 0.7; transition: opacity 0.3s ease, transform 0.3s ease; display: inline-block; }
+        h1:hover .title-ghost { opacity: 1; transform: translateY(-0.125rem) scale(1.1); }
+        h1:hover { color: var(--primary-accent); }
+        .section { margin-bottom: var(--spacing-sm); border-radius: var(--border-radius-md); background: var(--section-bg); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .section:hover { transform: translateY(-0.125rem); box-shadow: 0 0.25rem 0.9375rem var(--shadow-color-medium); }
+        .section-header { padding: 0.75rem 1.25rem; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background-color 0.3s ease; }
+        .section-header:hover { background-color: rgba(255, 255, 255, 0.05); }
+        .section-title { font-size: 1em; font-weight: 500; color: var(--section-title-color); margin: 0; display: flex; align-items: center; gap: var(--spacing-sm); }
+        .section-title .icon { width: 1.25em; height: 1.25em; stroke-width: 2.2; color: currentColor; }
+        .section-title .icon.principales { color: var(--primary-accent); } .section-title .icon.destacados { color: #4dabf7; } .section-title .icon.tecnicas { color: #fab005; } .section-title .icon.utilidades { color: #8ce99a; } .section-title .icon.owner { color: #e589f0; }
+        .arrow .icon { transition: transform 0.35s cubic-bezier(0.25, 0.1, 0.25, 1); color: var(--text-muted-color); width: 1.125em; height: 1.125em; }
+        .grid-links { display: grid; grid-template-columns: 1fr; gap: var(--spacing-md); padding-left: 1.375rem; padding-right: 1.375rem; height: 0; opacity: 0; overflow: hidden; }
+        .link-button { padding: 0.9375rem 1.25rem; background: var(--link-button-bg); border: 1px solid var(--border-color-light); border-radius: var(--border-radius-md); color: var(--text-color); text-decoration: none; font-size: var(--font-size-sm); font-weight: 400; transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1); display: flex; align-items: center; justify-content: flex-start; gap: var(--spacing-sm); }
+        .link-button:hover { background: var(--link-button-hover-bg); color: var(--text-color-light); transform: translateY(-0.1875rem); box-shadow: 0 0.25rem 0.625rem rgba(var(--primary-accent-rgb), 0.15); }
+        .link-button .icon { width: 1em; height: 1em; stroke-width: 2.2; color: var(--text-muted-color); margin-right: var(--spacing-sm); }
+        #search-input { width: 100%; padding: 0.75rem 0.9375rem; margin-bottom: var(--spacing-lg); border: 1px solid var(--border-color-dark); background-color: var(--input-bg); color: var(--text-color); border-radius: var(--border-radius-sm); box-sizing: border-box; font-size: var(--font-size-md); outline: none; transition: border-color 0.3s, box-shadow 0.3s; }
+        #search-input::placeholder { color: var(--text-muted-color); }
+        #search-input:focus { border-color: var(--primary-accent); box-shadow: 0 0 0 0.125rem rgba(var(--primary-accent-rgb), 0.2); }
+        .modal { display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.4); backdrop-filter: blur(0.1875rem); align-items: center; justify-content: center; }
+        .modal-content { background-color: var(--modal-bg); color: var(--text-color); margin: auto; padding: var(--spacing-lg); border: 1px solid var(--modal-border); max-width: 28.125rem; width: 90%; border-radius: var(--border-radius-lg); box-shadow: 0 0.25rem 0.5rem var(--shadow-color-light); text-align: center; position: relative; }
+        .modal-content h2 { margin-top: 0; color: var(--section-title-color); font-size: 1.5em; margin-bottom: var(--spacing-md); display: flex; align-items: center; justify-content: center; gap: var(--spacing-sm); }
+        .modal-content h2 .icon { width: 1.5em; height: 1.5em; }
+        .modal-content label { display: block; margin-bottom: var(--spacing-xs); color: var(--text-color-light); text-align: left; font-size: var(--font-size-sm); }
+        .modal-content input[type="text"], .modal-content input[type="password"] { width: 100%; padding: 0.625rem; margin-bottom: var(--spacing-md); border: 1px solid var(--border-color-dark); background-color: var(--input-bg); color: var(--text-color); border-radius: var(--border-radius-sm); box-sizing: border-box; font-size: var(--font-size-md); }
+        .modal-content input[type="text"]:focus, .modal-content input[type="password"]:focus { border-color: var(--primary-accent); box-shadow: 0 0 0 0.125rem rgba(var(--primary-accent-rgb), 0.2); outline: none; }
+        .modal-content button { background-color: var(--primary-accent); color: var(--text-color-light); padding: 0.75rem 1.25rem; border: none; border-radius: var(--border-radius-sm); cursor: pointer; font-size: 1em; font-weight: 500; transition: background-color 0.3s ease; width: 100%; }
+        .modal-content button:hover { background-color: var(--primary-accent-hover); }
+        .modal-content p#passwordError { color: red; display: none; margin-top: var(--spacing-sm); font-size: var(--font-size-sm); }
+        .close-button { color: var(--text-muted-color); position: absolute; top: 0.75rem; right: 0.9375rem; cursor: pointer; transition: color 0.2s ease, transform 0.2s ease; }
+        .close-button .icon { width: 1.5em; height: 1.5em; }
+        .close-button:hover { color: var(--primary-accent); transform: rotate(90deg); }
+        #music-player-container { position: fixed; bottom: 0.9375rem; left: 0.9375rem; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(0.3125rem); padding: 0.625rem 0.9375rem; border-radius: var(--border-radius-sm); z-index: 999; display: flex; align-items: center; gap: var(--spacing-sm); box-shadow: 0 0.1875rem 0.625rem var(--shadow-color-light); border: 1px solid var(--border-color-light); }
+        #track-name { color: var(--text-color-light); font-size: var(--font-size-sm); font-weight: 500; }
+        #controls-container { display: flex; align-items: center; gap: var(--spacing-xs); }
+        #play-pause-button, #prev-button, #next-button { background-color: transparent; color: var(--text-color-light); border: none; padding: var(--spacing-xs); cursor: pointer; transition: color 0.3s ease, transform 0.2s ease; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        #play-pause-button .icon, #prev-button .icon, #next-button .icon { width: 1.1em; height: 1.1em; }
+        #play-pause-button:hover, #prev-button:hover, #next-button:hover { color: var(--primary-accent); transform: scale(1.1); }
+        #volume-slider { width: 3.75rem; height: 0.25rem; background: #555; outline: none; opacity: 0.7; transition: opacity .2s; cursor: pointer; border-radius: 0.1875rem; -webkit-appearance: none; appearance: none; vertical-align: middle; }
+        #volume-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 0.625rem; height: 0.625rem; background: var(--text-color-light); cursor: pointer; border-radius: 50%; border: 2px solid var(--bg-color); }
+        #volume-slider::-moz-range-thumb { width: 0.625rem; height: 0.625rem; background: var(--text-color-light); cursor: pointer; border-radius: 50%; border: 2px solid var(--bg-color); }
         #volume-slider:hover { opacity: 1; }
-        /* Media Queries */
-        @media (min-width: 600px) { .grid-links { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; } .link-button { padding: 18px 25px; } #status-monitor { font-size: 0.9em; } }
-        @media (max-width: 767px) { #status-monitor p.status-line { flex-direction: column; align-items: center; gap: 4px; } .right-group { margin-left: 0; justify-content: center; } .status-line .left-group, .status-line .right-group { flex-wrap: wrap; justify-content: center;} }
-        @media (max-width: 599px) { body { padding: 10px; } .container { width: 95%; padding: 15px; } h1 { font-size: 1.5em; margin: 10px 0 15px 0; } #status-monitor { font-size: 0.85em; padding: 6px 0; margin-bottom: 15px; } .live-time { min-width: 95px; font-size: 0.9em; } .countdown-timer { min-width: 65px; font-size: 0.9em; } .countdown-label { min-width: auto; font-size: 0.85em; text-align: center; margin-right: 5px;} .section { margin-bottom: 10px; } .section-header { padding: 12px 15px; } .section-title { font-size: 0.9em; } .grid-links { padding: 10px; gap: 8px; } .link-button { padding: 10px 12px; font-size: 0.85em; } #search-input { width: 100%; max-width: none; padding: 10px; margin-bottom: 15px; } #music-player-container { bottom: 5px; left: 5px; padding: 5px; gap: 5px; } #track-name { font-size: 0.7em; } #controls-container { gap: 3px; } #play-pause-button, #prev-button, #next-button { padding: 3px; font-size: 0.9em; } #volume-slider { width: 40px; height: 3px; } #volume-slider::-webkit-slider-thumb { width: 6px; height: 6px; } #volume-slider::-moz-range-thumb { width: 6px; height: 6px; } }
+        @media (min-width: 37.5rem) { .grid-links { grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr)); gap: var(--spacing-md); padding-left: 1.375rem; padding-right: 1.375rem; } .link-button { padding: 1.125rem 1.5625rem; } }
+        @media (max-width: 37.4375rem) { body { padding: var(--spacing-sm); } .container { width: calc(100% - var(--spacing-md)); padding: var(--spacing-md); margin: var(--spacing-sm) auto; margin-bottom: 4.375rem; } h1 { font-size: 1.5em; margin: var(--spacing-sm) 0 var(--spacing-md); } .section { margin-bottom: var(--spacing-sm); } .section-header { padding: 0.75rem 0.9375rem; } .section-title { font-size: 0.9em; } .grid-links { padding-left: 1.125rem; padding-right: 1.125rem; gap: var(--spacing-sm); } .link-button { padding: 0.625rem 0.75rem; font-size: var(--font-size-sm); justify-content: center; } .link-button .icon { margin-right: var(--spacing-xs); } #search-input { padding: 0.625rem 0.75rem; margin-bottom: var(--spacing-md); } #music-player-container { bottom: var(--spacing-xs); left: var(--spacing-xs); padding: var(--spacing-xs); gap: var(--spacing-xs); width: auto; } #track-name { display: none; } #controls-container { gap: 0.1875rem; } #play-pause-button, #prev-button, #next-button { padding: 0.1875rem; } #play-pause-button .icon, #prev-button .icon, #next-button .icon { width: 0.9em; height: 0.9em; } #volume-slider { display: none; } }
+
     </style>
 </head>
+
 <body>
-    <!-- Pantalla de Carga -->
     <div id="loading-screen">
-        <div class="loading-spinner"></div>
-        <p>Cargando... UnevennesX Projects</p>
+        <div class="loading-title-container">
+            <div class="loading-title" id="loading-title-evanescence">
+                {/* Las letras se generarán con JS */}
+            </div>
+            <div class="loading-title" id="loading-title-unevennesx">
+                {/* Las letras se generarán con JS */}
+            </div>
+        </div>
     </div>
 
-    <!-- Contenedor Principal -->
-    <div class="container">
+    <div class="container gsap-hidden">
         <h1>
-            <a href="https://unevennesx.github.io/consultas/" class="link-button">UnevennesX 👻 EvannescencE</a>
+            <a href="https://unevennesx.github.io/consultas/" style="text-decoration: none; color: inherit;">UnevennesX <span class="title-ghost">👻</span> EvannescencE</a>
         </h1>
 
-        <!-- MONITOR DE ESTADO -->
-        <div id="status-monitor">
-             <p class="status-line" id="london-status-line">
-                 <span class="left-group"><i class="fas fa-city location-icon"></i><span class="location-label">Londres:</span><span class="live-time" id="london-time-display">--:--:-- --</span><span class="fixed-schedule">(3 AM - 3 PM)</span></span>
-                 <span class="right-group"><span class="status-dot status-red" id="london-status-dot"></span><span class="status-text status-red" id="london-status-text">Inactivo</span><span class="countdown-label" id="london-cd-label">---</span><span class="countdown-timer" id="london-countdown">--:--:--</span></span>
-            </p>
-            <p class="status-line" id="la-status-line">
-                <span class="left-group"><i class="fas fa-sun location-icon"></i><span class="location-label">Los Ángeles:</span><span class="live-time" id="la-time-display">--:--:-- --</span><span class="fixed-schedule">(9 AM - 9 PM)</span></span>
-                 <span class="right-group"><span class="status-dot status-red" id="la-status-dot"></span><span class="status-text status-red" id="la-status-text">Inactivo</span><span class="countdown-label" id="la-cd-label">---</span><span class="countdown-timer" id="la-countdown">--:--:--</span></span>
-            </p>
+        <input type="text" id="search-input" placeholder="Buscar proyectos..." class="gsap-hidden">
+        <div id="no-results-message" style="display:none; color: var(--text-color-light); text-align: center; margin: var(--spacing-md) 0;">No se encontraron resultados.</div>
+
+        <div class="section gsap-hidden" data-section-name="Principales">
+            <div class="section-header">
+                <div class="section-title"><i data-feather="star" class="icon principales"></i> Principales</div>
+                <div class="arrow"><i data-feather="chevron-down" class="icon"></i></div>
+            </div>
+            <div class="grid-links">
+                <a href="https://extension-de-pg.vercel.app/" class="link-button"><i data-feather="paperclip" class="icon"></i> Precio del $</a>
+                <a href="https://mi-pg.vercel.app/login/" class="link-button"><i data-feather="paperclip" class="icon"></i> UnevennesX</a>
+                <a href="https://unevennesx.github.io/UserAgent/" class="link-button"><i data-feather="paperclip" class="icon"></i> User Agent 2.0</a>
+                <a href="https://unevennesx.github.io/Avanced-UnevennesX/" class="link-button"><i data-feather="paperclip" class="icon"></i> Avanced-EvanneS</a>
+                <a href="https://unevennesx.github.io/zipcodes/" class="link-button"><i data-feather="paperclip" class="icon"></i> Zipcode</a>
+            </div>
         </div>
-        <!-- FIN MONITOR DE ESTADO -->
-
-        <input type="text" id="search-input" placeholder="Buscar proyectos...">
-        <div id="no-results-message" style="display:none; color: white; text-align: center; margin-top: 10px;">No se encontraron resultados.</div>
-
-        <!-- Secciones -->
-        <div class="section" data-section-name="Principales"> <div class="section-header"> <div class="section-title">🌟 Principales</div> <div class="arrow">▼</div> </div> <div class="grid-links"> <a href="https://extension-de-pg.vercel.app/" class="link-button"> Precio del $ 🤑🔥 </a> <a href="https://mi-pg.vercel.app/login/" class="link-button">UnevennesX</a> <a href="https://unevennesx.github.io/UserAgent/" class="link-button">User Agent 2.0</a> <a href="https://unevennesx.github.io/Avanced-UnevennesX/" class="link-button">Avanced-EvanneS 🔥</a> <a href="https://unevennesx.github.io/zipcodes/" class="link-button"> Zipcode </a> </div> </div>
-        <div class="section" data-section-name="Destacados"> <div class="section-header"> <div class="section-title">🚀 Destacados</div> <div class="arrow">▼</div> </div> <div class="grid-links"> <a href="https://unevennesx.github.io/-CheckLinks-/" class="link-button"> ALL SAMPLICIOUS </a> <a href="https://unevennesx.github.io/app/" class="link-button"> glimpsehere.com </a> <a href="https://unevennesx.github.io/zamplia/" class="link-button"> Zamplia </a> <a href="https://unevennesx.github.io/UnevennesX/" class="link-button">Armador V1</a> <a href="https://unevennesx.github.io/cube/" class="link-button"> Sample-Cube </a> <a href="https://unevennesx.github.io/savanta/" class="link-button"> Savanta </a> <a href="https://unevennesx.github.io/ISA/" class="link-button"> ISA - </a> <a href="https://unevennesx.github.io/Survey.Dashmr/" class="link-button"> Survey.Dashmr </a> <a href="https://unevennesx.github.io/Survey-Cint/" class="link-button"> Sw.Cint </a> <a href="https://unevennesx.github.io/tsid/" class="link-button"> TSID </a> <a href="https://unevennesx.github.io/rd-secured/" class="link-button"> Rd.Secured👻 </a> <a href="https://unevennesx.github.io/RD-SIN-rd_proj_ud-/" class="link-button"> Rd.🚫"rd_proj_ud"🚫 </a> <a href="https://unevennesx.github.io/All-Spectrum/" class="link-button"> ALL Spectrum👾 <span class="new-badge">Mejorado</span> </a> <a href="https://unevennesx.github.io/spectrum-corto/" class="link-button"> ⚠️Spectrum Corto⚠️ <span class="new-badge">Corto</span> </a> <a href="https://unevennesx.github.io/Survey.Emi/" class="link-button"> Survey.Emi🤫 <span class="new-badge">New</span> </a> </div> </div>
-        <div class="section" data-section-name="Técnicas"> <div class="section-header"> <div class="section-title">⚙️ Técnicas</div> <div class="arrow">▼</div> </div> <div class="grid-links"> <a href="https://unevennesx.github.io/fakename/" class="link-button"> Fake-Name </a> <a href="https://unevennesx.github.io/cpx-tap-bit/" class="link-button">CPX</a> <a href="https://unevennesx.github.io/calculadora/" class="link-button"> Calculadora </a> </div> </div>
-        <div class="section" data-section-name="Utilidades"> <div class="section-header"> <div class="section-title">🔧 Utilidades</div> <div class="arrow">▼</div> </div> <div class="grid-links"> <a href="https://unevennesx.github.io/UID-ONLY/" class="link-button">Bitlabs</a> <a href="https://unevennesx.github.io/userv1/" class="link-button"> User Agent 1.0 </a> <a href="https://unevennesx.github.io/agg-consultas/" class="link-button"> Admin de consultas </a> </div> </div>
-        <!-- SECCIÓN OWNER -->
-        <div class="section" data-section-name="👑 Owner" id="owner-section">
+        <div class="section gsap-hidden" data-section-name="Destacados">
+            <div class="section-header">
+                <div class="section-title"><i data-feather="send" class="icon destacados"></i> Destacados</div>
+                <div class="arrow"><i data-feather="chevron-down" class="icon"></i></div>
+            </div>
+            <div class="grid-links">
+                <a href="https://unevennesx.github.io/-CheckLinks-/" class="link-button"><i data-feather="paperclip" class="icon"></i> ALL SAMPLICIOUS</a>
+                <a href="https://unevennesx.github.io/app/" class="link-button"><i data-feather="paperclip" class="icon"></i> glimpsehere.com</a>
+                <a href="https://unevennesx.github.io/zamplia/" class="link-button"><i data-feather="paperclip" class="icon"></i> Zamplia</a>
+                <a href="https://unevennesx.github.io/UnevennesX/" class="link-button"><i data-feather="paperclip" class="icon"></i> Armador V1</a>
+                <a href="https://unevennesx.github.io/cube/" class="link-button"><i data-feather="paperclip" class="icon"></i> Sample-Cube</a>
+                <a href="https://unevennesx.github.io/savanta/" class="link-button"><i data-feather="paperclip" class="icon"></i> Savanta</a>
+                <a href="https://unevennesx.github.io/ISA/" class="link-button"><i data-feather="paperclip" class="icon"></i> ISA</a>
+                <a href="https://unevennesx.github.io/Survey.Dashmr/" class="link-button"><i data-feather="paperclip" class="icon"></i> Survey.Dashmr</a>
+                <a href="https://unevennesx.github.io/Survey-Cint/" class="link-button"><i data-feather="paperclip" class="icon"></i> Sw.Cint</a>
+                <a href="https://unevennesx.github.io/tsid/" class="link-button"><i data-feather="paperclip" class="icon"></i> TSID</a>
+                <a href="https://unevennesx.github.io/rd-secured/" class="link-button"><i data-feather="paperclip" class="icon"></i> Rd.Secured <span style="opacity:0.8;">👻</span></a>
+                <a href="https://unevennesx.github.io/RD-SIN-rd_proj_ud-/" class="link-button"><i data-feather="paperclip" class="icon"></i> Rd."rd_proj_ud"</a>
+                <a href="https://unevennesx.github.io/All-Spectrum/" class="link-button"><i data-feather="paperclip" class="icon"></i> ALL Spectrum</a>
+                <a href="https://unevennesx.github.io/spectrum-corto/" class="link-button"><i data-feather="paperclip" class="icon"></i> Spectrum Corto</a>
+                <a href="https://unevennesx.github.io/Survey.Emi/" class="link-button"><i data-feather="paperclip" class="icon"></i> Survey.Emi</a>
+            </div>
+        </div>
+        <div class="section gsap-hidden" data-section-name="Técnicas">
+            <div class="section-header">
+                <div class="section-title"><i data-feather="code" class="icon tecnicas"></i> Técnicas</div>
+                <div class="arrow"><i data-feather="chevron-down" class="icon"></i></div>
+            </div>
+            <div class="grid-links">
+                <a href="https://unevennesx.github.io/fakename/" class="link-button"><i data-feather="paperclip" class="icon"></i> Fake-Name</a>
+                <a href="https://unevennesx.github.io/cpx-tap-bit/" class="link-button"><i data-feather="paperclip" class="icon"></i> CPX</a>
+                <a href="https://unevennesx.github.io/calculadora/" class="link-button"><i data-feather="paperclip" class="icon"></i> Calculadora</a>
+            </div>
+        </div>
+        <div class="section gsap-hidden" data-section-name="Utilidades">
+            <div class="section-header">
+                <div class="section-title"><i data-feather="tool" class="icon utilidades"></i> Utilidades</div>
+                <div class="arrow"><i data-feather="chevron-down" class="icon"></i></div>
+            </div>
+            <div class="grid-links">
+                <a href="https://unevennesx.github.io/UID-ONLY/" class="link-button"><i data-feather="paperclip" class="icon"></i> Bitlabs</a>
+                <a href="https://unevennesx.github.io/userv1/" class="link-button"><i data-feather="paperclip" class="icon"></i> User Agent 1.0</a>
+                <a href="https://unevennesx.github.io/agg-consultas/" class="link-button"><i data-feather="paperclip" class="icon"></i> Admin Consultas</a>
+            </div>
+        </div>
+        
+        <div class="section gsap-hidden" data-section-name="👑 Owner" id="owner-section">
             <div class="section-header" id="owner-header">
-                <div class="section-title">👑 Owner</div>
-                <div class="arrow">▼</div>
+                <div class="section-title"><i data-feather="lock" class="icon owner"></i> Owner</div>
+                <div class="arrow"><i data-feather="chevron-down" class="icon"></i></div>
             </div>
             <div class="grid-links" id="owner-links">
-                <a href="https://unevennesx.github.io/user-owner/" class="link-button"> UserAgent V3 👑 </a>
-                <a href="https://mi-pg.vercel.app/extraer-links/" class="link-button"> Links UnevennesX 👑 </a>
-                <a href="https://mi-pg.vercel.app/offline_backup/manage/" class="link-button"> Backup UnevennesX 👑 </a>
+                <a href="https://unevennesx.github.io/user-owner/" class="link-button"><i data-feather="paperclip" class="icon"></i> UserAgent V3</a>
+                <a href="https://mi-pg.vercel.app/extraer-links/" class="link-button"><i data-feather="paperclip" class="icon"></i> Links UnevennesX</a>
+                <a href="https://mi-pg.vercel.app/offline_backup/manage/" class="link-button"><i data-feather="paperclip" class="icon"></i> Backup UnevennesX</a>
             </div>
         </div>
-
-        <!-- Reproductor de Música -->
-        <div id="music-player-container"> <span id="track-name">New York</span> <div id="controls-container"> <button id="prev-button"><i class="fas fa-backward"></i></button> <button id="play-pause-button"><i class="fas fa-play"></i></button> <button id="next-button"><i class="fas fa-forward"></i></button> <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.1"> </div> <audio id="background-music" loop> <source src="newyork.mp3" type="audio/mpeg"> <source src="miami.mp3" type="audio/mpeg"> <source src="rd.mp3" type="audio/mpeg"> </audio> </div>
     </div>
 
-    <!-- Modal Contraseña -->
+    <div id="music-player-container" class="gsap-hidden">
+        <span id="track-name">New York</span>
+        <div id="controls-container">
+            <button id="prev-button" aria-label="Previous track"><i data-feather="skip-back" class="icon"></i></button>
+            <button id="play-pause-button" aria-label="Play or Pause">
+                <i data-feather="play" class="icon icon-play"></i><i data-feather="pause" class="icon icon-pause" style="display:none;"></i>
+            </button>
+            <button id="next-button" aria-label="Next track"><i data-feather="skip-forward" class="icon"></i></button>
+        </div>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.1" aria-label="Volume">
+        <audio id="background-music" loop>
+            <source src="audio/newyork.mp3" type="audio/mpeg">
+            <source src="audio/miami.mp3" type="audio/mpeg">
+            <source src="audio/rd.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
     <div id="passwordModal" class="modal">
         <div class="modal-content">
-            <span class="close-button" id="closeModal">×</span>
-            <h2>Acceso Owner</h2>
+            <span class="close-button" id="closeModal" aria-label="Cerrar modal"><i data-feather="x" class="icon"></i></span>
+            <h2><i data-feather="key" class="icon"></i> Acceso Owner</h2>
             <label for="usernameInput">Usuario:</label>
             <input type="text" id="usernameInput" placeholder="Usuario" value="UnevennesX" readonly>
             <label for="passwordInput">Contraseña:</label>
             <input type="password" id="passwordInput" placeholder="Contraseña">
             <button id="submitPassword">Entrar</button>
-            <p id="passwordError" style="color: red; display: none;">Usuario o contraseña incorrectos.</p>
+            <p id="passwordError">Usuario o contraseña incorrectos.</p>
         </div>
     </div>
 
-    <!-- Script Principal -->
+    <script src="js/gsap.min.js"></script>
+    <script src="js/feather.min.js"></script>
     <script>
         "use strict";
 
-        // --- [ Utilidades y Elementos Globales ] ---
+        // --- (JavaScript idéntico a la versión anterior) ---
+        function getRgbFromCssVar(cssVarName) { const colorStr = getComputedStyle(document.documentElement).getPropertyValue(cssVarName).trim(); if (colorStr.startsWith('#')) { const hex = colorStr.replace('#', ''); const r = parseInt(hex.substring(0, 2), 16); const g = parseInt(hex.substring(2, 4), 16); const b = parseInt(hex.substring(4, 6), 16); return `${r}, ${g}, ${b}`; } else if (colorStr.startsWith('rgba')) { const parts = colorStr.substring(colorStr.indexOf('(') + 1, colorStr.lastIndexOf(')')).split(','); return `${parseInt(parts[0])}, ${parseInt(parts[1])}, ${parseInt(parts[2])}`; } return '255, 64, 129';  }
+        document.documentElement.style.setProperty('--primary-accent-rgb', getRgbFromCssVar('--primary-accent'));
+        document.documentElement.style.setProperty('--h1-glow-start-rgb', getRgbFromCssVar('--h1-glow-start'));
+        document.documentElement.style.setProperty('--h1-glow-end-rgb', getRgbFromCssVar('--h1-glow-end'));
         function normalizeString(str) { return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }
         const searchInput = document.getElementById('search-input');
         const noResultsMessage = document.getElementById('no-results-message');
@@ -161,206 +253,145 @@
         const closeModalButton = document.getElementById('closeModal');
         const submitPasswordButton = document.getElementById('submitPassword');
         const passwordInput = document.getElementById('passwordInput');
-        const usernameInput = document.getElementById('usernameInput');
         const ownerSection = document.getElementById('owner-section');
         const ownerHeader = document.getElementById('owner-header');
         const ownerLinks = document.getElementById('owner-links');
         const passwordError = document.getElementById('passwordError');
-
-        // --- [ Estado de la Aplicación ] ---
-        const correctUsername = "UnevennesX";
+        const correctUsername = "UnevennesX"; 
         const correctPassword = "EvannescencE";
         let isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
         let isPlaying = false;
         let currentTrackIndex = 0;
-        const tracks = [{ src: "newyork.mp3", name: "New York" }, { src: "miami.mp3", name: "Miami" }, { src: "rd.mp3", name: "RD" },];
+        const tracks = [ { src: "audio/newyork.mp3", name: "New York" }, { src: "audio/miami.mp3", name: "Miami" }, { src: "audio/rd.mp3", name: "RD" }, ];
         let hasInteracted = false;
-
-        // --- [ Lógica de Visibilidad Owner (CORREGIDA) ] ---
-        function updateOwnerSectionVisibility() {
-            if (!ownerSection || !ownerLinks) return;
-            const isCurrentlyActive = ownerSection.classList.contains('active');
-
-            // La sección Owner (cabecera) SIEMPRE está visible en el flujo normal
-            ownerSection.style.display = "block";
-
-            // Los links internos dependen de autenticación Y estado activo
-            if (isAuthenticated && isCurrentlyActive) {
-                ownerLinks.style.display = "grid";
-            } else {
-                ownerLinks.style.display = "none";
-            }
-
-            // Si no está autenticado, asegurarse que no esté activo
-            if (!isAuthenticated) {
-                 ownerSection.classList.remove("active");
-                 // Doble chequeo para ocultar links si no está autenticado
-                 ownerLinks.style.display = "none";
-            }
-             // console.log(`Owner Visibility Update: Auth=${isAuthenticated}, Active=${isCurrentlyActive}, SectionDisplay=${ownerSection.style.display}, LinksDisplay=${ownerLinks.style.display}`);
-        }
-
-
-        // --- [ Lógica de Autenticación ] ---
-        function checkPassword() {
-            const enteredPassword = passwordInput.value;
-            if (enteredPassword === correctPassword) {
-                isAuthenticated = true; localStorage.setItem("isAuthenticated", "true");
-                if (passwordModal) passwordModal.style.display = "none";
-                if (ownerSection) ownerSection.classList.add("active"); // Expandir al loguear
-                if (passwordError) passwordError.style.display = "none";
-                if (passwordInput) passwordInput.value = "";
-                updateOwnerSectionVisibility(); // ACTUALIZAR AHORA
-            } else {
-                if (passwordError) passwordError.style.display = "block";
-                isAuthenticated = false; localStorage.setItem("isAuthenticated", "false");
-                updateOwnerSectionVisibility(); // Asegurar que oculte links si falla
-            }
-        }
-
-        // --- [ Lógica de Búsqueda (CORREGIDA para Owner) ] ---
-        function handleSearch() {
-             let searchTerm = searchInput.value;
-             searchTerm = normalizeString(searchTerm);
-             let hasResults = false;
-             let ownerHasVisibleLinks = false; // Trackea si Owner tiene links que coinciden
-
-             // Resetear visibilidad si no hay búsqueda activa
-             if (searchTerm.length < 2) {
-                 document.querySelectorAll('.section').forEach(section => {
-                     section.style.display = 'block'; // Mostrar todas las secciones
-                     section.classList.remove('active'); // Colapsar todas
-                 });
-                 document.querySelectorAll('.link-button').forEach(link => {
-                     link.style.display = 'block'; // Mostrar todos los links (luego owner ajustará los suyos)
-                 });
-                 if (noResultsMessage) noResultsMessage.style.display = 'none';
-                 updateOwnerSectionVisibility(); // MUY IMPORTANTE: ajustar visibilidad de links owner según auth/active
-                 return;
-             }
-
-             // --- Búsqueda activa ---
-             // Ocultar todo primero
-             document.querySelectorAll('.section').forEach(section => {
-                 section.style.display = 'none';
-                 section.classList.remove('active');
-             });
-             document.querySelectorAll('.link-button').forEach(link => {
-                 link.style.display = 'none';
-             });
-
-             // Mostrar coincidencias
-             document.querySelectorAll('.link-button').forEach(link => {
-                 const linkText = normalizeString(link.textContent);
-                 const section = link.closest('.section');
-                 if (section && linkText.includes(searchTerm)) {
-                     const isOwnerLink = section.id === 'owner-section';
-                     if (!isOwnerLink) { // Secciones normales
-                         link.style.display = 'block';
-                         section.style.display = 'block'; // Mostrar sección normal si tiene match
-                         section.classList.add('active');
-                         hasResults = true;
-                     } else if (isOwnerLink && isAuthenticated) { // Links de Owner (solo si auth)
-                         link.style.display = 'block';
-                         ownerHasVisibleLinks = true; // Marcar que Owner tiene un link visible
-                         hasResults = true;
-                     }
-                 }
-             });
-
-             // Decidir visibilidad de la SECCIÓN Owner basado en si tiene links visibles
-             if (ownerSection) {
-                 if (ownerHasVisibleLinks) { // Implica que isAuthenticated es true
-                     ownerSection.style.display = 'block'; // Mostrar sección Owner
-                     ownerSection.classList.add('active'); // Expandirla
-                 } else {
-                     // Si no hay links visibles DENTRO de Owner (o no está auth),
-                     // la sección Owner se queda oculta por la regla general de búsqueda.
-                     ownerSection.style.display = 'none';
-                     ownerSection.classList.remove('active');
-                 }
-             }
-
-             // Mensaje "No resultados"
-             if (noResultsMessage) noResultsMessage.style.display = hasResults ? 'none' : 'block';
-             // Llamar al final para asegurar estado correcto de ownerLinks (grid/none)
-             updateOwnerSectionVisibility();
-        }
-
-
-        // --- [ Lógica Reproductor Música (Sin cambios) ] ---
+        const gridLinksPadding = { top: "1.25rem", bottom: "1.25rem" };
+        const sectionEase = "power3.inOut";
+        const sectionDuration = 0.35;
+        function updateOwnerSectionVisibility(animate = false) { if (!ownerSection || !ownerLinks) return; const isCurrentlyActive = ownerSection.classList.contains('active'); ownerSection.style.display = "block"; const targetProps = { height: 0, opacity: 0, paddingTop: "0px", paddingBottom: "0px" }; if (isAuthenticated && isCurrentlyActive) { targetProps.height = "auto"; targetProps.opacity = 1; targetProps.paddingTop = gridLinksPadding.top; targetProps.paddingBottom = gridLinksPadding.bottom; } if (animate) { gsap.to(ownerLinks, { ...targetProps, duration: sectionDuration, ease: sectionEase }); } else { gsap.set(ownerLinks, targetProps); } if (!isAuthenticated) { ownerSection.classList.remove("active"); const arrowIcon = ownerHeader.querySelector('.arrow .icon'); if (arrowIcon) gsap.to(arrowIcon, { rotation: 0, duration: 0.3, ease: sectionEase }); } }
+        function checkPassword() { const enteredPassword = passwordInput.value; if (enteredPassword === correctPassword) { isAuthenticated = true; localStorage.setItem("isAuthenticated", "true"); if (passwordModal) { gsap.to(passwordModal.querySelector('.modal-content'), { y: 20, opacity: 0, scale: 0.95, duration: 0.25, ease: "power2.in" }); gsap.to(passwordModal, { autoAlpha: 0, duration: 0.3, delay:0.1, ease: "power2.in", onComplete: () => passwordModal.style.display = "none" }); } if (ownerSection) { ownerSection.classList.add("active"); const arrowIcon = ownerHeader.querySelector('.arrow .icon'); if (arrowIcon) gsap.to(arrowIcon, { rotation: 180, duration: 0.3, ease: sectionEase }); } if (passwordError) passwordError.style.display = "none"; if (passwordInput) passwordInput.value = ""; updateOwnerSectionVisibility(true); } else { if (passwordError) { passwordError.style.display = "block"; gsap.fromTo(passwordError, {opacity: 0, y: -10}, {opacity: 1, y: 0, duration: 0.3, ease: "bounce.out"}); gsap.fromTo(passwordModal.querySelector('.modal-content'), {x:0}, {x:10, duration:0.05, repeat:5, yoyo:true, clearProps:"x", ease:"circ.inOut"}); } isAuthenticated = false; localStorage.setItem("isAuthenticated", "false"); updateOwnerSectionVisibility(); } }
+        function handleSearch() { let searchTerm = searchInput.value; searchTerm = normalizeString(searchTerm); let hasResults = false; let ownerHasVisibleLinks = false; if (searchTerm.length < 2) { document.querySelectorAll('.section').forEach(section => { section.style.display = 'block'; }); document.querySelectorAll('.link-button').forEach(link => { link.style.display = 'flex'; }); if (noResultsMessage) noResultsMessage.style.display = 'none'; updateOwnerSectionVisibility(); return; } document.querySelectorAll('.section').forEach(section => { section.style.display = 'none'; }); document.querySelectorAll('.link-button').forEach(link => { link.style.display = 'none'; }); document.querySelectorAll('.link-button').forEach(link => { const linkText = normalizeString(link.textContent); const section = link.closest('.section'); if (section && linkText.includes(searchTerm)) { const isOwnerLink = section.id === 'owner-section'; if (!isOwnerLink) { link.style.display = 'flex'; section.style.display = 'block'; if (!section.classList.contains('active')) { section.classList.add('active'); const gridLinks = section.querySelector('.grid-links'); const arrowIcon = section.querySelector('.arrow .icon'); gsap.to(gridLinks, { height: "auto", opacity: 1, paddingTop: gridLinksPadding.top, paddingBottom: gridLinksPadding.bottom, duration: sectionDuration, ease: sectionEase }); if(arrowIcon) gsap.to(arrowIcon, { rotation: 180, duration: 0.3, ease: sectionEase }); } hasResults = true; } else if (isOwnerLink && isAuthenticated) { link.style.display = 'flex'; ownerHasVisibleLinks = true; hasResults = true; } } }); if (ownerSection) { if (ownerHasVisibleLinks) { ownerSection.style.display = 'block'; if (!ownerSection.classList.contains('active')) { ownerSection.classList.add('active'); const arrowIcon = ownerHeader.querySelector('.arrow .icon'); if(arrowIcon) gsap.to(arrowIcon, { rotation: 180, duration: 0.3, ease: sectionEase }); } } } if (noResultsMessage) noResultsMessage.style.display = hasResults ? 'none' : 'block'; updateOwnerSectionVisibility(true); }
         function loadTrack(trackIndex) { if(trackIndex<0){trackIndex=tracks.length-1}else if(trackIndex>=tracks.length){trackIndex=0}currentTrackIndex=trackIndex;if(audio){const e=tracks[trackIndex].src;const t=audio.currentSrc?new URL(audio.currentSrc,window.location.href).pathname:null;const n=new URL(e,window.location.href).pathname;if(audio.src===""||t!==n){try { audio.src = e; audio.load(); } catch(err){ console.error("Error setting audio src:", err); }}}if(trackNameDisplay)trackNameDisplay.textContent=tracks[trackIndex].name;localStorage.setItem("currentTrackIndex",currentTrackIndex) }
-        function loadSavedState() { const e=localStorage.getItem("currentTrackIndex");currentTrackIndex=e!==null?parseInt(e,10):0;const t=localStorage.getItem("volume");if(volumeSlider){volumeSlider.value=t!==null?t:.1}if(audio)audio.volume=t!==null?t:.1;if(playPauseButton){playPauseButton.innerHTML='<i class="fas fa-play"></i>'}loadTrack(currentTrackIndex) }
-        function initialUserInteraction() { if(!hasInteracted && audio){ hasInteracted=!0; loadSavedState(); if(localStorage.getItem("musicState")==="playing"){ audio.play().then(()=>{isPlaying=!0; if(playPauseButton)playPauseButton.innerHTML='<i class="fas fa-pause"></i>'}).catch(e=>{ localStorage.setItem("musicState","paused"); isPlaying = false; if(playPauseButton) playPauseButton.innerHTML='<i class="fas fa-play"></i>'; })} } document.removeEventListener("click",initialUserInteraction); document.removeEventListener("touchstart", initialUserInteraction); }
-
-        // === CÓDIGO DEL MONITOR DE ESTADO (v1.16 - Predicción Individual) ===
-        const monitorConfig = { locations: [ { key: 'london', name: 'Londres', timezone: 'Europe/London', activeStartHour: 3, activeEndHour: 15, ui: {} }, { key: 'la', name: 'LA', timezone: 'America/Los_Angeles', activeStartHour: 9, activeEndHour: 21, ui: {} } ], checkInterval: 1000, debug: false };
-        monitorConfig.locations.forEach(loc => { loc.ui = { liveTimeDisplay: document.getElementById(`${loc.key}-time-display`), dot: document.getElementById(`${loc.key}-status-dot`), text: document.getElementById(`${loc.key}-status-text`), countdown: document.getElementById(`${loc.key}-countdown`), cdLabel: document.getElementById(`${loc.key}-cd-label`) }; });
-        const StatusMonitor = {
-            formatters: { liveTime12h: (tz) => new Intl.DateTimeFormat('en-US', { timeZone: tz, hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true }), localHour24: (tz) => new Intl.DateTimeFormat('en-CA', { timeZone: tz, hour: 'numeric', minute: 'numeric', second: 'numeric', hourCycle: 'h23' }) },
-            checkElements: (locations) => { for(const loc of locations){if(!loc.ui){console.error(`[SETUP_ERROR] UI object not defined for '${loc.key}'`);return!1}for(const key in loc.ui){if(!loc.ui[key]){console.error(`[SETUP_ERROR] UI Element '${key}' not found for '${loc.key}' (${loc.ui[key]})`);return!1}}}if(typeof Intl=="undefined"||!Intl.DateTimeFormat().resolvedOptions().timeZone){console.error("[SETUP_ERROR] Intl or TimeZone API not supported.");const e=document.getElementById("status-monitor");e&&(e.innerHTML="<p style='color:red; text-align:center;'>Error: Time functions not supported.</p>");return!1}return!0 },
-            formatCountdown: (totalSeconds) => { if (isNaN(totalSeconds) || totalSeconds < 0) totalSeconds = 0; const h = Math.floor(totalSeconds / 3600); const m = Math.floor((totalSeconds % 3600) / 60); const s = Math.floor(totalSeconds % 60); return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`; },
-            getDateInTimezone: (tz, referenceDate = new Date()) => { try { const formatter = new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hourCycle: 'h23' }); const parts = formatter.formatToParts(referenceDate); const dateParts = {}; parts.forEach(({type, value}) => { dateParts[type] = parseInt(value); }); return { year: dateParts.year, month: dateParts.month, day: dateParts.day, hour: dateParts.hour === 24 ? 0 : dateParts.hour, minute: dateParts.minute, second: dateParts.second }; } catch (e) { return null; } },
-            getUTCTimestampForLocalHour: (targetHour24, tz, referenceDate) => { try { const nowInTz = StatusMonitor.getDateInTimezone(tz, referenceDate); if (!nowInTz) throw new Error("Could not get 'now' in timezone"); const dateAtTargetHourUTC = new Date(Date.UTC( nowInTz.year, nowInTz.month - 1, nowInTz.day, targetHour24, 0, 0 )); const formatterForOffset = new Intl.DateTimeFormat('en-CA', { timeZone: tz, timeZoneName: 'longOffset' }); const parts = formatterForOffset.formatToParts(dateAtTargetHourUTC); const offsetString = parts.find(p => p.type === 'timeZoneName')?.value; if (!offsetString || !offsetString.includes('GMT')) { const nowOffsetMillis = referenceDate.getTime() - (new Date(referenceDate.toLocaleString('en-US', {timeZone: tz}))).getTime(); return dateAtTargetHourUTC.getTime() + nowOffsetMillis; } const offsetMatch = offsetString.match(/GMT([+-])(\d{1,2})(?::(\d{2}))?/); if (!offsetMatch) throw new Error(`Could not parse offset: ${offsetString}`); const sign = offsetMatch[1] === '+' ? 1 : -1; const hoursOffset = parseInt(offsetMatch[2], 10); const minutesOffset = parseInt(offsetMatch[3] || "0", 10); const totalOffsetMillis = sign * (hoursOffset * 3600 + minutesOffset * 60) * 1000; const timestamp = dateAtTargetHourUTC.getTime() - totalOffsetMillis; if (isNaN(timestamp)) throw new Error("Timestamp is NaN"); return timestamp; } catch (e) { return null; } },
-            getLocationStatusAt: (location, timestamp) => { const { timezone, activeStartHour, activeEndHour } = location; try { const dateInTZ = StatusMonitor.getDateInTimezone(timezone, new Date(timestamp)); if (!dateInTZ) return { isActive: false, error: true }; const currentHourLocal = dateInTZ.hour; const isActive = (currentHourLocal >= activeStartHour && currentHourLocal < activeEndHour); return { isActive: isActive, error: false }; } catch (e) { return { isActive: false, error: true }; } },
-            getNextIndividualChangeTimestamp: (location, nowTimestamp) => { const { timezone, activeStartHour, activeEndHour } = location; const now = new Date(nowTimestamp); const today = new Date(now); const tomorrow = new Date(now); tomorrow.setDate(now.getDate() + 1); const dayAfter = new Date(now); dayAfter.setDate(now.getDate() + 2); const relevantDates = [today, tomorrow, dayAfter]; const eventTimestamps = []; relevantDates.forEach(dateRef => { const startTs = StatusMonitor.getUTCTimestampForLocalHour(activeStartHour, timezone, dateRef); const endTs = StatusMonitor.getUTCTimestampForLocalHour(activeEndHour, timezone, dateRef); if (startTs !== null) eventTimestamps.push(startTs); if (endTs !== null) eventTimestamps.push(endTs); }); const futureEvents = eventTimestamps.filter(ts => ts > nowTimestamp + 500).sort((a, b) => a - b); return futureEvents.length > 0 ? futureEvents[0] : null; },
-            run: (config) => {
-                 if(!StatusMonitor.checkElements(config.locations)){console.error("[FATAL] Monitor UI elements missing. Aborting initialization.");return}
-                 if(config.debug)console.log("[INFO] Starting Status Monitor (v1.16)...");
-                 const updateCycle = () => {
-                     const now = new Date(); const nowTimestamp = now.getTime(); let locationData = {};
-                     config.locations.forEach(loc => { locationData[loc.key] = { currentState: StatusMonitor.getLocationStatusAt(loc, nowTimestamp), nextChange: StatusMonitor.getNextIndividualChangeTimestamp(loc, nowTimestamp), predictionLabel: "---" }; });
-                     config.locations.forEach(loc => {
-                         const data = locationData[loc.key]; if (data.nextChange === null) return; // No prediction needed if no next change
-                         const timeAfterThisChange = data.nextChange + 1000; let futureStates = {}; let predictionError = false;
-                         config.locations.forEach(otherLoc => { const futureState = StatusMonitor.getLocationStatusAt(otherLoc, timeAfterThisChange); futureStates[otherLoc.key] = futureState; if (futureState.error) predictionError = true; });
-                         if (predictionError) { data.predictionLabel = "Próx: Error"; } else { const futureActiveKeys = Object.keys(futureStates).filter(key => futureStates[key].isActive); if (futureActiveKeys.length === 0) { data.predictionLabel = "Próx: Descansa"; } else if (futureActiveKeys.length === 1) { const activeLoc = config.locations.find(l => l.key === futureActiveKeys[0]); data.predictionLabel = `Próx: ${activeLoc.name} Act.`; } else { data.predictionLabel = `Próx: Ambos Act.`; } }
-                     });
-                     config.locations.forEach(loc => {
-                         const { ui } = loc; const { currentState, nextChange, predictionLabel } = locationData[loc.key];
-                         if (ui.liveTimeDisplay) { try { ui.liveTimeDisplay.textContent = StatusMonitor.formatters.liveTime12h(loc.timezone).format(now); ui.liveTimeDisplay.style.color = ''; } catch (e) { ui.liveTimeDisplay.textContent = 'Error'; ui.liveTimeDisplay.style.color = 'red'; } }
-                         if (!currentState.error) { const statusClass = currentState.isActive ? 'status-green' : 'status-red'; const statusText = currentState.isActive ? 'Activo' : 'Inactivo'; if (ui.dot && ui.dot.className !== `status-dot ${statusClass}`) ui.dot.className = `status-dot ${statusClass}`; if (ui.text && (ui.text.textContent !== statusText || !ui.text.classList.contains(statusClass))) { ui.text.textContent = statusText; ui.text.className = `status-text ${statusClass}`; ui.text.style.color = ''; } } else { if (ui.dot) ui.dot.className = 'status-dot'; if (ui.text) {ui.text.textContent = 'Error'; ui.text.className = 'status-text'; ui.text.style.color='red';} }
-                         if (ui.cdLabel) { ui.cdLabel.textContent = predictionLabel; ui.cdLabel.style.display = nextChange !== null ? '' : 'none'; }
-                         if (ui.countdown) { if (nextChange !== null) { const secondsRemaining = Math.max(0, (nextChange - nowTimestamp) / 1000); ui.countdown.textContent = StatusMonitor.formatCountdown(secondsRemaining); ui.countdown.style.display = ''; } else { ui.countdown.textContent = '--:--:--'; ui.countdown.style.display = 'none'; } }
-                     });
-                     if (config.debug && Math.random() < 0.05) console.log(`[INFO] Monitor update tick @ ${now.toISOString()}`);
-                 };
-                 try { updateCycle(); setInterval(updateCycle, config.checkInterval); if (config.debug) console.log("[INFO] Monitor update interval started."); } catch (error) { console.error("[FATAL] Error during initial monitor setup:", error); const monitorDiv = document.getElementById("status-monitor"); if (monitorDiv) monitorDiv.innerHTML = "<p style='color:red; text-align:center;'>FATAL MONITOR INIT ERROR. See console.</p>"; }
-            }
-        };
-        // === FIN CÓDIGO MONITOR ===
-
-        // --- [ Event Listeners Setup ] ---
-        document.querySelectorAll('.section:not(#owner-section) .section-header').forEach(header => { header.addEventListener('click', () => { const section = header.parentElement; section.classList.toggle('active'); document.querySelectorAll('.section:not(#owner-section)').forEach(otherSection => { if (otherSection !== section && otherSection.classList.contains('active')) { otherSection.classList.remove('active'); } }); }); });
+        function loadSavedState() { const e=localStorage.getItem("currentTrackIndex");currentTrackIndex=e!==null?parseInt(e,10):0;const t=localStorage.getItem("volume");if(volumeSlider){volumeSlider.value=t!==null?t:.1}if(audio)audio.volume=t!==null?t:.1;if(playPauseButton){ const playIcon = playPauseButton.querySelector('.icon-play'); const pauseIcon = playPauseButton.querySelector('.icon-pause'); playIcon.style.display = 'inline-block'; pauseIcon.style.display = 'none';}loadTrack(currentTrackIndex) }
+        function initialUserInteraction() { if(!hasInteracted && audio){ hasInteracted=!0; loadSavedState(); if(localStorage.getItem("musicState")==="playing"){ audio.play().then(()=>{isPlaying=!0; if(playPauseButton){const playIcon = playPauseButton.querySelector('.icon-play'); const pauseIcon = playPauseButton.querySelector('.icon-pause'); playIcon.style.display = 'none'; pauseIcon.style.display = 'inline-block';}}).catch(e=>{ localStorage.setItem("musicState","paused"); isPlaying = false; if(playPauseButton){const playIcon = playPauseButton.querySelector('.icon-play'); const pauseIcon = playPauseButton.querySelector('.icon-pause'); playIcon.style.display = 'inline-block'; pauseIcon.style.display = 'none'; }}); }} document.removeEventListener("click",initialUserInteraction); document.removeEventListener("touchstart", initialUserInteraction); }
+        document.querySelectorAll('.section:not(#owner-section) .section-header').forEach(header => { header.addEventListener('click', () => { const section = header.parentElement; const gridLinks = section.querySelector('.grid-links'); const arrowIcon = header.querySelector('.arrow .icon'); const linksToAnimate = Array.from(gridLinks.querySelectorAll('.link-button')); section.classList.toggle('active'); if (section.classList.contains('active')) { gsap.to(gridLinks, { height: "auto", opacity: 1, paddingTop: gridLinksPadding.top, paddingBottom: gridLinksPadding.bottom, duration: sectionDuration, ease: sectionEase }); if(arrowIcon) gsap.to(arrowIcon, { rotation: 180, duration: 0.3, ease: sectionEase }); gsap.fromTo(linksToAnimate, { opacity: 0, y: "0.5rem" }, { opacity: 1, y: "0rem", duration: 0.3, ease: "power2.out", stagger: 0.05, delay: 0.1 }); } else { gsap.to(gridLinks, { height: 0, opacity: 0, paddingTop: "0px", paddingBottom: "0px", duration: sectionDuration, ease: sectionEase }); if(arrowIcon) gsap.to(arrowIcon, { rotation: 0, duration: 0.3, ease: sectionEase }); } document.querySelectorAll('.section:not(#owner-section)').forEach(otherSection => { if (otherSection !== section && otherSection.classList.contains('active')) { otherSection.classList.remove('active'); const otherGridLinks = otherSection.querySelector('.grid-links'); const otherArrowIcon = otherSection.querySelector('.arrow .icon'); gsap.to(otherGridLinks, { height: 0, opacity: 0, paddingTop: "0px", paddingBottom: "0px", duration: sectionDuration, ease: sectionEase }); if(otherArrowIcon) gsap.to(otherArrowIcon, { rotation: 0, duration: 0.3, ease: sectionEase }); } }); }); });
         searchInput?.addEventListener('input', handleSearch);
-        playPauseButton?.addEventListener('click', () => { if(isPlaying){audio.pause();playPauseButton.innerHTML='<i class="fas fa-play"></i>';localStorage.setItem("musicState","paused")}else{if(!audio.src || audio.src === window.location.href){ loadTrack(currentTrackIndex); } audio.play().then(()=>{playPauseButton.innerHTML='<i class="fas fa-pause"></i>';localStorage.setItem("musicState","playing")}).catch(e=>{ isPlaying = !isPlaying; })} isPlaying=!isPlaying }); // Corregido toggle en catch
+        playPauseButton?.addEventListener('click', () => { const playIcon = playPauseButton.querySelector('.icon-play'); const pauseIcon = playPauseButton.querySelector('.icon-pause'); if(isPlaying){ audio.pause(); playIcon.style.display = 'inline-block'; pauseIcon.style.display = 'none'; localStorage.setItem("musicState","paused"); } else { if(!audio.src || audio.src === window.location.href){ loadTrack(currentTrackIndex); } audio.play().then(()=>{ playIcon.style.display = 'none'; pauseIcon.style.display = 'inline-block'; localStorage.setItem("musicState","playing"); }).catch(e=>{ isPlaying = !isPlaying; console.error("Error playing audio:", e); }); } isPlaying=!isPlaying; });
         prevButton?.addEventListener('click', () => { loadTrack(currentTrackIndex-1);if(isPlaying){audio.play().catch(e=>console.error("Error playing prev audio:",e))} });
         nextButton?.addEventListener('click', () => { loadTrack(currentTrackIndex+1);if(isPlaying){audio.play().catch(e=>console.error("Error playing next audio:",e))} });
         volumeSlider?.addEventListener('input', () => { if (audio) audio.volume=volumeSlider.value; localStorage.setItem("volume",volumeSlider.value) });
         audio?.addEventListener('ended', () => { if(isPlaying){loadTrack(currentTrackIndex+1);audio.play().catch(e=>console.error("Error playing audio on ended:",e))}else{loadTrack(currentTrackIndex+1)} });
         document.addEventListener('click', initialUserInteraction, { once: true });
         document.addEventListener('touchstart', initialUserInteraction, { once: true });
-        ownerHeader?.addEventListener('click', (event) => { event.preventDefault(); if (!isAuthenticated) { if (passwordModal) passwordModal.style.display = "block"; if (passwordInput) passwordInput.focus(); } else { if (ownerSection) ownerSection.classList.toggle("active"); updateOwnerSectionVisibility(); } });
-        closeModalButton?.addEventListener('click', () => { if (passwordModal) passwordModal.style.display = "none"; });
+        ownerHeader?.addEventListener('click', (event) => { event.preventDefault(); const arrowIcon = ownerHeader.querySelector('.arrow .icon'); if (!isAuthenticated) { if (passwordModal) { passwordModal.style.display = "flex"; gsap.fromTo(passwordModal, {autoAlpha:0}, { autoAlpha: 1, duration: 0.3, ease: "power2.out" }); gsap.fromTo(passwordModal.querySelector('.modal-content'), { y: "-1.875rem", opacity: 0, scale:0.95}, { y: "0rem", opacity: 1, scale:1, duration: 0.4, ease: "back.out(1.7)"}); } if (passwordInput) passwordInput.focus(); } else { ownerSection.classList.toggle("active"); if (arrowIcon) gsap.to(arrowIcon, { rotation: ownerSection.classList.contains('active') ? 180 : 0, duration: 0.3, ease: sectionEase }); updateOwnerSectionVisibility(true); } });
+        closeModalButton?.addEventListener('click', () => { if (passwordModal) { gsap.to(passwordModal.querySelector('.modal-content'), { y: "1.25rem", opacity: 0, scale: 0.95, duration: 0.25, ease: "power2.in" }); gsap.to(passwordModal, { autoAlpha: 0, duration: 0.3, delay:0.1, ease: "power2.in", onComplete: () => passwordModal.style.display = "none" }); } });
         submitPasswordButton?.addEventListener('click', checkPassword);
         passwordInput?.addEventListener('keypress', (event) => { if (event.key === "Enter") { checkPassword(); } });
-        window.addEventListener('click', (event) => { if (event.target === passwordModal && passwordModal) { passwordModal.style.display = "none"; } });
-
-        // --- [ Inicialización al Cargar Página ] ---
+        window.addEventListener('click', (event) => { if (event.target === passwordModal && passwordModal && passwordModal.style.display !== "none") { gsap.to(passwordModal.querySelector('.modal-content'), { y: "1.25rem", opacity: 0, scale: 0.95, duration: 0.25, ease: "power2.in" }); gsap.to(passwordModal, { autoAlpha: 0, duration: 0.3, delay:0.1, ease: "power2.in", onComplete: () => passwordModal.style.display = "none" }); } });
+        
         document.addEventListener("DOMContentLoaded", () => {
-            const loadingScreen = document.getElementById('loading-screen');
-            if (loadingScreen) {
-                loadingScreen.classList.add('hidden');
-                loadingScreen.addEventListener('transitionend', () => { loadingScreen.style.display = 'none'; }, { once: true });
-                setTimeout(() => { if (loadingScreen.style.display !== 'none') { loadingScreen.style.display = 'none'; } }, 700);
+            if (typeof feather !== 'undefined') {
+                feather.replace({width: '1em', height: '1em', 'stroke-width': 2.2});
+            } else {
+                console.error("Feather Icons script not loaded. Make sure js/feather.min.js is present or CDN is working.");
             }
-            try { StatusMonitor.run(monitorConfig); } catch (monitorError) { console.error("Error initializing Status Monitor:", monitorError); const monitorDiv = document.getElementById("status-monitor"); if(monitorDiv) monitorDiv.innerHTML = "<p style='color:red;text-align:center;'>Error al cargar el monitor de estado.</p>"; }
-            // Llamada inicial para asegurar el estado correcto de Owner al cargar
-            updateOwnerSectionVisibility();
-            // console.log("UnevennesX Page Initialized (v1.17 - Owner Visible Fix).");
+            
+            const loadingScreen = document.getElementById('loading-screen');
+            gsap.set("#loading-screen", { autoAlpha: 1 });
+
+            function splitTextIntoSpans(targetSelector, text) {
+                const target = document.querySelector(targetSelector);
+                if (!target) return [];
+                target.innerHTML = '';
+                return text.split("").map(char => {
+                    const span = document.createElement("span");
+                    span.className = "char";
+                    span.style.setProperty('--char-index', target.children.length);
+                    span.textContent = char === " " ? "\u00A0" : char;
+                    target.appendChild(span);
+                    return span;
+                });
+            }
+
+            document.querySelectorAll('.section').forEach(section => { const gridLinks = section.querySelector('.grid-links'); const arrowIcon = section.querySelector('.arrow .icon'); const initialPadding = { paddingTop: "0px", paddingBottom: "0px" }; if (section.classList.contains('active')) { initialPadding.paddingTop = gridLinksPadding.top; initialPadding.paddingBottom = gridLinksPadding.bottom; gsap.set(gridLinks, { height: "auto", opacity: 1, ...initialPadding }); if(arrowIcon) gsap.set(arrowIcon, { rotation: 180 }); } else { gsap.set(gridLinks, { height: 0, opacity: 0, ...initialPadding }); if(arrowIcon) gsap.set(arrowIcon, { rotation: 0 }); } });
+            updateOwnerSectionVisibility(false);
+            gsap.to("h1", { duration: 1.8, textShadow: `0 0 0.75rem var(--h1-glow-end), 0 0 1.5rem var(--h1-glow-end)`, yoyo: true, repeat: -1, ease: "sine.inOut", });
+
+            if (loadingScreen) {
+                const titleEvanescenceEl = document.getElementById("loading-title-evanescence");
+                const titleUnevennesxEl = document.getElementById("loading-title-unevennesx");
+
+                const evanescenceChars = splitTextIntoSpans("#loading-title-evanescence", "EvanescencE");
+                const unevennesxChars = splitTextIntoSpans("#loading-title-unevennesx", "UnevennesX");
+                
+                gsap.set(titleUnevennesxEl, { opacity:0, y: 20, scale: 0.9 });
+
+                const masterLoadingTl = gsap.timeline({
+                    delay: 0.3, 
+                    onComplete: () => {
+                        gsap.to(loadingScreen, { 
+                            autoAlpha: 0, 
+                            duration: 0.8, 
+                            ease: "power2.inOut",
+                            onComplete: () => { 
+                                gsap.to('body', { opacity: 1, duration: 0.3 });
+                                const pageEntryTl = gsap.timeline({ defaults: { ease: "expo.out", duration:0.6 } });
+                                pageEntryTl
+                                  .fromTo(".container", { autoAlpha: 0, y: "3rem", scale:0.9 }, { autoAlpha: 1, y: "0rem", scale:1, duration:0.5})
+                                  .fromTo("h1", { autoAlpha: 0, y: "1.5rem", scale:0.9 }, { autoAlpha: 1, y: "0rem", scale:1, duration: 0.4 }, "-=0.2")
+                                  .fromTo("#search-input", { autoAlpha: 0, y: "1.25rem", scale:0.95 }, { autoAlpha: 1, y: "0rem", scale:1, duration: 0.4 }, "-=0.2")
+                                  .fromTo(".section", { autoAlpha: 0, y: "1.25rem", scale:0.98 }, { autoAlpha: 1, y: "0rem", scale:1, duration: 0.3, stagger: { amount: 0.3, from: "start", ease: "power1.out" } }, "-=0.2")
+                                  .fromTo("#music-player-container", { autoAlpha: 0, x: "-2rem", scale:0.9 }, { autoAlpha: 1, x: "0rem", scale:1, duration: 0.4, ease: "back.out(1.2)" }, "-=0.1");
+                            }
+                        });
+                    }
+                });
+
+                masterLoadingTl
+                    .staggerFromTo(evanescenceChars, 0.5, 
+                        { opacity: 0, y: 30, scale: 0.7, rotationX: -80, color: "var(--primary-accent)" },
+                        { opacity: 1, y: 0, scale: 1, rotationX: 0, color: "var(--text-color-light)", ease: "back.out(1.5)"}, 
+                        0.06
+                    )
+                    .addLabel("evanescenceIn")
+                    .to(evanescenceChars, {
+                        duration: 0.6,
+                        opacity: 0,
+                        scale: 0.1,
+                        filter: "blur(3px)",
+                        ease: "power1.in",
+                        stagger: {
+                            each: 0.03,
+                            from: "random",
+                            onStart: function() {
+                                let target = this.targets()[0];
+                                gsap.to(target, {
+                                    y: () => window.innerHeight * 0.25 + Math.sin(Array.from(evanescenceChars).indexOf(target) * 0.4) * 40 + gsap.utils.random(-30, 30),
+                                    x: () => (Array.from(evanescenceChars).indexOf(target) - evanescenceChars.length / 2) * (gsap.utils.random(5,12)) + gsap.utils.random(-40, 40),
+                                    rotationZ: () => gsap.utils.random(-180, 180),
+                                    rotationX: () => gsap.utils.random(-70, 70),
+                                    duration: 0.6 + Math.random() * 0.3,
+                                    ease: "power1.in"
+                                });
+                            }
+                        }
+                    }, "evanescenceIn+=0.8")
+                    .set(titleEvanescenceEl, { display: "none" }, ">")
+
+                    .set(titleUnevennesxEl, { opacity:1, y: 20, scale: 0.9 })
+                    .staggerFromTo(unevennesxChars, 0.6,
+                        { opacity: 0, y:30, scale: 0.6, filter:"blur(8px)", color: "var(--section-title-color)" },
+                        { opacity: 1, y:0, scale: 1, filter:"blur(0px)", color: "var(--text-color-light)", ease: "expo.out" },
+                        0.05, "<0.2" 
+                    )
+                    .addLabel("unevennesxIn")
+                    .to({}, {duration: 1.0}, "unevennesxIn+=0.5");
+
+            } else { 
+                 gsap.to('body', { opacity: 1, duration: 0.2 }); 
+                 const pageEntryTl = gsap.timeline({ defaults: { ease: "expo.out", duration:0.6 } }); 
+                 pageEntryTl .fromTo(".container", { autoAlpha: 0, y: "3.125rem", scale:0.95 }, { autoAlpha: 1, y: "0rem", scale:1, duration:0.5}) .fromTo("h1", { autoAlpha: 0, y: "1.5rem", scale:0.9 }, { autoAlpha: 1, y: "0rem", scale:1, duration: 0.4 }, "-=0.25") .fromTo("#search-input", { autoAlpha: 0, y: "1.25rem", scale:0.95 }, { autoAlpha: 1, y: "0rem", scale:1, duration: 0.4 }, "-=0.25") .fromTo(".section", { autoAlpha: 0, y: "1.25rem", scale:0.98 }, { autoAlpha: 1, y: "0rem", scale:1, duration: 0.35, stagger: { amount: 0.25, from: "start", ease: "power1.out" } }, "-=0.25") .fromTo("#music-player-container", { autoAlpha: 0, x: "-2.1875rem", scale:0.9 }, { autoAlpha: 1, x: "0rem", scale:1, duration: 0.4, ease: "back.out(1.2)" }, "-=0.1"); 
+            }
         });
-
     </script>
-
 </body>
 </html>
