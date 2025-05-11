@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -15,10 +14,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Prefetch para intentar cargar las fuentes antes -->
-    <link rel="prefetch" href="https://fonts.googleapis.com/css2?family=Roboto:wght=300;400;500;700;800;900&display=swap" as="style">
+    <link rel="prefetch" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;800;900&display=swap" as="style">
     <link rel="prefetch" href="https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92DNhyPQRSl.woff2" as="font" type="font/woff2" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght=300;400;500;700;800;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+
     <!-- CSS de la PANTALLA DE CARGA: Inline y al principio para carga instantánea -->
     <style>
         #loading-screen {
@@ -37,7 +36,7 @@
             visibility: visible; /* Visible por defecto */
             /* Transición CSS REMOVIDA, será manejada por GSAP */
         }
-        
+
         .loading-content {
             text-align: center;
             color: #ddd; /* Color de texto base */
@@ -117,24 +116,26 @@
             --border-radius-sm: 0.25rem;
             --border-radius-md: 0.5rem;
             --border-radius-lg: 0.75rem;
+            /* Cambiado el color del punto a primary-accent */
+            --link-dot-color: var(--primary-accent);
         }
         html { font-size: var(--font-size-base); height: 100%; }
-        
-        body { 
-            font-family: var(--font-family); 
-            font-size: var(--font-size-md); 
-            line-height: 1.6; 
-            margin: 0; 
-            background-color: var(--bg-color); 
-            color: var(--text-color); 
-            padding: var(--spacing-sm); 
-            box-sizing: border-box; 
-            min-height: 100%; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            overflow-x: hidden; 
+
+        body {
+            font-family: var(--font-family);
+            font-size: var(--font-size-md);
+            line-height: 1.6;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: var(--spacing-sm);
+            box-sizing: border-box;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
             opacity: 0; /* Oculto por defecto */
             visibility: hidden; /* Oculto por defecto */
             /* Transición CSS REMOVIDA, será manejada por GSAP */
@@ -149,15 +150,52 @@
         .section:hover { transform: translateY(-0.125rem); box-shadow: 0 0.25rem 0.9375rem var(--shadow-color-medium); }
         .section-header { padding: 0.75rem 1.25rem; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background-color 0.3s ease; }
         .section-header:hover { background-color: rgba(255, 255, 255, 0.05); }
+        /* Estilos para el título de sección */
         .section-title { font-size: 1em; font-weight: 500; color: var(--section-title-color); margin: 0; display: flex; align-items: center; gap: var(--spacing-sm); }
+        /* Iconos en títulos de sección (usando Feather) */
         .section-title .icon { width: 1.25em; height: 1.25em; stroke-width: 2.2; color: currentColor; }
         .section-title .icon.principales { color: var(--primary-accent); } .section-title .icon.destacados { color: #4dabf7; } .section-title .icon.tecnicas { color: #fab005; } .section-title .icon.utilidades { color: #8ce99a; } .section-title .icon.owner { color: #e589f0; }
+
         .arrow .icon { transition: transform 0.35s cubic-bezier(0.25, 0.1, 0.25, 1); color: var(--text-muted-color); width: 1.125em; height: 1.125em; }
         /* grid-links altura inicial controlada por JS para secciones colapsadas */
         .grid-links { display: grid; grid-template-columns: 1fr; gap: var(--spacing-md); padding-left: 1.375rem; padding-right: 1.375rem; height: 0; opacity: 0; overflow: hidden; }
-        .link-button { padding: 0.9375rem 1.25rem; background: var(--link-button-bg); border: 1px solid var(--border-color-light); border-radius: var(--border-radius-md); color: var(--text-color); text-decoration: none; font-size: var(--font-size-sm); font-weight: 400; transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1); display: flex; align-items: center; justify-content: flex-start; gap: var(--spacing-sm); }
+        /* Estilos para los botones de enlace */
+        .link-button {
+             padding: 0.9375rem 1.25rem;
+             background: var(--link-button-bg);
+             border: 1px solid var(--border-color-light);
+             border-radius: var(--border-radius-md);
+             color: var(--text-color);
+             text-decoration: none;
+             font-size: var(--font-size-sm);
+             font-weight: 400;
+             transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+             display: flex;
+             align-items: center;
+             justify-content: flex-start;
+             gap: var(--spacing-sm);
+             position: relative; /* Necesario para posicionar el pseudo-elemento */
+             padding-left: calc(1.375rem + 0.5em + var(--spacing-sm)); /* Ajustar padding-left para dejar espacio al punto */
+        }
         .link-button:hover { background: var(--link-button-hover-bg); color: var(--text-color-light); transform: translateY(-0.1875rem); box-shadow: 0 0.25rem 0.625rem rgba(var(--primary-accent-rgb), 0.15); }
-        .link-button .icon { width: 1em; height: 1em; stroke-width: 2.2; color: var(--text-muted-color); margin-right: var(--spacing-sm); }
+
+        /* El punto antes del texto del enlace */
+        .link-button::before {
+            content: ""; /* Contenido vacío, creamos la forma con background/border-radius */
+            display: inline-block;
+            width: 0.5em; /* Tamaño del punto */
+            height: 0.5em; /* Tamaño del punto */
+            background-color: var(--link-dot-color); /* Color rosa (usando primary-accent) */
+            border-radius: 50%; /* Hace que sea un círculo */
+            margin-right: var(--spacing-sm); /* Espacio entre el punto y el texto */
+            flex-shrink: 0; /* Evita que el punto se encoja */
+            position: absolute; /* Posicionar absolutamente dentro del link-button */
+            left: 1.375rem; /* Alinear con el padding-left del grid-links */
+            top: 50%; /* Centrar verticalmente */
+            transform: translateY(-50%); /* Ajustar para centrado perfecto */
+        }
+
+
         #search-input { width: 100%; padding: 0.75rem 0.9375rem; margin-bottom: var(--spacing-lg); border: 1px solid var(--border-color-dark); background-color: var(--input-bg); color: var(--text-color); border-radius: var(--border-radius-sm); box-sizing: border-box; font-size: var(--font-size-md); outline: none; transition: border-color 0.3s, box-shadow 0.3s; }
         #search-input::placeholder { color: var(--text-muted-color); }
         #search-input:focus { border-color: var(--primary-accent); box-shadow: 0 0 0 0.125rem rgba(var(--primary-accent-rgb), 0.2); }
@@ -166,7 +204,7 @@
         .modal-content h2 { margin-top: 0; color: var(--section-title-color); font-size: 1.5em; margin-bottom: var(--spacing-md); display: flex; align-items: center; justify-content: center; gap: var(--spacing-sm); }
         .modal-content h2 .icon { width: 1.5em; height: 1.5em; }
         .modal-content label { display: block; margin-bottom: var(--spacing-xs); color: var(--text-color-light); text-align: left; font-size: var(--font-size-sm); }
-        .modal-content input[type="text"], .modal-content input[type="password"] { width: 100%; padding: 0.625rem; margin-bottom: var(--spacing-md); border: 1px solid var(--border-color-dark); background-color: var(--input-bg); color: var(--text-color); border-radius: var(--border-radius-sm); box-sizing: border-box; font-size: var(--font-size-md); }
+        .modal-content input[type="text"], .modal-content input[type="password"] { width: 100%; padding: 0.625rem; margin-bottom: var(--spacing-md); border: 1px solid var(--border-color-dark); background-color: var(--input-bg); color: var(--text-color); border-radius: var(--border-radius-sm); box-sizing: border-box; font-size: var(--font-size-md); outline: none; transition: border-color 0.3s, box-shadow 0.3s; }
         .modal-content input[type="text"]:focus, .modal-content input[type="password"]:focus { border-color: var(--primary-accent); box-shadow: 0 0 0 0.125rem rgba(var(--primary-accent-rgb), 0.2); outline: none; }
         .modal-content button { background-color: var(--primary-accent); color: var(--text-color-light); padding: 0.75rem 1.25rem; border: none; border-radius: var(--border-radius-sm); cursor: pointer; font-size: 1em; font-weight: 500; transition: background-color 0.3s ease; width: 100%; }
         .modal-content button:hover { background-color: var(--primary-accent-hover); }
@@ -183,8 +221,47 @@
         #volume-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 0.625rem; height: 0.625rem; background: var(--text-color-light); cursor: pointer; border-radius: 50%; border: 2px solid var(--bg-color); }
         #volume-slider::-moz-range-thumb { width: 0.625rem; height: 0.625rem; background: var(--text-color-light); cursor: pointer; border-radius: 50%; border: 2px solid var(--bg-color); }
         #volume-slider:hover { opacity: 1; }
-        @media (min-width: 37.5rem) { .grid-links { grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr)); gap: var(--spacing-md); padding-left: 1.375rem; padding-right: 1.375rem; } .link-button { padding: 1.125rem 1.5625rem; } }
-        @media (max-width: 37.4375rem) { body { padding: var(--spacing-sm); } .container { width: calc(100% - var(--spacing-md)); padding: var(--spacing-md); margin: var(--spacing-sm) auto; margin-bottom: 4.375rem; } h1 { font-size: 1.5em; margin: var(--spacing-sm) 0 var(--spacing-md); } .section { margin-bottom: var(--spacing-sm); } .section-header { padding: 0.75rem 0.9375rem; } .section-title { font-size: 0.9em; } .grid-links { padding-left: 1.125rem; padding-right: 1.125rem; gap: var(--spacing-sm); } .link-button { padding: 0.625rem 0.75rem; font-size: var(--font-size-sm); justify-content: center; } .link-button .icon { margin-right: var(--spacing-xs); } #search-input { padding: 0.625rem 0.75rem; margin-bottom: var(--spacing-md); } #music-player-container { bottom: var(--spacing-xs); left: var(--spacing-xs); padding: var(--spacing-xs); gap: var(--spacing-xs); width: auto; } #track-name { display: none; } #controls-container { gap: 0.187rem; } #play-pause-button .icon, #prev-button .icon, #next-button .icon { width: 0.9em; height: 0.9em; } #volume-slider { display: none; } }
+        @media (min-width: 37.5rem) {
+             .grid-links { grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr)); gap: var(--spacing-md); padding-left: 1.375rem; padding-right: 1.375rem; }
+             .link-button {
+                 padding: 1.125rem 1.5625rem;
+                 /* Ajustar padding-left para pantallas más grandes si es necesario,
+                    o mantener el ajuste basado en el padding del grid-links si es responsivo */
+                 padding-left: calc(1.375rem + 0.5em + var(--spacing-sm)); /* Mismo cálculo que arriba */
+             }
+             /* Ajustar la posición del punto para pantallas más grandes si el padding-left del grid-links cambia */
+             .link-button::before {
+                 left: 1.375rem; /* Alinear con el padding-left del grid-links */
+             }
+         }
+        @media (max-width: 37.4375rem) {
+            body { padding: var(--spacing-sm); }
+            .container { width: calc(100% - var(--spacing-md)); padding: var(--spacing-md); margin: var(--spacing-sm) auto; margin-bottom: 4.375rem; }
+            h1 { font-size: 1.5em; margin: var(--spacing-sm) 0 var(--spacing-md); }
+            .section { margin-bottom: var(--spacing-sm); }
+            .section-header { padding: 0.75rem 0.9375rem; }
+            .section-title { font-size: 0.9em; }
+            .grid-links { padding-left: 1.125rem; padding-right: 1.125rem; gap: var(--spacing-sm); }
+            .link-button {
+                 padding: 0.625rem 0.75rem;
+                 font-size: var(--font-size-sm);
+                 justify-content: center;
+                 /* Ajustar padding-left para pantallas pequeñas */
+                 padding-left: calc(1.125rem + 0.5em + var(--spacing-xs)); /* Usar var(--spacing-xs) para gap en mobile */
+            }
+             /* Ajustar la posición del punto para pantallas pequeñas */
+             .link-button::before {
+                 left: 1.125rem; /* Alinear con el padding-left del grid-links en mobile */
+                 margin-right: var(--spacing-xs); /* Usar var(--spacing-xs) para gap en mobile */
+             }
+
+             #search-input { padding: 0.625rem 0.75rem; margin-bottom: var(--spacing-md); }
+             #music-player-container { bottom: var(--spacing-xs); left: var(--spacing-xs); padding: var(--spacing-xs); gap: var(--spacing-xs); width: auto; }
+             #track-name { display: none; }
+             #controls-container { gap: 0.187rem; }
+             #play-pause-button .icon, #prev-button .icon, #next-button .icon { width: 0.9em; height: 0.9em; }
+             #volume-slider { display: none; }
+        }
 
     </style>
 </head>
@@ -203,87 +280,87 @@
     </div>
 
     <!-- CONTENIDO PRINCIPAL: Inicialmente oculto por CSS -->
-    <div class="container"> 
+    <div class="container">
         <h1>
             <a href="https://unevennesx.github.io/consultas/" style="text-decoration: none; color: inherit;">UnevennesX <span class="title-ghost">👻</span> EvannescencE</a>
         </h1>
 
-        <input type="text" id="search-input" placeholder="Buscar proyectos..."> 
+        <input type="text" id="search-input" placeholder="Buscar proyectos...">
         <div id="no-results-message" style="display:none; color: var(--text-color-light); text-align: center; margin: var(--spacing-md) 0;">No se encontraron resultados.</div>
 
-        <div class="section" data-section-name="Principales"> 
+        <div class="section" data-section-name="Principales">
             <div class="section-header">
                 <div class="section-title"><i data-feather="star" class="icon principales"></i> Principales</div>
                 <div class="arrow"><i data-feather="chevron-down" class="icon"></i></div>
             </div>
             <div class="grid-links">
-                <a href="https://extension-de-pg.vercel.app/" class="link-button"><i data-feather="paperclip" class="icon"></i> Precio del $</a>
-                <a href="https://mi-pg.vercel.app/login/" class="link-button"><i data-feather="paperclip" class="icon"></i> UnevennesX</a>
-                <a href="https://unevennesx.github.io/UserAgent/" class="link-button"><i data-feather="paperclip" class="icon"></i> User Agent 2.0</a>
-                <a href="https://unevennesx.github.io/Avanced-UnevennesX/" class="link-button"><i data-feather="paperclip" class="icon"></i> Avanced-EvanneS</a>
-                <a href="https://unevennesx.github.io/zipcodes/" class="link-button"><i data-feather="paperclip" class="icon"></i> Zipcode</a>
+                <a href="https://extension-de-pg.vercel.app/" class="link-button">Precio del $</a>
+                <a href="https://mi-pg.vercel.app/login/" class="link-button">UnevennesX</a>
+                <a href="https://unevennesx.github.io/UserAgent/" class="link-button">User Agent 2.0</a>
+                <a href="https://unevennesx.github.io/Avanced-UnevennesX/" class="link-button">Avanced-EvanneS</a>
+                <a href="https://unevennesx.github.io/zipcodes/" class="link-button">Zipcode</a>
             </div>
         </div>
-        <div class="section" data-section-name="Destacados"> 
+        <div class="section" data-section-name="Destacados">
             <div class="section-header">
                 <div class="section-title"><i data-feather="send" class="icon destacados"></i> Destacados</div>
                 <div class="arrow"><i data-feather="chevron-down" class="icon"></i></div>
             </div>
             <div class="grid-links">
-                <a href="https://unevennesx.github.io/-CheckLinks-/" class="link-button"><i data-feather="paperclip" class="icon"></i> ALL SAMPLICIOUS</a>
-                <a href="https://unevennesx.github.io/app/" class="link-button"><i data-feather="paperclip" class="icon"></i> glimpsehere.com</a>
-                <a href="https://unevennesx.github.io/zamplia/" class="link-button"><i data-feather="paperclip" class="icon"></i> Zamplia</a>
-                <a href="https://unevennesx.github.io/UnevennesX/" class="link-button"><i data-feather="paperclip" class="icon"></i> Armador V1</a>
-                <a href="https://unevennesx.github.io/cube/" class="link-button"><i data-feather="paperclip" class="icon"></i> Sample-Cube</a>
-                <a href="https://unevennesx.github.io/savanta/" class="link-button"><i data-feather="paperclip" class="icon"></i> Savanta</a>
-                <a href="https://unevennesx.github.io/ISA/" class="link-button"><i data-feather="paperclip" class="icon"></i> ISA</a>
-                <a href="https://unevennesx.github.io/Survey.Dashmr/" class="link-button"><i data-feather="paperclip" class="icon"></i> Survey.Dashmr</a>
-                <a href="https://unevennesx.github.io/Survey-Cint/" class="link-button"><i data-feather="paperclip" class="icon"></i> Sw.Cint</a>
-                <a href="https://unevennesx.github.io/tsid/" class="link-button"><i data-feather="paperclip" class="icon"></i> TSID</a>
-                <a href="https://unevennesx.github.io/rd-secured/" class="link-button"><i data-feather="paperclip" class="icon"></i> Rd.Secured <span style="opacity:0.8;">👻</span></a>
-                <a href="https://unevennesx.github.io/RD-SIN-rd_proj_ud-/" class="link-button"><i data-feather="paperclip" class="icon"></i> Rd."rd_proj_ud"</a>
-                <a href="https://unevennesx.github.io/All-Spectrum/" class="link-button"><i data-feather="paperclip" class="icon"></i> ALL Spectrum</a>
-                <a href="https://unevennesx.github.io/spectrum-corto/" class="link-button"><i data-feather="paperclip" class="icon"></i> Spectrum Corto</a>
-                <a href="https://unevennesx.github.io/Survey.Emi/" class="link-button"><i data-feather="paperclip" class="icon"></i> Survey.Emi</a>
+                <a href="https://unevennesx.github.io/-CheckLinks-/" class="link-button">ALL SAMPLICIOUS</a>
+                <a href="https://unevennesx.github.io/app/" class="link-button">glimpsehere.com</a>
+                <a href="https://unevennesx.github.io/zamplia/" class="link-button">Zamplia</a>
+                <a href="https://unevennesx.github.io/UnevennesX/" class="link-button">Armador V1</a>
+                <a href="https://unevennesx.github.io/cube/" class="link-button">Sample-Cube</a>
+                <a href="https://unevennesx.github.io/savanta/" class="link-button">Savanta</a>
+                <a href="https://unevennesx.github.io/ISA/" class="link-button">ISA</a>
+                <a href="https://unevennesx.github.io/Survey.Dashmr/" class="link-button">Survey.Dashmr</a>
+                <a href="https://unevennesx.github.io/Survey-Cint/" class="link-button">Sw.Cint</a>
+                <a href="https://unevennesx.github.io/tsid/" class="link-button">TSID</a>
+                <a href="https://unevennesx.github.io/rd-secured/" class="link-button">Rd.Secured <span style="opacity:0.8;">👻</span></a>
+                <a href="https://unevennesx.github.io/RD-SIN-rd_proj_ud-/" class="link-button">Rd."rd_proj_ud"</a>
+                <a href="https://unevennesx.github.io/All-Spectrum/" class="link-button">ALL Spectrum</a>
+                <a href="https://unevennesx.github.io/spectrum-corto/" class="link-button">Spectrum Corto</a>
+                <a href="https://unevennesx.github.io/Survey.Emi/" class="link-button">Survey.Emi</a>
             </div>
         </div>
-        <div class="section" data-section-name="Técnicas"> 
+        <div class="section" data-section-name="Técnicas">
             <div class="section-header">
                 <div class="section-title"><i data-feather="code" class="icon tecnicas"></i> Técnicas</div>
                 <div class="arrow"><i data-feather="chevron-down" class="icon"></i></div>
             </div>
             <div class="grid-links">
-                <a href="https://unevennesx.github.io/fakename/" class="link-button"><i data-feather="paperclip" class="icon"></i> Fake-Name</a>
-                <a href="https://unevennesx.github.io/cpx-tap-bit/" class="link-button"><i data-feather="paperclip" class="icon"></i> CPX</a>
-                <a href="https://unevennesx.github.io/calculadora/" class="link-button"><i data-feather="paperclip" class="icon"></i> Calculadora</a>
+                <a href="https://unevennesx.github.io/fakename/" class="link-button">Fake-Name</a>
+                <a href="https://unevennesx.github.io/cpx-tap-bit/" class="link-button">CPX</a>
+                <a href="https://unevennesx.github.io/calculadora/" class="link-button">Calculadora</a>
             </div>
         </div>
-        <div class="section" data-section-name="Utilidades"> 
+        <div class="section" data-section-name="Utilidades">
             <div class="section-header">
                 <div class="section-title"><i data-feather="tool" class="icon utilidades"></i> Utilidades</div>
                 <div class="arrow"><i data-feather="chevron-down" class="icon"></i></div>
             </div>
             <div class="grid-links">
-                <a href="https://unevennesx.github.io/UID-ONLY/" class="link-button"><i data-feather="paperclip" class="icon"></i> Bitlabs</a>
-                <a href="https://unevennesx.github.io/userv1/" class="link-button"><i data-feather="paperclip" class="icon"></i> User Agent 1.0</a>
-                <a href="https://unevennesx.github.io/agg-consultas/" class="link-button"><i data-feather="paperclip" class="icon"></i> Admin Consultas</a>
+                <a href="https://unevennesx.github.io/UID-ONLY/" class="link-button">Bitlabs</a>
+                <a href="https://unevennesx.github.io/userv1/" class="link-button">User Agent 1.0</a>
+                <a href="https://unevennesx.github.io/agg-consultas/" class="link-button">Admin Consultas</a>
             </div>
         </div>
-        
-        <div class="section" data-section-name="👑 Owner" id="owner-section"> 
+
+        <div class="section" data-section-name="👑 Owner" id="owner-section">
             <div class="section-header" id="owner-header">
                 <div class="section-title"><i data-feather="lock" class="icon owner"></i> Owner</div>
                 <div class="arrow"><i data-feather="chevron-down" class="icon"></i></div>
             </div>
             <div class="grid-links" id="owner-links">
-                <a href="https://unevennesx.github.io/user-owner/" class="link-button"><i data-feather="paperclip" class="icon"></i> UserAgent V3</a>
-                <a href="https://mi-pg.vercel.app/extraer-links/" class="link-button"><i data-feather="paperclip" class="icon"></i> Links UnevennesX</a>
-                <a href="https://mi-pg.vercel.app/offline_backup/manage/" class="link-button"><i data-feather="paperclip" class="icon"></i> Backup UnevennesX</a>
+                <a href="https://unevennesx.github.io/user-owner/" class="link-button">UserAgent V3</a>
+                <a href="https://mi-pg.vercel.app/extraer-links/" class="link-button">Links UnevennesX</a>
+                <a href="https://mi-pg.vercel.app/offline_backup/manage/" class="link-button">Backup UnevennesX</a>
             </div>
         </div>
     </div>
 
-    <div id="music-player-container"> 
+    <div id="music-player-container">
         <span id="track-name">New York</span>
         <div id="controls-container">
             <button id="prev-button" aria-label="Previous track"><i data-feather="skip-back" class="icon"></i></button>
@@ -294,7 +371,7 @@
         </div>
         <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.1" aria-label="Volume">
         <!-- AUDIO: Añadido preload="none" para evitar la descarga inicial -->
-        <audio id="background-music" loop preload="none"> 
+        <audio id="background-music" loop preload="none">
             <source src="audio/newyork.mp3" type="audio/mpeg">
             <source src="audio/miami.mp3" type="audio/mpeg">
             <source src="audio/rd.mp3" type="audio/mpeg">
@@ -314,9 +391,9 @@
         </div>
     </div>
 
-    <!-- SCRIPTS: GSAP para transiciones suaves, Feather para iconos -->
+    <!-- SCRIPTS: GSAP para transiciones suaves, Feather para iconos (solo usados para títulos de sección, flechas y modal) -->
     <script src="js/gsap.min.js"></script>
-    <script src="js/feather.min.js" defer></script> 
+    <script src="js/feather.min.js" defer></script>
 
     <!-- SCRIPT PRINCIPAL: Oculta el loading y muestra el contenido, inicializa la página -->
     <script>
@@ -328,124 +405,246 @@
         document.documentElement.style.setProperty('--h1-glow-start-rgb', getRgbFromCssVar('--h1-glow-start'));
         document.documentElement.style.setProperty('--h1-glow-end-rgb', getRgbFromCssVar('--h1-glow-end'));
         function normalizeString(str) { return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }
-        
+
         // Referencias a elementos (inicializadas en setupPageInteractiveElements)
         let searchInput, noResultsMessage, audio, playPauseButton, prevButton, nextButton, volumeSlider, trackNameDisplay, passwordModal, closeModalButton, submitPasswordButton, passwordInput, ownerSection, ownerHeader, ownerLinks, passwordError;
 
         // Credenciales
-        const correctUsername = "UnevennesX"; 
+        const correctUsername = "UnevennesX";
         const correctPassword = "EvannescencE";
 
+        // Estado de autenticación cargado desde localStorage
         let isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
         let isPlaying = false;
         let currentTrackIndex = 0;
         const tracks = [ { src: "audio/newyork.mp3", name: "New York" }, { src: "audio/miami.mp3", name: "Miami" }, { src: "audio/rd.mp3", name: "RD" }, ];
         let hasInteracted = false;
 
-        // Configuración de GSAP para animaciones (no carga inicial)
+        // Configuración de GSAP para animaciones
         const gridLinksPadding = { top: "1.25rem", bottom: "1.25rem" };
         const sectionEase = "power3.inOut";
         const sectionDuration = 0.35;
 
         // Lógica para la sección Owner
         function updateOwnerSectionVisibility(animate = false) {
-            if (!ownerSection || !ownerLinks) return; 
+            if (!ownerSection || !ownerLinks) return;
 
             const isCurrentlyActive = ownerSection.classList.contains('active');
-            ownerSection.style.display = "block"; 
 
-            const targetProps = { height: 0, opacity: 0, paddingTop: "0px", paddingBottom: "0px" };
-            
-            if (isAuthenticated && isCurrentlyActive) {
-                 targetProps.height = "auto";
-                 targetProps.opacity = 1;
-                 targetProps.paddingTop = gridLinksPadding.top;
-                 targetProps.paddingBottom = gridLinksPadding.bottom;
-            } else if (!isAuthenticated && isCurrentlyActive) {
-                 ownerSection.classList.remove('active'); 
-            } else if (isAuthenticated && !isCurrentlyActive && ownerLinks.style.height === "0px") {
-                 targetProps.height = "auto";
-                 targetProps.opacity = 1;
-                 targetProps.paddingTop = gridLinksPadding.top;
-                 targetProps.paddingBottom = gridLinksPadding.bottom;
-            }
+            // Los enlaces solo deben ser visibles si está autenticado Y la sección está "activa" (expandida)
+            const showLinks = isAuthenticated && isCurrentlyActive;
+
+            const targetProps = {
+                height: showLinks ? "auto" : 0,
+                opacity: showLinks ? 1 : 0,
+                paddingTop: showLinks ? gridLinksPadding.top : "0px",
+                paddingBottom: showLinks ? gridLinksPadding.bottom : "0px"
+            };
 
             const arrowIcon = ownerHeader ? ownerHeader.querySelector('.arrow .icon') : null;
+            const targetRotation = showLinks ? 180 : 0; // Rota si los enlaces están visibles
 
-            // Only use GSAP if it's loaded
+            // Solo usar GSAP si está cargado
             if (typeof gsap !== 'undefined') {
                 if (animate) {
                     gsap.to(ownerLinks, { ...targetProps, duration: sectionDuration, ease: sectionEase });
-                     if (arrowIcon) {
-                        gsap.to(arrowIcon, { rotation: (isAuthenticated && ownerSection.classList.contains('active')) ? 180 : 0, duration: 0.3, ease: sectionEase });
-                     }
+                    if (arrowIcon) {
+                        gsap.to(arrowIcon, { rotation: targetRotation, duration: 0.3, ease: sectionEase });
+                    }
                 } else {
-                     gsap.set(ownerLinks, targetProps);
+                    gsap.set(ownerLinks, targetProps);
                      if (arrowIcon) {
-                        gsap.set(arrowIcon, { rotation: (isAuthenticated && ownerSection.classList.contains('active')) ? 180 : 0 });
+                        gsap.set(arrowIcon, { rotation: targetRotation });
                      }
                 }
-            } else { 
-                 ownerLinks.style.height = targetProps.height === 'auto' ? 'auto' : '0px';
-                 ownerLinks.style.opacity = targetProps.opacity; 
-                 ownerLinks.style.paddingTop = targetProps.paddingTop;
-                 ownerLinks.style.paddingBottom = targetProps.paddingBottom;
-                 if(arrowIcon) arrowIcon.style.transform = `rotate(${(isAuthenticated && ownerSection.classList.contains('active')) ? 180 : 0}deg)`;
+            } else {
+                // Fallback CSS
+                ownerLinks.style.height = targetProps.height === 'auto' ? 'auto' : '0px';
+                ownerLinks.style.opacity = targetProps.opacity;
+                ownerLinks.style.paddingTop = targetProps.paddingTop;
+                ownerLinks.style.paddingBottom = targetProps.paddingBottom;
+                if(arrowIcon) arrowIcon.style.transform = `rotate(${targetRotation}deg)`;
             }
+        }
 
-             if (!isAuthenticated && !ownerSection.classList.contains('active')) {
-                 ownerSection.style.display = "none";
+
+        function checkPassword() {
+             const enteredPassword = passwordInput.value;
+             if (enteredPassword === correctPassword) {
+                 isAuthenticated = true;
+                 localStorage.setItem("isAuthenticated", "true");
+
+                 if (passwordModal) {
+                     if (typeof gsap !== 'undefined') {
+                         gsap.to(passwordModal.querySelector('.modal-content'), { y: 20, opacity: 0, scale: 0.95, duration: 0.25, ease: "power2.in" });
+                         gsap.to(passwordModal, { autoAlpha: 0, duration: 0.3, delay:0.1, ease: "power2.in", onComplete: () => passwordModal.style.display = "none" });
+                     } else {
+                         passwordModal.style.display = "none";
+                         passwordModal.style.opacity = '0';
+                         passwordModal.style.visibility = 'hidden';
+                     }
+                 }
+
+                 if (ownerSection) {
+                     // Añadir la clase 'active' y animar la expansión de los enlaces
+                     ownerSection.classList.add("active");
+                     updateOwnerSectionVisibility(true);
+                 }
+
+                 if (passwordError) passwordError.style.display = "none";
+                 if (passwordInput) passwordInput.value = "";
+
+             } else {
+                 if (passwordError) {
+                     passwordError.style.display = "block";
+                     if (typeof gsap !== 'undefined') {
+                         gsap.fromTo(passwordError, {opacity: 0, y: -10}, {opacity: 1, y: 0, duration: 0.3, ease: "bounce.out"});
+                         gsap.fromTo(passwordModal.querySelector('.modal-content'), {x:0}, {x:10, duration:0.05, repeat:5, yoyo:true, clearProps:"x", ease:"circ.inOut"});
+                     }
+                 }
+                 isAuthenticated = false;
+                 localStorage.setItem("isAuthenticated", "false");
+                 // Si falla el login, asegurarse de que la sección Owner esté colapsada y sin clase active
+                 if (ownerSection) {
+                      ownerSection.classList.remove("active");
+                      updateOwnerSectionVisibility(true); // Animar el colapso si estaba expandida
+                 }
              }
         }
 
+        // Lógica de búsqueda
+        function handleSearch() {
+            let searchTerm = searchInput.value;
+            searchTerm = normalizeString(searchTerm);
+            let hasResults = false;
+            let ownerHasVisibleLinks = false; // Variable para rastrear si hay enlaces del owner visibles (match + auth)
 
-        function checkPassword() { 
-             const enteredPassword = passwordInput.value; if (enteredPassword === correctPassword) { isAuthenticated = true; localStorage.setItem("isAuthenticated", "true"); if (passwordModal) { if (typeof gsap !== 'undefined') { gsap.to(passwordModal.querySelector('.modal-content'), { y: 20, opacity: 0, scale: 0.95, duration: 0.25, ease: "power2.in" }); gsap.to(passwordModal, { autoAlpha: 0, duration: 0.3, delay:0.1, ease: "power2.in", onComplete: () => passwordModal.style.display = "none" }); } else { passwordModal.style.display = "none"; passwordModal.style.opacity = '0'; passwordModal.style.visibility = 'hidden'; } } if (ownerSection) { ownerSection.classList.add("active"); } if (passwordError) passwordError.style.display = "none"; if (passwordInput) passwordInput.value = ""; updateOwnerSectionVisibility(true); } else { if (passwordError) { passwordError.style.display = "block"; if (typeof gsap !== 'undefined') { gsap.fromTo(passwordError, {opacity: 0, y: -10}, {opacity: 1, y: 0, duration: 0.3, ease: "bounce.out"}); gsap.fromTo(passwordModal.querySelector('.modal-content'), {x:0}, {x:10, duration:0.05, repeat:5, yoyo:true, clearProps:"x", ease:"circ.inOut"}); } } isAuthenticated = false; localStorage.setItem("isAuthenticated", "false"); updateOwnerSectionVisibility(); }
-        }
+            // Si el término de búsqueda es muy corto, restablecer la vista
+            if (searchTerm.length < 2) {
+                document.querySelectorAll('.section').forEach(section => {
+                    section.style.display = 'block'; // Mostrar todas las secciones
+                });
+                document.querySelectorAll('.link-button').forEach(link => {
+                    link.style.display = 'flex'; // Mostrar todos los enlaces
+                });
+                if (noResultsMessage) noResultsMessage.style.display = 'none';
 
-        function handleSearch() { 
-             let searchTerm = searchInput.value; searchTerm = normalizeString(searchTerm); let hasResults = false; let ownerHasVisibleLinks = false; if (searchTerm.length < 2) { document.querySelectorAll('.section').forEach(section => { section.style.display = 'block'; }); document.querySelectorAll('.link-button').forEach(link => { link.style.display = 'flex'; }); if (noResultsMessage) noResultsMessage.style.display = 'none'; 
-
-             document.querySelectorAll('.section:not(#owner-section)').forEach(section => {
-                 section.classList.remove('active');
-                 const gridLinks = section.querySelector('.grid-links');
-                 const arrowIcon = section.querySelector('.arrow .icon');
-                 if (gridLinks) {
-                     if (typeof gsap !== 'undefined') {
-                         gsap.to(gridLinks, { height: 0, opacity: 0, paddingTop: "0px", paddingBottom: "0px", duration: sectionDuration, ease: sectionEase });
-                     } else {
-                         gridLinks.style.height = '0'; gridLinks.style.opacity = '0'; gridLinks.style.paddingTop = '0px'; gridLinks.style.paddingBottom = '0px';
+                // Colapsar todas las secciones (excepto Owner inicialmente, su estado depende de auth/click)
+                document.querySelectorAll('.section:not(#owner-section)').forEach(section => {
+                    section.classList.remove('active');
+                    const gridLinks = section.querySelector('.grid-links');
+                    const arrowIcon = section.querySelector('.arrow .icon');
+                    if (gridLinks) {
+                        if (typeof gsap !== 'undefined') {
+                            gsap.to(gridLinks, { height: 0, opacity: 0, paddingTop: "0px", paddingBottom: "0px", duration: sectionDuration, ease: sectionEase });
+                        } else {
+                            gridLinks.style.height = '0'; gridLinks.style.opacity = '0'; gridLinks.style.paddingTop = '0px'; gridLinks.style.paddingBottom = '0px';
+                        }
+                    }
+                     if(arrowIcon) {
+                        if (typeof gsap !== 'undefined') { gsap.to(arrowIcon, { rotation: 0, duration: 0.3, ease: sectionEase }); }
+                        else { arrowIcon.style.transform = 'rotate(0deg)'; }
                      }
-                 }
-                  if(arrowIcon) {
-                     if (typeof gsap !== 'undefined') { gsap.to(arrowIcon, { rotation: 0, duration: 0.3, ease: sectionEase }); }
-                     else { arrowIcon.style.transform = 'rotate(0deg)'; }
-                  }
-             });
+                });
 
-             ownerSection.classList.remove('active');
-             updateOwnerSectionVisibility(true);
+                // Para la sección Owner al borrar la búsqueda:
+                // La sección completa (header + links div) siempre es visible por defecto.
+                // Solo necesitamos asegurarnos de que la visibilidad de los links dentro esté correcta
+                // según el estado de autenticación y la clase 'active'.
+                if (ownerSection) {
+                     ownerSection.style.display = 'block'; // Asegurar que la sección es visible
+                     updateOwnerSectionVisibility(true); // Animar los enlaces según el estado 'active' y 'auth'
+                }
 
-             return; } document.querySelectorAll('.section').forEach(section => { section.style.display = 'none'; }); document.querySelectorAll('.link-button').forEach(link => { link.style.display = 'none'; }); document.querySelectorAll('.link-button').forEach(link => { const linkText = normalizeString(link.textContent); const section = link.closest('.section'); if (section && linkText.includes(searchTerm)) { const isOwnerLink = section.id === 'owner-section'; if (!isOwnerLink) { link.style.display = 'flex'; section.style.display = 'block'; if (!section.classList.contains('active')) { section.classList.add('active'); const gridLinks = section.querySelector('.grid-links'); const arrowIcon = section.querySelector('.arrow .icon'); if (typeof gsap !== 'undefined') { gsap.to(gridLinks, { height: "auto", opacity: 1, paddingTop: gridLinksPadding.top, paddingBottom: gridLinksPadding.bottom, duration: sectionDuration, ease: sectionEase }); if(arrowIcon) gsap.to(arrowIcon, { rotation: 180, duration: 0.3, ease: sectionEase }); } else { gridLinks.style.height = 'auto'; gridLinks.style.opacity = '1'; gridLinks.style.paddingTop = gridLinksPadding.top; gridLinks.style.paddingBottom = gridLinksPadding.bottom; if(arrowIcon) arrowIcon.style.transform = 'rotate(180deg)'; } } hasResults = true; } else if (isOwnerLink && isAuthenticated) { link.style.display = 'flex'; ownerHasVisibleLinks = true; hasResults = true; } } }); if (ownerSection) { if (ownerHasVisibleLinks) { ownerSection.style.display = 'block'; if (isAuthenticated && !ownerSection.classList.contains('active')) { ownerSection.classList.add('active'); updateOwnerSectionVisibility(true); } else if (isAuthenticated && ownerSection.classList.contains('active')) { updateOwnerSectionVisibility(false); } else if (!isAuthenticated && ownerSection.classList.contains('active')) { ownerSection.classList.remove('active'); updateOwnerSectionVisibility(true); } else if (!isAuthenticated && !ownerSection.classList.contains('active')) { updateOwnerSectionVisibility(false); ownerSection.style.display = 'none'; } } else { ownerSection.classList.remove('active'); updateOwnerSectionVisibility(true); ownerSection.style.display = 'none'; } } if (noResultsMessage) noResultsMessage.style.display = hasResults ? 'none' : 'block'; 
+
+                return; // Salir de la función si el término es muy corto
+            }
+
+            // Si hay término de búsqueda: Ocultar todo inicialmente
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none'; // Ocultar todas las secciones
+            });
+            document.querySelectorAll('.link-button').forEach(link => {
+                link.style.display = 'none'; // Ocultar todos los enlaces
+            });
+
+            // Iterar sobre los enlaces para encontrar coincidencias
+            document.querySelectorAll('.link-button').forEach(link => {
+                const linkText = normalizeString(link.textContent);
+                const section = link.closest('.section');
+
+                if (section && linkText.includes(searchTerm)) {
+                    const isOwnerLink = section.id === 'owner-section';
+
+                    // Si no es un enlace de la sección Owner
+                    if (!isOwnerLink) {
+                        link.style.display = 'flex'; // Mostrar el enlace
+                        section.style.display = 'block'; // Mostrar la sección contenedora
+
+                        // Si la sección no está activa, la activamos y expandimos (solo si no es Owner)
+                        if (!section.classList.contains('active')) {
+                            section.classList.add('active');
+                            const gridLinks = section.querySelector('.grid-links');
+                            const arrowIcon = section.querySelector('.arrow .icon');
+                            if (typeof gsap !== 'undefined') {
+                                gsap.to(gridLinks, { height: "auto", opacity: 1, paddingTop: gridLinksPadding.top, paddingBottom: gridLinksPadding.bottom, duration: sectionDuration, ease: sectionEase });
+                                if(arrowIcon) gsap.to(arrowIcon, { rotation: 180, duration: 0.3, ease: sectionEase });
+                            } else {
+                                gridLinks.style.height = 'auto'; gridLinks.style.opacity = '1'; gridLinks.style.paddingTop = gridLinksPadding.top; gridLinks.style.paddingBottom = gridLinksPadding.bottom;
+                                if(arrowIcon) arrowIcon.style.transform = 'rotate(180deg)';
+                            }
+                        }
+                        hasResults = true; // Marcamos que hay resultados
+
+                    } else { // Si es un enlace de la sección Owner
+                        // Solo mostramos enlaces del Owner si el usuario está autenticado
+                        if (isAuthenticated) {
+                            link.style.display = 'flex'; // Mostrar el enlace
+                            ownerHasVisibleLinks = true; // Marcamos que hay al menos un enlace del owner visible
+                            hasResults = true; // Marcamos que hay resultados en general
+                            // La sección Owner ya es visible (si hay links que coincidan + auth).
+                            // La visibilidad de los *enlaces* dentro ya la gestiona updateOwnerSectionVisibility
+                            // basada en el estado 'active' (que no cambiamos aquí) y 'auth'.
+                        }
+                    }
+                }
+            });
+
+            // Después de iterar, decidir si mostrar la sección Owner completa
+            if (ownerSection) {
+                if (ownerHasVisibleLinks) {
+                    ownerSection.style.display = 'block'; // Mostrar la sección si hay links de Owner que cumplen y está autenticado
+                    // Los enlaces dentro ya fueron manejados. No necesitamos llamar a updateOwnerSectionVisibility aquí.
+                } else {
+                    // Si no hay enlaces del owner que cumplan (o no autenticado), ocultar la sección Owner completa
+                    ownerSection.style.display = 'none';
+                }
+            }
+
+
+            // Mostrar u ocultar el mensaje de no resultados
+            if (noResultsMessage) {
+                 noResultsMessage.style.display = hasResults ? 'none' : 'block';
+            }
         }
 
         // Lógica del reproductor de audio
-        function loadTrack(trackIndex) { 
-            if (trackIndex < 0) { trackIndex = tracks.length - 1; } else if (trackIndex >= tracks.length) { trackIndex = 0; } 
-            currentTrackIndex = trackIndex; 
-            if (audio) { 
-                const newSrc = tracks[trackIndex].src; 
-                const currentSrcPath = audio.currentSrc ? new URL(audio.currentSrc, window.location.href).pathname : null; 
-                const newSrcPath = new URL(newSrc, window.location.href).pathname; 
-                if (!audio.src || currentSrcPath !== newSrcPath) { 
-                    try { audio.src = newSrc; audio.load(); } catch(err){ console.error("Error setting audio src:", err); } 
-                } 
-            } 
-            if (trackNameDisplay) trackNameDisplay.textContent = tracks[trackIndex].name; 
-            localStorage.setItem("currentTrackIndex", currentTrackIndex); 
+        function loadTrack(trackIndex) {
+            if (trackIndex < 0) { trackIndex = tracks.length - 1; } else if (trackIndex >= tracks.length) { trackIndex = 0; }
+            currentTrackIndex = trackIndex;
+            if (audio) {
+                const newSrc = tracks[trackIndex].src;
+                const currentSrcPath = audio.currentSrc ? new URL(audio.currentSrc, window.location.href).pathname : null;
+                const newSrcPath = new URL(newSrc, window.location.href).pathname;
+                if (!audio.src || currentSrcPath !== newSrcPath) {
+                    try { audio.src = newSrc; audio.load(); } catch(err){ console.error("Error setting audio src:", err); }
+                }
+            }
+            if (trackNameDisplay) trackNameDisplay.textContent = tracks[trackIndex].name;
+            localStorage.setItem("currentTrackIndex", currentTrackIndex);
         }
 
-        function loadSavedState() { 
+        function loadSavedState() {
             const e = localStorage.getItem("currentTrackIndex");
             currentTrackIndex = e !== null ? parseInt(e, 10) : 0;
             const t = localStorage.getItem("volume");
@@ -457,18 +656,23 @@
             if(playPauseButton){
                 const playIcon = playPauseButton.querySelector('.icon-play');
                 const pauseIcon = playPauseButton.querySelector('.icon-pause');
+                // Inicialmente, mostrar el icono de Play, el estado real se determinará en initialUserInteraction
                 playIcon.style.display = 'inline-block';
                 pauseIcon.style.display = 'none';
             }
         }
 
-        function initialUserInteraction() { 
-            if (!hasInteracted && audio) { 
-                hasInteracted = true; 
-                loadTrack(currentTrackIndex); 
+        function initialUserInteraction() {
+            // Solo ejecutar si no ha habido interacción antes y el audio existe
+            if (!hasInteracted && audio) {
+                hasInteracted = true;
+                // Cargar la pista al interactuar por primera vez
+                loadTrack(currentTrackIndex);
 
+                // Verificar si el estado guardado indica que debería estar reproduciendo
                 if (localStorage.getItem("musicState") === "playing") {
                     audio.play().then(() => {
+                        // Éxito en la reproducción, actualizar UI
                         isPlaying = true;
                         if (playPauseButton) {
                             const playIcon = playPauseButton.querySelector('.icon-play');
@@ -477,26 +681,36 @@
                             pauseIcon.style.display = 'inline-block';
                         }
                     }).catch(e => {
+                        // Falló la reproducción automática (ej. restricción del navegador)
                         console.warn("La reproducción automática en la primera interacción falló:", e);
+                        // Asegurarse de que el estado y la UI reflejen que no está reproduciendo
                         localStorage.setItem("musicState", "paused");
                         isPlaying = false;
                         if (playPauseButton) {
                             const playIcon = playPauseButton.querySelector('.icon-play');
                             const pauseIcon = playPauseButton.querySelector('.icon-pause');
-                            playIcon.style.display = 'inline-block';
+                            playIcon.style.display = 'inline-block'; // Asegurar que se muestre el Play
                             pauseIcon.style.display = 'none';
                         }
                     });
                 } else {
-                    isPlaying = false; 
+                    // Si el estado guardado es "paused" o nulo, solo cargar la pista, no reproducir
+                    isPlaying = false;
+                     if (playPauseButton) {
+                        const playIcon = playPauseButton.querySelector('.icon-play');
+                        const pauseIcon = playPauseButton.querySelector('.icon-pause');
+                        playIcon.style.display = 'inline-block'; // Asegurar que se muestre el Play
+                        pauseIcon.style.display = 'none';
+                    }
                 }
-            } 
-            document.removeEventListener("click", initialUserInteraction); 
-            document.removeEventListener("touchstart", initialUserInteraction); 
+            }
+            // Eliminar listeners una vez que se ha producido la primera interacción
+            document.removeEventListener("click", initialUserInteraction);
+            document.removeEventListener("touchstart", initialUserInteraction);
         }
 
+
         // --- Función de inicialización de la página principal ---
-        // Contiene toda la lógica que NO es la pantalla de carga inicial
         function setupPageInteractiveElements() {
              // Obtener referencias a elementos DESPUÉS de que el DOM esté listo
              searchInput = document.getElementById('search-input');
@@ -517,69 +731,73 @@
              passwordError = document.getElementById('passwordError');
 
 
-            // Inicializar Feather Icons (se ejecuta si feather.min.js ya terminó de cargar o está diferido)
+            // Inicializar Feather Icons (solo para títulos de sección, flechas y modal)
+            // Solo se inicializarán si el script de feather ya está disponible
             if (typeof feather !== 'undefined') {
                 feather.replace({width: '1em', height: '1em', 'stroke-width': 2.2});
             } else {
-                 console.warn("Feather Icons script not loaded. Icons might not display.");
+                 console.warn("Feather Icons script not loaded. Icons might not display correctly.");
             }
-            
-            // Cargar el estado guardado del audio (volumen, pista)
-            loadSavedState();
 
-            // Configurar estados iniciales de las secciones al cargar (colapsadas por defecto, Owner depende de auth)
-            document.querySelectorAll('.section').forEach(section => { 
-                 const gridLinks = section.querySelector('.grid-links'); 
-                 const arrowIcon = section.querySelector('.arrow .icon'); 
-                 const initialPadding = { paddingTop: "0px", paddingBottom: "0px" }; 
-                 
-                 if (section.id !== 'owner-section') {
-                     section.classList.remove('active'); 
-                     if (gridLinks) {
-                         if (typeof gsap !== 'undefined') {
-                             gsap.set(gridLinks, { height: 0, opacity: 0, ...initialPadding }); 
-                         } else {
-                             gridLinks.style.height = '0';
-                             gridLinks.style.opacity = '0';
-                             gridLinks.style.paddingTop = '0px';
-                             gridLinks.style.paddingBottom = '0px';
-                         }
-                     }
-                      if(arrowIcon && typeof gsap !== 'undefined') gsap.set(arrowIcon, { rotation: 0 }); 
-                 } else {
-                     if(isAuthenticated) {
-                         section.classList.add('active');
+            // Cargar el estado guardado del audio (volumen, pista)
+            loadSavedState(); // loadSavedState ahora también llama a loadTrack
+
+            // Configurar estados iniciales de las secciones al cargar (colapsadas por defecto)
+            document.querySelectorAll('.section').forEach(section => {
+                 const gridLinks = section.querySelector('.grid-links');
+                 const arrowIcon = section.querySelector('.arrow .icon');
+                 const initialPadding = { paddingTop: "0px", paddingBottom: "0px" };
+
+                 // Todas las secciones, incluida Owner, inician colapsadas visualmente
+                 section.classList.remove('active'); // Asegurarse de que no tengan la clase active al cargar
+                 if (gridLinks) {
+                     if (typeof gsap !== 'undefined') {
+                         gsap.set(gridLinks, { height: 0, opacity: 0, ...initialPadding });
                      } else {
-                         section.classList.remove('active');
+                         gridLinks.style.height = '0';
+                         gridLinks.style.opacity = '0';
+                         gridLinks.style.paddingTop = '0px';
+                         gridLinks.style.paddingBottom = '0px';
                      }
                  }
+                  // Asegurarse de que el icono de flecha apunte hacia abajo al inicio
+                  if(arrowIcon && typeof gsap !== 'undefined') gsap.set(arrowIcon, { rotation: 0 });
+                  else if (arrowIcon) arrowIcon.style.transform = 'rotate(0deg)';
+
+                 // Por defecto, todas las secciones son visibles en el DOM, a menos que la búsqueda las oculte
+                 section.style.display = 'block';
+
             });
-            
-            // Ajustar el estado inicial VISUAL de la sección Owner basado en la autenticación
-            updateOwnerSectionVisibility(false); 
+
+            // Al cargar, asegurar que la visibilidad de los enlaces de Owner refleje el estado de autenticación (colapsado si no auth)
+            updateOwnerSectionVisibility(false);
+
 
             // Animación del título con brillo
             if (typeof gsap !== 'undefined') {
-                gsap.to("h1", { 
-                    duration: 1.8, 
-                    textShadow: `0 0 0.75rem var(--h1-glow-end), 0 0 1.5rem var(--h1-glow-end)`, 
-                    yoyo: true, 
-                    repeat: -1, 
-                    ease: "sine.inOut", 
+                gsap.to("h1", {
+                    duration: 1.8,
+                    textShadow: `0 0 0.75rem var(--h1-glow-end), 0 0 1.5rem var(--h1-glow-end)`,
+                    yoyo: true,
+                    repeat: -1,
+                    ease: "sine.inOut",
                 });
             } else {
                  console.warn("GSAP no está cargado. La animación del título no funcionará.");
             }
 
             // --- Adjuntar Event Listeners ---
-             document.querySelectorAll('.section:not(#owner-section) .section-header').forEach(header => { 
-                header.addEventListener('click', () => { 
+
+             // Listeners para secciones normales (no Owner)
+             document.querySelectorAll('.section:not(#owner-section) .section-header').forEach(header => {
+                header.addEventListener('click', () => {
                     if (typeof gsap === 'undefined') { /* fallback */ } else {
-                        const section = header.parentElement; 
-                        const gridLinks = section.querySelector('.grid-links'); 
-                        const arrowIcon = header.querySelector('.arrow .icon'); 
+                        const section = header.parentElement;
+                        const gridLinks = section.querySelector('.grid-links');
+                        const arrowIcon = header.querySelector('.arrow .icon');
                         const isCurrentlyActive = section.classList.contains('active');
 
+                        // Colapsar otras secciones no Owner si están activas
                         document.querySelectorAll('.section:not(#owner-section)').forEach(otherSection => {
                              if (otherSection !== section && otherSection.classList.contains('active')) {
                                  otherSection.classList.remove('active');
@@ -590,21 +808,52 @@
                              }
                          });
 
+                        // Toggle la sección clickeada
                         section.classList.toggle('active');
 
-                        if (!isCurrentlyActive) { 
-                            gsap.to(gridLinks, { height: "auto", opacity: 1, paddingTop: gridLinksPadding.top, paddingBottom: gridLinksPadding.bottom, duration: sectionDuration, ease: sectionEase }); 
-                            if(arrowIcon) gsap.to(arrowIcon, { rotation: 180, duration: 0.3, ease: sectionEase }); 
-                        } else { 
-                            gsap.to(gridLinks, { height: 0, opacity: 0, paddingTop: "0px", paddingBottom: "0px", duration: sectionDuration, ease: sectionEase }); 
-                            if(arrowIcon) gsap.to(arrowIcon, { rotation: 0, duration: 0.3, ease: sectionEase }); 
+                        // Animar la expansión o colapso
+                        if (!isCurrentlyActive) {
+                            gsap.to(gridLinks, { height: "auto", opacity: 1, paddingTop: gridLinksPadding.top, paddingBottom: gridLinksPadding.bottom, duration: sectionDuration, ease: sectionEase });
+                            if(arrowIcon) gsap.to(arrowIcon, { rotation: 180, duration: 0.3, ease: sectionEase });
+                        } else {
+                            gsap.to(gridLinks, { height: 0, opacity: 0, paddingTop: "0px", paddingBottom: "0px", duration: sectionDuration, ease: sectionEase });
+                            if(arrowIcon) gsap.to(arrowIcon, { rotation: 0, duration: 0.3, ease: sectionEase });
                         }
                     }
-                }); 
+                });
              });
 
+             // Listener para la sección Owner
+             ownerHeader?.addEventListener('click', (event) => {
+                 event.preventDefault(); // Evitar comportamiento por defecto si fuera un enlace
+                 const arrowIcon = ownerHeader.querySelector('.arrow .icon');
+
+                 if (!isAuthenticated) {
+                     // Si no está autenticado, mostrar el modal de contraseña
+                     if (passwordModal) {
+                         passwordModal.style.display = "flex"; // Usar flex para centrar
+                         if (typeof gsap !== 'undefined') {
+                             gsap.fromTo(passwordModal, {autoAlpha:0}, { autoAlpha: 1, duration: 0.3, ease: "power2.out" });
+                             gsap.fromTo(passwordModal.querySelector('.modal-content'), { y: "-1.875rem", opacity: 0, scale:0.95}, { y: "0rem", opacity: 1, scale:1, duration: 0.4, ease: "back.out(1.7)"});
+                         } else {
+                             passwordModal.style.opacity = '1';
+                             passwordModal.style.visibility = 'visible';
+                             passwordModal.querySelector('.modal-content').style.opacity = '1';
+                             passwordModal.querySelector('.modal-content').style.transform = 'translateY(0)';
+                         }
+                     }
+                     if (passwordInput) passwordInput.focus(); // Poner el foco en el input de contraseña
+                 } else {
+                     // Si está autenticado, toggle la clase 'active' y actualiza la visibilidad de los enlaces
+                     ownerSection.classList.toggle("active");
+                     updateOwnerSectionVisibility(true); // Animar el cambio de estado
+                 }
+             });
+
+
+             // Listeners de búsqueda y audio - se mantienen igual
              searchInput?.addEventListener('input', handleSearch);
-             playPauseButton?.addEventListener('click', () => { 
+             playPauseButton?.addEventListener('click', () => {
                  const playIcon = playPauseButton.querySelector('.icon-play');
                  const pauseIcon = playPauseButton.querySelector('.icon-pause');
                  if (isPlaying) { audio.pause(); playIcon.style.display = 'inline-block'; pauseIcon.style.display = 'none'; localStorage.setItem("musicState", "paused"); isPlaying = false; } else { if (!audio.src || audio.src === window.location.href + "#") { loadTrack(currentTrackIndex); } audio.play().then(() => { playIcon.style.display = 'none'; pauseIcon.style.display = 'inline-block'; localStorage.setItem("musicState", "playing"); isPlaying = true; }).catch(e => { console.error("Error playing audio on button click:", e); playIcon.style.display = 'inline-block'; pauseIcon.style.display = 'none'; localStorage.setItem("musicState", "paused"); isPlaying = false; }); }
@@ -613,42 +862,25 @@
              nextButton?.addEventListener('click', () => { loadTrack(currentTrackIndex+1);if(isPlaying){audio.play().catch(e=>console.error("Error playing next audio:",e))} });
              volumeSlider?.addEventListener('input', () => { if (audio) audio.volume=volumeSlider.value; localStorage.setItem("volume",volumeSlider.value) });
              audio?.addEventListener('ended', () => { if(isPlaying){loadTrack(currentTrackIndex+1);audio.play().catch(e=>console.error("Error playing audio on ended:",e))}else{loadTrack(currentTrackIndex+1)} });
-            
+
              // Listen for first user interaction to potentially start audio
              document.addEventListener('click', initialUserInteraction, { once: true });
              document.addEventListener('touchstart', initialUserInteraction, { once: true });
 
-             ownerHeader?.addEventListener('click', (event) => { 
-                 event.preventDefault(); 
-                 const arrowIcon = ownerHeader.querySelector('.arrow .icon'); 
-                 if (!isAuthenticated) { 
-                     if (passwordModal) { 
-                         passwordModal.style.display = "flex"; 
-                         if (typeof gsap !== 'undefined') {
-                             gsap.fromTo(passwordModal, {autoAlpha:0}, { autoAlpha: 1, duration: 0.3, ease: "power2.out" }); 
-                             gsap.fromTo(passwordModal.querySelector('.modal-content'), { y: "-1.875rem", opacity: 0, scale:0.95}, { y: "0rem", opacity: 1, scale:1, duration: 0.4, ease: "back.out(1.7)"}); 
-                         } else { passwordModal.style.opacity = '1'; passwordModal.style.visibility = 'visible'; passwordModal.querySelector('.modal-content').style.opacity = '1'; passwordModal.querySelector('.modal-content').style.transform = 'translateY(0)'; }
-                     } 
-                     if (passwordInput) passwordInput.focus(); 
-                 } else { 
-                     ownerSection.classList.toggle("active"); 
-                     updateOwnerSectionVisibility(true); 
-                 } 
-             });
-
-             closeModalButton?.addEventListener('click', () => { 
-                 if (passwordModal) { 
+             // Listeners del modal de contraseña
+             closeModalButton?.addEventListener('click', () => {
+                 if (passwordModal) {
                      if (typeof gsap !== 'undefined') { gsap.to(passwordModal.querySelector('.modal-content'), { y: "1.25rem", opacity: 0, scale: 0.95, duration: 0.25, ease: "power2.in" }); gsap.to(passwordModal, { autoAlpha: 0, duration: 0.3, delay:0.1, ease: "power2.in", onComplete: () => passwordModal.style.display = "none" }); } else { passwordModal.style.display = "none"; passwordModal.style.opacity = '0'; passwordModal.style.visibility = 'hidden'; passwordModal.querySelector('.modal-content').style.opacity = '0'; passwordModal.querySelector('.modal-content').style.transform = 'translateY(1.25rem)'; }
-                 } 
+                 }
              });
 
              submitPasswordButton?.addEventListener('click', checkPassword);
              passwordInput?.addEventListener('keypress', (event) => { if (event.key === "Enter") { checkPassword(); } });
 
-             window.addEventListener('click', (event) => { 
-                 if (event.target === passwordModal && passwordModal && passwordModal.style.display !== "none") { 
+             window.addEventListener('click', (event) => {
+                 if (event.target === passwordModal && passwordModal && passwordModal.style.display !== "none") {
                      if (typeof gsap !== 'undefined') { gsap.to(passwordModal.querySelector('.modal-content'), { y: "1.25rem", opacity: 0, scale: 0.95, duration: 0.25, ease: "power2.in" }); gsap.to(passwordModal, { autoAlpha: 0, duration: 0.3, delay:0.1, ease: "power2.in", onComplete: () => passwordModal.style.display = "none" }); } else { passwordModal.style.display = "none"; passwordModal.style.opacity = '0'; passwordModal.style.visibility = 'hidden'; passwordModal.querySelector('.modal-content').style.opacity = '0'; passwordModal.querySelector('.modal-content').style.transform = 'translateY(1.25rem)'; }
-                 } 
+                 }
              });
 
         } // Fin de setupPageInteractiveElements
@@ -660,7 +892,7 @@
             const body = document.body;
 
             // Aumentar el tiempo mínimo que se muestra el loader (en milisegundos)
-            const MIN_LOADING_DISPLAY_TIME = 750; // Aumentado de 200 a 750
+            const MIN_LOADING_DISPLAY_TIME = 750;
             const startTime = Date.now();
 
             // Esta función oculta el loader y muestra el contenido principal
@@ -676,7 +908,7 @@
                                  // Ocultar completamente el loader después de la animación
                                  gsap.set(loadingScreen, { visibility: 'hidden', display: 'none' });
                                  // Ejecutar la inicialización de la página después de que el loader desaparezca
-                                 setupPageInteractiveElements(); 
+                                 setupPageInteractiveElements();
                              }
                          });
 
@@ -685,13 +917,13 @@
                             // Hacer el body visible antes de animar su opacidad
                             .set(body, { visibility: 'visible' })
                             // Animar simultáneamente: fade out loader y fade in body
-                            .to(loadingScreen, { opacity: 0, duration: 0.8, ease: "power2.inOut" }, 0) 
-                            .fromTo(body, 
+                            .to(loadingScreen, { opacity: 0, duration: 0.8, ease: "power2.inOut" }, 0)
+                            .fromTo(body,
                                 { opacity: 0, scale: 0.98 }, // Start from slightly scaled down and invisible
                                 { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, // Animate to full opacity and scale, same duration as loader fade
                                 0 // Start at the same time as loader fade
                             );
-                         
+
                      } else {
                          // Fallback simple si GSAP no está cargado
                          if(loadingScreen) {
@@ -702,7 +934,7 @@
                          body.style.opacity = '1';
                          body.style.visibility = 'visible';
                          // Ejecutar inicialización inmediatamente en fallback
-                         setupPageInteractiveElements(); 
+                         setupPageInteractiveElements();
                      }
                  };
 
@@ -711,7 +943,7 @@
                      setTimeout(performTransition, remainingTime);
                  } else {
                      // El tiempo mínimo ya pasó, ejecutar la transición inmediatamente
-                     performTransition(); 
+                     performTransition();
                  }
             }
 
